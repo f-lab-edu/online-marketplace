@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/coupang
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  type-aliases-package: com.coupang.marketplace.mapper
+  mapper-locations: resources/mybatis/mapper/**/*.xml
