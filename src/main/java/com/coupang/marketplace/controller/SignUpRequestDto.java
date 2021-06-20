@@ -35,7 +35,7 @@ public class SignUpRequestDto {
     }
 
     public User toEntity(){
-        return User.builder()
+        return User.WithoutIdBuilder()
                 .name(name)
                 .email(email)
                 .password(password)
