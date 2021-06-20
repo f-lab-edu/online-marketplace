@@ -13,7 +13,7 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/user/sign-up")
+    @PostMapping("/users/sign-up")
     public String signUp(@Valid @RequestBody SignUpRequestDto requestDto) {
         userService.save(requestDto);
         return "success";
