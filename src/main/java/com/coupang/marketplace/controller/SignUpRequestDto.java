@@ -3,7 +3,6 @@ package com.coupang.marketplace.controller;
 import com.coupang.marketplace.domain.User;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

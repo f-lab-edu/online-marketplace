@@ -15,7 +15,7 @@ public class UserService {
 
     public void save(SignUpRequestDto dto){
         if (checkIfUserExist(dto.getEmail())) {
-            throw new Error("이미 등록된 이메일입니다.");
+            throw new IllegalArgumentException("이미 등록된 메일입니다.");
         }
 
         String salt = CryptoUtil.generateSalt();
