@@ -3,14 +3,12 @@ package com.coupang.marketplace.controller;
 import com.coupang.marketplace.domain.User;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Getter
-@NoArgsConstructor
 public class SignUpRequestDto {
     @NotBlank(message = "이름을 입력해주세요.")
     private String name;
@@ -34,11 +32,12 @@ public class SignUpRequestDto {
         this.phone = phone;
     }
 
-    public User toEntity(){
-        return User.WithoutIdBuilder()
+    public User toEntity(String salt, String encryptedPassword){
+        return User.builder()
                 .name(name)
                 .email(email)
-                .password(password)
+                .salt(salt)
+                .password(encryptedPassword)
                 .phone(phone)
                 .build();
     }
