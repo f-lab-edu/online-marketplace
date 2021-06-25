@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -17,8 +18,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/users/sign-up")
-    public ResponseEntity signUp(@Valid @RequestBody SignUpRequestDto requestDto) {
+    public ResponseEntity<SuccessResponse> signUp(@Valid @RequestBody SignUpRequestDto requestDto) {
         userService.join(requestDto);
-        return new ResponseEntity(HttpStatus.CREATED);
+        SuccessResponse res = SuccessResponse.builder()
+                .status(StatusEnum.CREATED)
+                .message("회원가입 성공")
+                .build();
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 }

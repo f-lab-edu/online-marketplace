@@ -10,12 +10,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<FailResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+        FailResponse res = FailResponse.builder()
+                .status(StatusEnum.BAD_REQUEST)
+                .errorMessage(e.getMessage())
+                .build();
+        return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity handleIllegalArgumentException(IllegalArgumentException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<FailResponse> handleIllegalArgumentException(IllegalArgumentException e){
+        FailResponse res = FailResponse.builder()
+                .status(StatusEnum.BAD_REQUEST)
+                .errorMessage(e.getMessage())
+                .build();
+        return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
     }
 }
