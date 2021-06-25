@@ -17,8 +17,8 @@ public class UserService {
     private final SaltGenerator saltGenerator;
     private final Sha256Encryptor sha256Encryptor;
 
-    public void save(SignUpRequestDto dto){
-        if (checkIfUserExist(dto.getEmail())) {
+    public void join(SignUpRequestDto dto){
+        if (checkIsUserExist(dto.getEmail())) {
             throw new IllegalArgumentException("이미 등록된 메일입니다.");
         }
 
@@ -29,7 +29,7 @@ public class UserService {
         userRepository.insertUser(user);
     }
 
-    public boolean checkIfUserExist (String email) {
+    public boolean checkIsUserExist (String email) {
         return userRepository.findByEmail(email).isPresent();
     }
 }
