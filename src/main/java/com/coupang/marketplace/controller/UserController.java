@@ -13,6 +13,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RestController
 public class UserController {
+
     private final UserService userService;
 
     @PostMapping("/users/sign-up")
