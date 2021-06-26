@@ -10,6 +10,9 @@ import java.util.Optional;
 @Mapper
 @Repository
 public interface UserRepository {
+
     void insertUser(User user);
+
     Optional<User> findByEmail(String email);
+
 }

@@ -1,27 +1,18 @@
 package com.coupang.marketplace.util;
 
+import org.springframework.stereotype.Component;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 
 
-public class CryptoUtil {
-    public static String generateSalt(){
-        Random random = new Random();
+@Component
+public class Sha256Encryptor implements Encryptor {
 
-        byte[] salt = new byte[8];
-        random.nextBytes(salt);
+    private static final String algorithm = "SHA-256";
 
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < salt.length; i++) {
-            sb.append(String.format("%02x",salt[i]));
-        }
-
-        return sb.toString();
-
-    }
-
-    public static String encryptPassword(String plainPassword, String salt) {
+    @Override
+    public String run(String plainPassword, String salt) {
         String result = "";
 
         byte[] byteSalt = salt.getBytes();
@@ -32,19 +23,19 @@ public class CryptoUtil {
         System.arraycopy(byteSalt, 0, bytes, a.length, byteSalt.length);
 
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            MessageDigest md = MessageDigest.getInstance(algorithm);
             md.update(bytes);
 
             byte[] byteData = md.digest();
 
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < byteData.length; i++) {
                 sb.append(Integer.toString((byteData[i] & 0xFF) + 256, 16).substring(1));
             }
 
             result = sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            throw new RuntimeException("암호화에 실패하였습니다.");
         }
 
         return result;
