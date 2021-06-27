@@ -36,22 +36,23 @@ public class UserService {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    public Optional<User> login(SignInRequestDto dto){
-        if (!checkIfUserExist(dto.getEmail())) {
-            throw new Error("존재하지 않는 이메일입니다.");
+    public User login(SignInRequestDto dto){
+        if (!checkIsUserExist(dto.getEmail())) {
+            throw new IllegalArgumentException("존재하지 않는 이메일입니다.");
         }
         else {
             Optional<User> user = userRepository.findByEmail(dto.getEmail());
+            String userSalt = user.get().getSalt();
 
-            String email = dto.getEmail();
             String password = dto.getPassword();
+            String encryptedPassword = sha256Encryptor.run(password, userSalt);
 
-            //TO DO : 암호화된 비밀번호와 일치하는지 확인
-
-            //TO DO : 실패
-
-            //성공
-            return user;
+            if(encryptedPassword.equals(user.get().getPassword())){
+                return user.get();
+            }
+            else{
+                throw new IllegalArgumentException("패스워드가 틀렸습니다.");
+            }
         }
     }
 }

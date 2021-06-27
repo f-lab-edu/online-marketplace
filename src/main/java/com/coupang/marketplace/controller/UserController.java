@@ -31,11 +31,12 @@ public class UserController {
     }
 
     @PostMapping("/users/login")
-    /*@ResponseStatus(HttpStatus.OK)*/
-    public String signIn(@Valid @RequestBody SignInRequestDto requestDto) {
-        Optional<User> user = userService.login(requestDto);
-
-        //TO DO : 리턴값에 따라 다른 처리
-        return "success";
+    public ResponseEntity<SuccessResponse> signIn(@Valid @RequestBody SignInRequestDto requestDto) {
+        User user = userService.login(requestDto);
+        SuccessResponse res = SuccessResponse.builder()
+                .status(StatusEnum.OK)
+                .message("로그인 성공")
+                .build();
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }
