@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/users/login")
     public ResponseEntity<SuccessResponse> signIn(@Valid @RequestBody SignInRequestDto requestDto) {
-        User user = userService.login(requestDto);
+        userService.login(requestDto);
         SuccessResponse res = SuccessResponse.builder()
                 .status(StatusEnum.OK)
                 .message("로그인 성공")

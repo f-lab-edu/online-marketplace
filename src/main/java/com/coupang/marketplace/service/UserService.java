@@ -39,7 +39,7 @@ public class UserService {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    public User login(SignInRequestDto dto){
+    public void login(SignInRequestDto dto){
         if (!checkIsUserExist(dto.getEmail())) {
             throw new IllegalArgumentException("존재하지 않는 이메일입니다.");
         }
@@ -52,7 +52,6 @@ public class UserService {
 
             if(encryptedPassword.equals(user.get().getPassword())){
                 httpSession.setAttribute(SessionKey.LOGIN_USER_ID, user.get().getId());
-                return user.get();
             }
             else{
                 throw new IllegalArgumentException("패스워드가 틀렸습니다.");
