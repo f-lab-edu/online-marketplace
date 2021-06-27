@@ -5,10 +5,12 @@ import com.coupang.marketplace.controller.SignUpRequestDto;
 import com.coupang.marketplace.domain.User;
 import com.coupang.marketplace.repository.UserRepository;
 import com.coupang.marketplace.util.SaltGenerator;
+import com.coupang.marketplace.util.SessionKey;
 import com.coupang.marketplace.util.Sha256Encryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 
@@ -19,6 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final SaltGenerator saltGenerator;
     private final Sha256Encryptor sha256Encryptor;
+    private final HttpSession httpSession;
 
     public void join(SignUpRequestDto dto){
         if (checkIsUserExist(dto.getEmail())) {
@@ -48,6 +51,7 @@ public class UserService {
             String encryptedPassword = sha256Encryptor.run(password, userSalt);
 
             if(encryptedPassword.equals(user.get().getPassword())){
+                httpSession.setAttribute(SessionKey.LOGIN_USER_ID, user.get().getId());
                 return user.get();
             }
             else{
