@@ -1,4 +1,4 @@
-package com.coupang.marketplace.util;
+package com.coupang.marketplace.constant;
 
 public class SessionKey {
 

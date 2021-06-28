@@ -3,7 +3,7 @@ package com.coupang.marketplace.service;
 import com.coupang.marketplace.controller.SignInRequestDto;
 import com.coupang.marketplace.domain.User;
 import com.coupang.marketplace.repository.UserRepository;
-import com.coupang.marketplace.util.SessionKey;
+import com.coupang.marketplace.constant.SessionKey;
 import com.coupang.marketplace.util.Sha256Encryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
