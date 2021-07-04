@@ -24,16 +24,14 @@ public class SessionLoginService implements LoginService{
         if (!userRepository.findByEmail(dto.getEmail()).isPresent()){
             throw new IllegalArgumentException("존재하지 않는 이메일입니다.");
         }
-        else {
-            Optional<User> user = userRepository.findByEmail(dto.getEmail());
-            String userSalt = user.get().getSalt();
-            String password = dto.getPassword();
-            String encryptedPassword = sha256Encryptor.run(password, userSalt);
+        Optional<User> user = userRepository.findByEmail(dto.getEmail());
+        String userSalt = user.get().getSalt();
+        String password = dto.getPassword();
+        String encryptedPassword = sha256Encryptor.run(password, userSalt);
 
-            if(!encryptedPassword.equals(user.get().getPassword())){
-                throw new IllegalArgumentException("패스워드가 틀렸습니다.");
-            }
-            httpSession.setAttribute(SessionKey.LOGIN_USER_ID, user.get().getId());
+        if(!encryptedPassword.equals(user.get().getPassword())){
+            throw new IllegalArgumentException("패스워드가 틀렸습니다.");
         }
+        httpSession.setAttribute(SessionKey.LOGIN_USER_ID, user.get().getId());
     }
 }
