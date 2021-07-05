@@ -1,13 +1,10 @@
 package com.coupang.marketplace.util;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Random;
 
-@Component
 public class SaltGenerator {
 
-    public String run(){
+    public static String generateSalt(){
         Random random = new Random();
 
         byte[] salt = new byte[8];
@@ -21,3 +18,6 @@ public class SaltGenerator {
         return sb.toString();
     }
 }
+
+
+
