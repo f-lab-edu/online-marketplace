@@ -27,7 +27,7 @@ public class SessionLoginService implements LoginService{
         Optional<User> user = userRepository.findByEmail(dto.getEmail());
         String userSalt = user.get().getSalt();
         String password = dto.getPassword();
-        String encryptedPassword = sha256Encryptor.run(password, userSalt);
+        String encryptedPassword = sha256Encryptor.encrypt(password, userSalt);
 
         if(!encryptedPassword.equals(user.get().getPassword())){
             throw new IllegalArgumentException("패스워드가 틀렸습니다.");
