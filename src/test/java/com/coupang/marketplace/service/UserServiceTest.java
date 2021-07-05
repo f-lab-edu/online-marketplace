@@ -17,6 +17,7 @@ import static com.coupang.marketplace.fixture.UserFixture.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -28,6 +29,29 @@ public class UserServiceTest {
 
     @MockBean
     private UserRepository userRepository;
+
+    @DisplayName("중복되지 않은 이메일이면 회원가입에 성공한다.")
+    @Test
+    void signUp() {
+        // given
+        final SignUpRequestDto dto = SignUpRequestDto.builder()
+                .name(User1.NAME)
+                .email(User1.EMAIL)
+                .password(User1.PASSWORD)
+                .phone(User1.PHONE)
+                .build();
+        final Optional<User> notFoundUser = Optional.ofNullable(null);
+
+        given(userRepository.findByEmail(any())).willReturn(notFoundUser);
+        doNothing().when(userRepository).insertUser(any());
+
+        // when
+        userService.join(dto);
+
+        // then
+        verify(userRepository, times(1)).insertUser(any());
+
+    }
 
     @DisplayName("중복된 이메일이면 에러를 내보낸다.")
     @Test
@@ -43,7 +67,7 @@ public class UserServiceTest {
 
         given(userRepository.findByEmail(any())).willReturn(user);
 
-        // when
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.join(dto));
     }
 }
