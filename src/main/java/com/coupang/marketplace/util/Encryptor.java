@@ -2,6 +2,6 @@ package com.coupang.marketplace.util;
 
 public interface Encryptor {
 
-    String encrypt (String... cryptoData);
+    String encrypt (CryptoData cryptoData);
 
 }
