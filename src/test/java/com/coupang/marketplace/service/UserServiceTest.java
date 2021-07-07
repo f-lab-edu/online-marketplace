@@ -3,13 +3,13 @@ package com.coupang.marketplace.service;
 import com.coupang.marketplace.controller.SignUpRequestDto;
 import com.coupang.marketplace.domain.User;
 import com.coupang.marketplace.repository.UserRepository;
+import com.coupang.marketplace.util.Encryptor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Optional;
 
@@ -21,14 +21,16 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest
 public class UserServiceTest {
 
-    @Autowired
+    @InjectMocks
     private UserService userService;
 
-    @MockBean
+    @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private Encryptor encryptor;
 
     @DisplayName("중복되지 않은 이메일이면 회원가입에 성공한다.")
     @Test
