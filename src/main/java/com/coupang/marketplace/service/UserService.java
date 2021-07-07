@@ -3,6 +3,7 @@ package com.coupang.marketplace.service;
 import com.coupang.marketplace.controller.SignUpRequestDto;
 import com.coupang.marketplace.domain.User;
 import com.coupang.marketplace.repository.UserRepository;
+import com.coupang.marketplace.util.CryptoData;
 import com.coupang.marketplace.util.Encryptor;
 import com.coupang.marketplace.util.SaltGenerator;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,11 @@ public class UserService {
         }
 
         String salt = SaltGenerator.generateSalt();
-        String encryptedPassword = encryptor.encrypt(dto.getPassword(), salt);
+        CryptoData cryptoData = CryptoData.WithSaltBuilder()
+                .plainText(dto.getPassword())
+                .salt(salt)
+                .build();
+        String encryptedPassword = encryptor.encrypt(cryptoData);
         User user = dto.toEntity(salt, encryptedPassword);
 
         userRepository.insertUser(user);

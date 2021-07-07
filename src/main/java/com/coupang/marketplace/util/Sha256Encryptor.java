@@ -12,11 +12,11 @@ public class Sha256Encryptor implements Encryptor {
     private static final String algorithm = "SHA-256";
 
     @Override
-    public String encrypt(String... cryptoData) {
+    public String encrypt(CryptoData cryptoData) {
         String result = "";
 
-        byte[] byteSalt = cryptoData[0].getBytes();
-        byte[] bytePassword = cryptoData[1].getBytes();
+        byte[] byteSalt = cryptoData.getSalt().getBytes();
+        byte[] bytePassword = cryptoData.getPlainText().getBytes();
         byte[] bytes = new byte[bytePassword.length + byteSalt.length];
 
         System.arraycopy(bytePassword, 0, bytes, 0, bytePassword.length);
