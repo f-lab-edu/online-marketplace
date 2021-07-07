@@ -1,6 +1,5 @@
-package com.coupang.marketplace.contoller;
+package com.coupang.marketplace.controller;
 
-import com.coupang.marketplace.controller.SignUpRequestDto;
 import com.coupang.marketplace.fixture.UserFixture.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
