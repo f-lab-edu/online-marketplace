@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -38,6 +37,8 @@ public class UserService {
     public boolean checkIsUserExist (String email) {
         return userRepository.findByEmail(email).isPresent();
     }
+
+
 }
 
 
