@@ -6,6 +6,8 @@ import lombok.Getter;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Getter
 public class SignInRequestDto {
 
@@ -17,7 +19,7 @@ public class SignInRequestDto {
     private String password;
 
     @Builder
-    public SignInRequestDto(String email, String password) {
+    public SignInRequestDto(@JsonProperty("email") String email, @JsonProperty("password") String password) {
         this.email = email;
         this.password = password;
     }
