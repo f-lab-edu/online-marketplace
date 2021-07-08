@@ -12,15 +12,15 @@ public class Sha256Encryptor implements Encryptor {
     private static final String algorithm = "SHA-256";
 
     @Override
-    public String run(String plainPassword, String salt) {
+    public String encrypt(CryptoData cryptoData) {
         String result = "";
 
-        byte[] byteSalt = salt.getBytes();
-        byte[] a = plainPassword.getBytes();
-        byte[] bytes = new byte[a.length + byteSalt.length];
+        byte[] byteSalt = cryptoData.getSalt().getBytes();
+        byte[] bytePassword = cryptoData.getPlainText().getBytes();
+        byte[] bytes = new byte[bytePassword.length + byteSalt.length];
 
-        System.arraycopy(a, 0, bytes, 0, a.length);
-        System.arraycopy(byteSalt, 0, bytes, a.length, byteSalt.length);
+        System.arraycopy(bytePassword, 0, bytes, 0, bytePassword.length);
+        System.arraycopy(byteSalt, 0, bytes, bytePassword.length, byteSalt.length);
 
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
@@ -35,7 +35,7 @@ public class Sha256Encryptor implements Encryptor {
 
             result = sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("암호화에 실패하였습니다.");
+            throw new RuntimeException("암호화에 실패하였습니다.", e);
         }
 
         return result;
