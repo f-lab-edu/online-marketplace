@@ -74,14 +74,14 @@ public class UserControllerTest extends ControllerTest {
     @Test
     void signIn() throws Exception {
         // given
-        final SignUpRequestDto dto1 = SignUpRequestDto.builder()
+        final SignUpRequestDto joinDto = SignUpRequestDto.builder()
             .name(User1.NAME)
             .email(User1.EMAIL)
             .password(User1.PASSWORD)
             .phone(User1.PHONE)
             .build();
 
-        final SignInRequestDto dto = SignInRequestDto.builder()
+        final SignInRequestDto LoginDto = SignInRequestDto.builder()
             .email(User1.EMAIL)
             .password(User1.PASSWORD)
             .build();
@@ -89,11 +89,11 @@ public class UserControllerTest extends ControllerTest {
         // when
         mvc.perform(post("/users/sign-up")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(dto1)));
+            .content(objectMapper.writeValueAsString(joinDto)));
 
         final ResultActions actions = mvc.perform(post("/users/login")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(dto)))
+            .content(objectMapper.writeValueAsString(LoginDto)))
             .andDo(print());
 
         // then
@@ -127,14 +127,14 @@ public class UserControllerTest extends ControllerTest {
     @Test
     void signInWithInvalidPassword() throws Exception {
         // given
-        final SignUpRequestDto dto1 = SignUpRequestDto.builder()
+        final SignUpRequestDto JoinDto = SignUpRequestDto.builder()
             .name(User1.NAME)
             .email(User1.EMAIL)
             .password(User1.PASSWORD)
             .phone(User1.PHONE)
             .build();
 
-        final SignInRequestDto dto = SignInRequestDto.builder()
+        final SignInRequestDto LoginDto = SignInRequestDto.builder()
             .email(User1.EMAIL)
             .password(User2.PASSWORD)
             .build();
@@ -142,11 +142,11 @@ public class UserControllerTest extends ControllerTest {
         // when
         mvc.perform(post("/users/sign-up")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(dto1)));
+            .content(objectMapper.writeValueAsString(JoinDto)));
 
         final ResultActions actions = mvc.perform(post("/users/login")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(dto)))
+            .content(objectMapper.writeValueAsString(LoginDto)))
             .andDo(print());
 
         // then
