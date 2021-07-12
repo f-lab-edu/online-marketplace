@@ -17,6 +17,7 @@ import static com.coupang.marketplace.fixture.UserFixture.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 
@@ -45,13 +46,12 @@ public class UserServiceTest {
         final Optional<User> notFoundUser = Optional.ofNullable(null);
 
         given(userRepository.findByEmail(any())).willReturn(notFoundUser);
-        doNothing().when(userRepository).insertUser(any());
 
         // when
         userService.join(dto);
 
         // then
-        verify(userRepository, times(1)).insertUser(any());
+        then(userRepository).should(times(1)).insertUser(any());
 
     }
 
