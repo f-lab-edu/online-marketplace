@@ -1,6 +1,6 @@
-package com.coupang.marketplace.controller;
+package com.coupang.marketplace.user.controller;
 
-import com.coupang.marketplace.domain.User;
+import com.coupang.marketplace.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 

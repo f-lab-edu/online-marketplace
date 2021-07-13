@@ -1,6 +1,6 @@
-package com.coupang.marketplace.repository;
+package com.coupang.marketplace.user.repository;
 
-import com.coupang.marketplace.domain.User;
+import com.coupang.marketplace.user.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

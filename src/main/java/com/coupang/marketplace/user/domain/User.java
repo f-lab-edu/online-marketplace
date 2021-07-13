@@ -1,4 +1,4 @@
-package com.coupang.marketplace.domain;
+package com.coupang.marketplace.user.domain;
 
 import lombok.Builder;
 import lombok.Getter;

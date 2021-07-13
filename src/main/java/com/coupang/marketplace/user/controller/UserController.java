@@ -1,7 +1,7 @@
-package com.coupang.marketplace.controller;
+package com.coupang.marketplace.user.controller;
 
-import com.coupang.marketplace.service.LoginService;
-import com.coupang.marketplace.service.UserService;
+import com.coupang.marketplace.user.service.LoginService;
+import com.coupang.marketplace.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

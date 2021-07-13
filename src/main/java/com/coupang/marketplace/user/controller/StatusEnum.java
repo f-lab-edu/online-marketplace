@@ -1,4 +1,4 @@
-package com.coupang.marketplace.controller;
+package com.coupang.marketplace.user.controller;
 
 public enum StatusEnum {
 

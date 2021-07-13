@@ -1,4 +1,4 @@
-package com.coupang.marketplace.controller;
+package com.coupang.marketplace.user.controller;
 
 import lombok.Builder;
 import lombok.Getter;
