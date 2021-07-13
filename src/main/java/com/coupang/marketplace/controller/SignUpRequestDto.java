@@ -1,6 +1,8 @@
 package com.coupang.marketplace.controller;
 
 import com.coupang.marketplace.domain.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -26,7 +28,7 @@ public class SignUpRequestDto {
     private String phone;
 
     @Builder
-    public SignUpRequestDto(String name, String email, String password, String phone) {
+    public SignUpRequestDto(@JsonProperty("name") String name, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("phone") String phone) {
         this.name = name;
         this.email = email;
         this.password = password;

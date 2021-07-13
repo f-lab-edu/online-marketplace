@@ -70,4 +70,88 @@ public class UserControllerTest extends ControllerTest {
                 .andDo(print());
     }
 
+    @DisplayName("회원의 이메일이 존재하고 패스워드가 일치하면 로그인에 성공한다.")
+    @Test
+    void signIn() throws Exception {
+        // given
+        final SignUpRequestDto joinDto = SignUpRequestDto.builder()
+            .name(User1.NAME)
+            .email(User1.EMAIL)
+            .password(User1.PASSWORD)
+            .phone(User1.PHONE)
+            .build();
+
+        final SignInRequestDto LoginDto = SignInRequestDto.builder()
+            .email(User1.EMAIL)
+            .password(User1.PASSWORD)
+            .build();
+
+        // when
+        mvc.perform(post("/users/sign-up")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(joinDto)));
+
+        final ResultActions actions = mvc.perform(post("/users/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(LoginDto)))
+            .andDo(print());
+
+        // then
+        actions
+            .andExpect(status().isOk())
+            .andDo(print());
+    }
+
+    @DisplayName("이메일이 존재하지 않은 사용자는 로그인에 실패한다.")
+    @Test
+    void signInWithNotFoundEmail() throws Exception {
+        // given
+        final SignInRequestDto dto = SignInRequestDto.builder()
+            .email(User1.EMAIL)
+            .password(User1.PASSWORD)
+            .build();
+
+        // when
+        final ResultActions actions = mvc.perform(post("/users/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(dto)))
+            .andDo(print());
+
+        // then
+        actions
+            .andExpect(status().isBadRequest())
+            .andDo(print());
+    }
+
+    @DisplayName("이메일이 존재하지만 패스워드가 일치하지 않은 사용자는 로그인에 실패한다.")
+    @Test
+    void signInWithInvalidPassword() throws Exception {
+        // given
+        final SignUpRequestDto JoinDto = SignUpRequestDto.builder()
+            .name(User1.NAME)
+            .email(User1.EMAIL)
+            .password(User1.PASSWORD)
+            .phone(User1.PHONE)
+            .build();
+
+        final SignInRequestDto LoginDto = SignInRequestDto.builder()
+            .email(User1.EMAIL)
+            .password(User2.PASSWORD)
+            .build();
+
+        // when
+        mvc.perform(post("/users/sign-up")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(JoinDto)));
+
+        final ResultActions actions = mvc.perform(post("/users/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(LoginDto)))
+            .andDo(print());
+
+        // then
+        actions
+            .andExpect(status().isBadRequest())
+            .andDo(print());
+    }
 }
