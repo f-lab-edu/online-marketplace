@@ -1,4 +1,4 @@
-package com.coupang.marketplace.global.util;
+package com.coupang.marketplace.global.util.crypto;
 
 import lombok.Builder;
 import lombok.Getter;

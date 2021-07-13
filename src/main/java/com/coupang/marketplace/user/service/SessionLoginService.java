@@ -4,8 +4,8 @@ import com.coupang.marketplace.user.controller.SignInRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.constant.SessionKey;
-import com.coupang.marketplace.global.util.CryptoData;
-import com.coupang.marketplace.global.util.Encryptor;
+import com.coupang.marketplace.global.util.crypto.CryptoData;
+import com.coupang.marketplace.global.util.crypto.Encryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
