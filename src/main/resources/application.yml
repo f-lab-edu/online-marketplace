@@ -6,5 +6,5 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
-  type-aliases-package: com.coupang.marketplace.domain
+  type-aliases-package: com.coupang.marketplace.*.domain
   mapper-locations: mybatis/mapper/**/*.xml

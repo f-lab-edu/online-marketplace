@@ -1,4 +1,4 @@
-package com.coupang.marketplace.domain.user.controller;
+package com.coupang.marketplace.user.controller;
 
 import com.coupang.marketplace.fixture.UserFixture.*;
 import org.junit.jupiter.api.DisplayName;

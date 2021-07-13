@@ -1,8 +1,8 @@
-package com.coupang.marketplace.domain.user.service;
+package com.coupang.marketplace.user.service;
 
-import com.coupang.marketplace.domain.user.controller.SignUpRequestDto;
-import com.coupang.marketplace.domain.user.domain.User;
-import com.coupang.marketplace.domain.user.repository.UserRepository;
+import com.coupang.marketplace.user.controller.SignUpRequestDto;
+import com.coupang.marketplace.user.domain.User;
+import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.util.Encryptor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

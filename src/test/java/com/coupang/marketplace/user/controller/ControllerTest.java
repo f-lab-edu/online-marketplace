@@ -1,4 +1,4 @@
-package com.coupang.marketplace.domain.user.controller;
+package com.coupang.marketplace.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
