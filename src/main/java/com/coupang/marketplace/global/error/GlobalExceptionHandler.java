@@ -1,5 +1,7 @@
-package com.coupang.marketplace.user.controller;
+package com.coupang.marketplace.global.error;
 
+import com.coupang.marketplace.global.common.FailResponse;
+import com.coupang.marketplace.global.common.StatusEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

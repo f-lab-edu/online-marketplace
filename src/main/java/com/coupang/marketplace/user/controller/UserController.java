@@ -1,5 +1,7 @@
 package com.coupang.marketplace.user.controller;
 
+import com.coupang.marketplace.global.common.StatusEnum;
+import com.coupang.marketplace.global.common.SuccessResponse;
 import com.coupang.marketplace.user.service.LoginService;
 import com.coupang.marketplace.user.service.UserService;
 import lombok.RequiredArgsConstructor;
