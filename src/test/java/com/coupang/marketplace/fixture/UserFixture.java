@@ -1,6 +1,6 @@
 package com.coupang.marketplace.fixture;
 
-import com.coupang.marketplace.user.domain.User;
+import com.coupang.marketplace.domain.User;
 
 public class UserFixture {
 
