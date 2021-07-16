@@ -4,6 +4,10 @@ spring:
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    session:
+      host: 127.0.0.1
+      port: 6379
 
 mybatis:
   type-aliases-package: com.coupang.marketplace.*.domain
