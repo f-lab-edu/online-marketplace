@@ -7,6 +7,7 @@ import com.coupang.marketplace.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,12 +32,22 @@ public class UserController {
     }
 
     @PostMapping("/users/login")
-    public ResponseEntity<SuccessResponse> signIn(@Valid @RequestBody SignInRequestDto requestDto) {
+    public ResponseEntity<SuccessResponse> loginUser(@Valid @RequestBody SignInRequestDto requestDto) {
         loginService.login(requestDto);
         SuccessResponse res = SuccessResponse.builder()
                 .status(StatusEnum.OK)
                 .message("로그인 성공")
                 .build();
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/logout")
+    public ResponseEntity<SuccessResponse> logoutUser(){
+        loginService.logout();
+        SuccessResponse res = SuccessResponse.builder()
+            .status(StatusEnum.OK)
+            .message("로그아웃 성공")
+            .build();
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }
