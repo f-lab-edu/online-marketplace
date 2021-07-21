@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.coupang.marketplace.user.controller.SignInRequestDto;
 import com.coupang.marketplace.user.domain.User;
-import com.coupang.marketplace.fixture.UserFixture.*;
+import com.coupang.marketplace.global.fixture.UserFixture.*;
 import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.util.crypto.Encryptor;
 

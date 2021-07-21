@@ -1,4 +1,4 @@
-package com.coupang.marketplace.user.controller;
+package com.coupang.marketplace.global.template;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,12 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @SpringBootTest
 @Transactional
-public class ControllerTest {
+public class ControllerTestTemplate {
 
     @Autowired
     protected MockMvc mvc;

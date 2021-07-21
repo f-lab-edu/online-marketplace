@@ -1,4 +1,4 @@
-package com.coupang.marketplace.fixture;
+package com.coupang.marketplace.global.fixture;
 
 import com.coupang.marketplace.product.domain.Product;
 

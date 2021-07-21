@@ -1,6 +1,7 @@
 package com.coupang.marketplace.user.controller;
 
-import com.coupang.marketplace.fixture.UserFixture.*;
+import com.coupang.marketplace.global.fixture.UserFixture.*;
+import com.coupang.marketplace.global.template.ControllerTestTemplate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -11,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-public class UserControllerTest extends ControllerTest {
+public class UserControllerTest extends ControllerTestTemplate {
 
     @DisplayName("이메일이 중복된 회원이 아니라면 회원 가입에 성공한다.")
     @Test
