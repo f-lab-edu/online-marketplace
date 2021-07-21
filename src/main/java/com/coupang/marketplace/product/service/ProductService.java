@@ -51,7 +51,6 @@ public class ProductService {
                 }
                 break;
         }
-
         return products;
     }
 
