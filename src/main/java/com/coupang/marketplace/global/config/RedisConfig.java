@@ -11,8 +11,9 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
+import com.coupang.marketplace.global.constant.SessionKey;
 
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60) //TO DO: 세션 만료 시간 수정
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = SessionKey.ExpirationTime)
 @Configuration
 public class RedisConfig {
 
