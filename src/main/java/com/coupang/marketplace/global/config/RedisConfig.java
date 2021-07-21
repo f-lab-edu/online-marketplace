@@ -25,11 +25,9 @@ public class RedisConfig {
 
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
-		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(redisHost, redisPort);
-		return new LettuceConnectionFactory(redisStandaloneConfiguration);
+		return new LettuceConnectionFactory(new RedisStandaloneConfiguration(redisHost, redisPort));
 	}
 
-	@Bean
 	public RedisTemplate<String, Object> redisTemplate() {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(redisConnectionFactory());
