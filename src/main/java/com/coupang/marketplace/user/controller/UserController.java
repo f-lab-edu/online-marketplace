@@ -42,12 +42,8 @@ public class UserController {
     }
 
     @GetMapping("/users/logout")
-    public ResponseEntity<SuccessResponse> logoutUser(){
+    public StatusEnum logoutUser(){
         loginService.logout();
-        SuccessResponse res = SuccessResponse.builder()
-            .status(StatusEnum.OK)
-            .message("로그아웃 성공")
-            .build();
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        return StatusEnum.OK;
     }
 }
