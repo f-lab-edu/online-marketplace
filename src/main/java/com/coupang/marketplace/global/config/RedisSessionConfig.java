@@ -8,9 +8,11 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
-@EnableRedisHttpSession
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = RedisSessionConfig.EXPIRATION_TIME)
 @Configuration
 public class RedisSessionConfig {
+
+    static final int EXPIRATION_TIME = 60;
 
     @Value("${spring.redis.session.host}")
     private String host;
