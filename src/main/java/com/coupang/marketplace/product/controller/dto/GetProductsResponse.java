@@ -37,7 +37,7 @@ public class GetProductsResponse {
         this.score = score;
     }
 
-    public static GetProductsResponse makeEntityToResponse(Product product) {
+    public static GetProductsResponse toResponse(Product product) {
         return GetProductsResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -47,9 +47,9 @@ public class GetProductsResponse {
                 .build();
     }
 
-    public static List<GetProductsResponse> makeList(List<Product> products) {
+    public static List<GetProductsResponse> toList(List<Product> products) {
         return products.stream()
-                .map(GetProductsResponse::makeEntityToResponse)
+                .map(GetProductsResponse::toResponse)
                 .collect(Collectors.toList());
     }
 

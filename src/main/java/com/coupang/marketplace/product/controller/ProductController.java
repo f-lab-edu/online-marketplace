@@ -20,15 +20,16 @@ public class ProductController {
 
     private final ProductService productService;
 
+
     @GetMapping("/products")
-    public ResponseEntity<SuccessResponse> getProducts(@Valid @ModelAttribute GetProductsRequest dto) {
+    public SuccessResponse getProducts(@Valid @ModelAttribute GetProductsRequest dto) {
         List<GetProductsResponse> products = productService.getProducts(dto);
         SuccessResponse res = SuccessResponse.builder()
                 .status(StatusEnum.OK)
                 .message("상품 목록 가져오기 성공")
                 .data(products)
                 .build();
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        return res;
     }
 
 }
