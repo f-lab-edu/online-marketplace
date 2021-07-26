@@ -15,14 +15,14 @@ public class Product {
     private String mainImg;
     private String detailImg;
     private BigInteger stock;
-    private float score;
+    private Float score;
     private BigInteger deliveryFee;
-    private boolean isRocket;
-    private boolean isRocketFresh;
-    private boolean isRocketGlobal;
+    private Boolean isRocket;
+    private Boolean isRocketFresh;
+    private Boolean isRocketGlobal;
 
     @Builder
-    public Product(BigInteger id, BigInteger categoryId, String name, BigInteger price, String mainImg, String detailImg, BigInteger stock, float score, BigInteger deliveryFee, boolean isRocket, boolean isRocketFresh, boolean isRocketGlobal) {
+    public Product(BigInteger id, BigInteger categoryId, String name, BigInteger price, String mainImg, String detailImg, BigInteger stock, Float score, BigInteger deliveryFee, Boolean isRocket, Boolean isRocketFresh, Boolean isRocketGlobal) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
