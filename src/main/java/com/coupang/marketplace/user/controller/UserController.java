@@ -42,8 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/users/logout")
-    public StatusEnum logoutUser(){
+    public void logoutUser(){
         loginService.logout();
-        return StatusEnum.OK;
     }
 }
