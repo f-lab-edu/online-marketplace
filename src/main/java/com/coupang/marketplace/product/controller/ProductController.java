@@ -18,6 +18,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+
     @GetMapping("/products")
     public SuccessResponse getProducts(@Valid @ModelAttribute GetProductsRequest dto) {
         List<GetProductsResponse> products = productService.getProducts(dto);
