@@ -16,6 +16,6 @@ public class CouponService {
 	private final CouponRepository couponRepository;
 
 	public List<Coupon> getAvailableCoupons(){
-		return couponRepository.findBeforeExpirationTime();
+		return couponRepository.getCouponsBeforeExpirationTime();
 	}
 }

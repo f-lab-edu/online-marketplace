@@ -11,5 +11,5 @@ import com.coupang.marketplace.coupon.domain.Coupon;
 @Repository
 public interface CouponRepository {
 
-	List<Coupon> findBeforeExpirationTime();
+	List<Coupon> getCouponsBeforeExpirationTime();
 }

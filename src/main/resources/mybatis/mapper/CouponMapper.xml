@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.coupang.marketplace.coupon.repository.CouponRepository">
-    <select id="findBeforeExpirationTime" resultType="Coupon">
+    <select id="getCouponsBeforeExpirationTime" resultType="Coupon">
         SELECT id, name, min_price, discount_price, product_id, expiration_time
         FROM COUPON
         WHERE expiration_time &gt; NOW()
