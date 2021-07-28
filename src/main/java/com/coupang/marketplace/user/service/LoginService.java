@@ -5,5 +5,5 @@ import com.coupang.marketplace.user.controller.SignInRequestDto;
 public interface LoginService {
 
     void login(SignInRequestDto dto);
-
+    void logout();
 }
