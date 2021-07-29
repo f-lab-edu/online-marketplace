@@ -16,7 +16,7 @@ public class CouponController {
 
 	private final CouponService couponService;
 
-	@GetMapping("/coupons")
+	@GetMapping("/available-coupons")
 	public List<Coupon> getAvailableCoupons(){
 		return couponService.getAvailableCoupons();
 	}
