@@ -19,7 +19,7 @@ public class GetProductsRequest {
     private DeliveryTypeEnum deliveryType;
 
     @Nullable
-    private Boolean isRocket;
+    private boolean isRocket;
 
     @NotNull
     @Min(1)

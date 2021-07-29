@@ -20,7 +20,7 @@ public class ProductService {
 
     public List<GetProductsResponse> getProducts(GetProductsRequest dto){
         DeliveryTypeEnum deliveryType = dto.getDeliveryType();
-        Boolean isRocket = dto.getIsRocket();
+        boolean isRocket = dto.isRocket();
         int listSize = dto.getListSize();
         int startId = dto.getStart();
 
