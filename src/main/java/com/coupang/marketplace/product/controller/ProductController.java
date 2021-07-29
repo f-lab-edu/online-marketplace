@@ -6,8 +6,6 @@ import com.coupang.marketplace.product.controller.dto.GetProductsRequest;
 import com.coupang.marketplace.product.controller.dto.GetProductsResponse;
 import com.coupang.marketplace.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,8 +17,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-
-
+    
     @GetMapping("/products")
     public SuccessResponse getProducts(@Valid @ModelAttribute GetProductsRequest dto) {
         List<GetProductsResponse> products = productService.getProducts(dto);

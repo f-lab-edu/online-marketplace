@@ -20,7 +20,7 @@ public class ProductService {
 
     public List<GetProductsResponse> getProducts(GetProductsRequest dto){
         DeliveryTypeEnum deliveryType = dto.getDeliveryType();
-        Boolean isRocket = dto.getIsRocket();
+        boolean isRocket = dto.isRocket();
         int listSize = dto.getListSize();
         int pageStart = (dto.getPage() - 1) * listSize;
 
@@ -29,7 +29,7 @@ public class ProductService {
         return GetProductsResponse.toList(products);
     }
 
-    private List<Product> getProductsByDeliveryType (DeliveryTypeEnum deliveryType, Boolean isRocket, int listSize, int pageStart) {
+    private List<Product> getProductsByDeliveryType (DeliveryTypeEnum deliveryType, boolean isRocket, int listSize, int pageStart) {
         List<Product> products = new ArrayList<>();
 
         switch (deliveryType) {
