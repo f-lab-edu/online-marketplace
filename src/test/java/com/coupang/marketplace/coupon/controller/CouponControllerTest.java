@@ -16,7 +16,7 @@ public class CouponControllerTest extends ControllerTestTemplate {
 	@Test
 	public void getAvailableCoupons() throws Exception{
 		//when
-		final ResultActions actions = mvc.perform(get("/coupons"))
+		final ResultActions actions = mvc.perform(get("/available-coupons"))
 			.andDo(print());
 
 		//then

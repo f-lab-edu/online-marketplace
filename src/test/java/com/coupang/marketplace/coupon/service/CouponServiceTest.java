@@ -1,7 +1,6 @@
 package com.coupang.marketplace.coupon.service;
 
-import static com.coupang.marketplace.fixture.CouponFixture.Coupon1.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.*;
 
 import java.util.Arrays;
@@ -14,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.coupang.marketplace.coupon.repository.CouponRepository;
-import com.coupang.marketplace.fixture.CouponFixture;
+import com.coupang.marketplace.fixture.CouponFixture.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CouponServiceTest {
@@ -30,9 +29,9 @@ public class CouponServiceTest {
 	public void getCouponsBeforeExpirationTime() {
 		//given
 		given(couponRepository.getCouponsBeforeExpirationTime())
-			.willReturn(Arrays.asList(COUPON));
+			.willReturn(Arrays.asList(Coupon1.COUPON));
 
 		//then
-		assertEquals(couponService.getAvailableCoupons().size(), 1);
+		assertThat(couponService.getAvailableCoupons().size()).isEqualTo(1);
 	}
 }
