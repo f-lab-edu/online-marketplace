@@ -16,9 +16,9 @@ public class ProductFixture {
         public static final BigInteger STOCK = new BigInteger("1000");
         public static final float SCORE = 5.0f;
         public static final BigInteger DELIVERY_FEE = new BigInteger("1000");
-        public static final boolean IS_ROCKET = true;
-        public static final boolean IS_ROCKET_FRESH = false;
-        public static final boolean IS_ROCKET_GLOBAL = false;
+        public static final boolean ROCKET = true;
+        public static final boolean ROCKET_FRESH = false;
+        public static final boolean ROCKET_GLOBAL = false;
 
         public static final Product PRODUCT = Product.builder()
                 .id(ID)
@@ -30,9 +30,9 @@ public class ProductFixture {
                 .stock(STOCK)
                 .score(SCORE)
                 .deliveryFee(DELIVERY_FEE)
-                .isRocket(IS_ROCKET)
-                .isRocketFresh(IS_ROCKET_FRESH)
-                .isRocketGlobal(IS_ROCKET_GLOBAL)
+                .rocket(ROCKET)
+                .rocketFresh(ROCKET_FRESH)
+                .rocketGlobal(ROCKET_GLOBAL)
                 .build();
     }
 
@@ -46,9 +46,9 @@ public class ProductFixture {
         public static final BigInteger STOCK = new BigInteger("2000");
         public static final float SCORE = 4.0f;
         public static final BigInteger DELIVERY_FEE = new BigInteger("2000");
-        public static final boolean IS_ROCKET = false;
-        public static final boolean IS_ROCKET_FRESH = true;
-        public static final boolean IS_ROCKET_GLOBAL = false;
+        public static final boolean ROCKET = false;
+        public static final boolean ROCKET_FRESH = true;
+        public static final boolean ROCKET_GLOBAL = false;
 
         public static final Product PRODUCT = Product.builder()
                 .id(ID)
@@ -60,9 +60,9 @@ public class ProductFixture {
                 .stock(STOCK)
                 .score(SCORE)
                 .deliveryFee(DELIVERY_FEE)
-                .isRocket(IS_ROCKET)
-                .isRocketFresh(IS_ROCKET_FRESH)
-                .isRocketGlobal(IS_ROCKET_GLOBAL)
+                .rocket(ROCKET)
+                .rocketFresh(ROCKET_FRESH)
+                .rocketGlobal(ROCKET_GLOBAL)
                 .build();
     }
 
@@ -76,9 +76,9 @@ public class ProductFixture {
         public static final BigInteger STOCK = new BigInteger("3000");
         public static final float SCORE = 3.0f;
         public static final BigInteger DELIVERY_FEE = new BigInteger("3000");
-        public static final boolean IS_ROCKET = false;
-        public static final boolean IS_ROCKET_FRESH = false;
-        public static final boolean IS_ROCKET_GLOBAL = true;
+        public static final boolean ROCKET = false;
+        public static final boolean ROCKET_FRESH = false;
+        public static final boolean ROCKET_GLOBAL = true;
 
         public static final Product PRODUCT = Product.builder()
                 .id(ID)
@@ -90,9 +90,9 @@ public class ProductFixture {
                 .stock(STOCK)
                 .score(SCORE)
                 .deliveryFee(DELIVERY_FEE)
-                .isRocket(IS_ROCKET)
-                .isRocketFresh(IS_ROCKET_FRESH)
-                .isRocketGlobal(IS_ROCKET_GLOBAL)
+                .rocket(ROCKET)
+                .rocketFresh(ROCKET_FRESH)
+                .rocketGlobal(ROCKET_GLOBAL)
                 .build();
     }
 }

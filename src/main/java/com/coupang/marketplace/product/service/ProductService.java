@@ -22,32 +22,32 @@ public class ProductService {
         DeliveryTypeEnum deliveryType = dto.getDeliveryType();
         boolean isRocket = dto.isRocket();
         int listSize = dto.getListSize();
-        int pageStart = (dto.getPage() - 1) * listSize;
+        int startId = dto.getStart();
 
-        List<Product> products = getProductsByDeliveryType(deliveryType, isRocket, listSize, pageStart);
+        List<Product> products = getProductsByDeliveryType(deliveryType, isRocket, listSize, startId);
 
         return GetProductsResponse.toList(products);
     }
 
-    private List<Product> getProductsByDeliveryType (DeliveryTypeEnum deliveryType, boolean isRocket, int listSize, int pageStart) {
+    private List<Product> getProductsByDeliveryType (DeliveryTypeEnum deliveryType, boolean isRocket, int listSize, int startId) {
         List<Product> products = new ArrayList<>();
 
         switch (deliveryType) {
             case ROCKET:
-                products = productRepository.getProductsByIsRocket(true, pageStart, listSize);
+                products = productRepository.getProductsByIsRocket(true, startId, listSize);
                 break;
             case ROCKET_FRESH:
                 if (isRocket) {
-                    products = productRepository.getProductsByIsRocketAndIsRocketFresh(true, true, pageStart, listSize);
+                    products = productRepository.getProductsByIsRocketAndIsRocketFresh(true, true, startId, listSize);
                 } else {
-                    products = productRepository.getProductsByIsRocketFresh(true, pageStart, listSize);
+                    products = productRepository.getProductsByIsRocketFresh(true, startId, listSize);
                 }
                 break;
             case ROCKET_GLOBAL:
                 if (isRocket) {
-                    products = productRepository.getProductsByIsRocketAndIsRocketGlobal(true, true, pageStart, listSize);
+                    products = productRepository.getProductsByIsRocketAndIsRocketGlobal(true, true, startId, listSize);
                 } else {
-                    products = productRepository.getProductsByIsRocketGlobal(true, pageStart, listSize);
+                    products = productRepository.getProductsByIsRocketGlobal(true, startId, listSize);
                 }
                 break;
         }

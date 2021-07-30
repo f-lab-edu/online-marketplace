@@ -6,36 +6,31 @@
     <select id="getProductsByIsRocket" resultType="Product">
         SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
         FROM PRODUCT
-        WHERE is_rocket = #{isRocket}
+        WHERE id > #{startId}
         LIMIT #{listSize}
-        OFFSET #{pageStart}
     </select>
     <select id="getProductsByIsRocketFresh" resultType="Product">
         SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
         FROM PRODUCT
-        WHERE is_rocket_fresh = #{isRocketFresh}
+        WHERE id > #{startId} AND is_rocket_fresh = #{isRocketFresh}
         LIMIT #{listSize}
-        OFFSET #{pageStart}
     </select>
     <select id="getProductsByIsRocketGlobal" resultType="Product">
         SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
         FROM PRODUCT
-        WHERE is_rocket_global = #{isRocketGlobal}
+        WHERE id > #{startId} AND is_rocket_global = #{isRocketGlobal}
         LIMIT #{listSize}
-        OFFSET #{pageStart}
     </select>
     <select id="getProductsByIsRocketAndIsRocketFresh" resultType="Product">
         SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
         FROM PRODUCT
-        WHERE is_rocket = #{isRocket} AND is_rocket_fresh = #{isRocketFresh}
+        WHERE id > #{startId} AND is_rocket_fresh = #{isRocketFresh}
         LIMIT #{listSize}
-        OFFSET #{pageStart}
     </select>
     <select id="getProductsByIsRocketAndIsRocketGlobal" resultType="Product">
         SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
         FROM PRODUCT
-        WHERE is_rocket = #{isRocket} AND is_rocket_global = #{isRocketGlobal}
+        WHERE id > #{startId} AND is_rocket_global = #{isRocketGlobal}
         LIMIT #{listSize}
-        OFFSET #{pageStart}
     </select>
 </mapper>

@@ -17,12 +17,12 @@ public class Product {
     private BigInteger stock;
     private Float score;
     private BigInteger deliveryFee;
-    private Boolean isRocket;
-    private Boolean isRocketFresh;
-    private Boolean isRocketGlobal;
+    private Boolean rocket;
+    private Boolean rocketFresh;
+    private Boolean rocketGlobal;
 
     @Builder
-    public Product(BigInteger id, BigInteger categoryId, String name, BigInteger price, String mainImg, String detailImg, BigInteger stock, Float score, BigInteger deliveryFee, Boolean isRocket, Boolean isRocketFresh, Boolean isRocketGlobal) {
+    public Product(BigInteger id, BigInteger categoryId, String name, BigInteger price, String mainImg, String detailImg, BigInteger stock, Float score, BigInteger deliveryFee, Boolean rocket, Boolean rocketFresh, Boolean rocketGlobal) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -32,9 +32,9 @@ public class Product {
         this.stock = stock;
         this.score = score;
         this.deliveryFee = deliveryFee;
-        this.isRocket = isRocket;
-        this.isRocketFresh = isRocketFresh;
-        this.isRocketGlobal = isRocketGlobal;
+        this.rocket = rocket;
+        this.rocketFresh = rocketFresh;
+        this.rocketGlobal = rocketGlobal;
     }
 
 }

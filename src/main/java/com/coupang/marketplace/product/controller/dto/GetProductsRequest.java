@@ -23,7 +23,7 @@ public class GetProductsRequest {
 
     @NotNull
     @Min(1)
-    private int page;
+    private int start;
 
     @NotNull
     @Min(1)
@@ -31,10 +31,10 @@ public class GetProductsRequest {
     private int listSize;
 
     @Builder
-    public GetProductsRequest(DeliveryTypeEnum deliveryType, boolean isRocket, int page, int listSize) {
+    public GetProductsRequest(DeliveryTypeEnum deliveryType, boolean isRocket, int start, int listSize) {
         this.deliveryType = deliveryType;
         this.isRocket = isRocket;
-        this.page = page;
+        this.start = start;
         this.listSize = listSize;
     }
 }

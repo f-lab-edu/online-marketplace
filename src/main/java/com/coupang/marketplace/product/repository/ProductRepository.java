@@ -11,13 +11,13 @@ import java.util.List;
 @Repository
 public interface ProductRepository {
 
-    List<Product> getProductsByIsRocket(boolean isRocket, int pageStart, int listSize);
+    List<Product> getProductsByIsRocket(boolean isRocket, int startId, int listSize);
 
-    List<Product> getProductsByIsRocketFresh(boolean isRocketFresh, int pageStart, int listSize);
+    List<Product> getProductsByIsRocketFresh(boolean isRocketFresh, int startId, int listSize);
 
-    List<Product> getProductsByIsRocketGlobal(boolean isRocketGlobal, int pageStart, int listSize);
+    List<Product> getProductsByIsRocketGlobal(boolean isRocketGlobal, int startId, int listSize);
 
-    List<Product> getProductsByIsRocketAndIsRocketFresh(boolean isRocket, boolean isRocketFresh, int pageStart, int listSize);
+    List<Product> getProductsByIsRocketAndIsRocketFresh(boolean isRocket, boolean isRocketFresh, int startId, int listSize);
 
-    List<Product> getProductsByIsRocketAndIsRocketGlobal(boolean isRocket, boolean isRocketGlobal, int pageStart, int listSize);
+    List<Product> getProductsByIsRocketAndIsRocketGlobal(boolean isRocket, boolean isRocketGlobal, int startId, int listSize);
 }

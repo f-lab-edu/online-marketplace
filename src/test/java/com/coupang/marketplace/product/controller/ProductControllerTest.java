@@ -23,7 +23,7 @@ public class ProductControllerTest extends ControllerTestTemplate {
         // given
         final GetProductsRequest dto = GetProductsRequest.builder()
                 .deliveryType(ROCKET)
-                .page(1)
+                .start(1)
                 .listSize(2)
                 .build();
         final MultiValueMap<String, String> params = MultiValueMapConverter.convert(objectMapper, dto);
@@ -46,7 +46,7 @@ public class ProductControllerTest extends ControllerTestTemplate {
         final GetProductsRequest dto = GetProductsRequest.builder()
                 .deliveryType(ROCKET_FRESH)
                 .isRocket(true)
-                .page(1)
+                .start(1)
                 .listSize(2)
                 .build();
         final MultiValueMap<String, String> params = MultiValueMapConverter.convert(objectMapper, dto);
