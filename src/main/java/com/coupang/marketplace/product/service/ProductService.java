@@ -53,4 +53,9 @@ public class ProductService {
         }
         return products;
     }
+
+    public List<GetProductsResponse> searchProductsByKeyword(String keyword) {
+        List<Product> products = productRepository.getProductsByKeyword(keyword);
+        return GetProductsResponse.toList(products);
+    }
 }

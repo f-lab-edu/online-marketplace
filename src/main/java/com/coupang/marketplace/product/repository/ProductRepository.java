@@ -20,4 +20,6 @@ public interface ProductRepository {
     List<Product> getProductsByIsRocketAndIsRocketFresh(boolean isRocket, boolean isRocketFresh, int startId, int listSize);
 
     List<Product> getProductsByIsRocketAndIsRocketGlobal(boolean isRocket, boolean isRocketGlobal, int startId, int listSize);
+
+    List<Product> getProductsByKeyword(String keyword);
 }

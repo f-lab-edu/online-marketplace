@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 
@@ -24,6 +25,17 @@ public class ProductController {
         SuccessResponse res = SuccessResponse.builder()
                 .status(StatusEnum.OK)
                 .message("상품 목록 가져오기 성공")
+                .data(products)
+                .build();
+        return res;
+    }
+
+    @GetMapping("/products/search")
+    public SuccessResponse searchProductsByKeyword (@NotBlank @RequestParam String keyword) {
+        List<GetProductsResponse> products = productService.searchProductsByKeyword(keyword);
+        SuccessResponse res = SuccessResponse.builder()
+                .status(StatusEnum.OK)
+                .message("상품 검색 성공")
                 .data(products)
                 .build();
         return res;

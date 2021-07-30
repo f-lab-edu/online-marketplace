@@ -62,4 +62,21 @@ public class ProductControllerTest extends ControllerTestTemplate {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
+
+    @DisplayName("키워드로 검색하면 키워드를 포함한 상품 목록을 가져온다.")
+    @Test
+    public void searchProductsByKeyword() throws Exception {
+        // given
+        final String keyword = "123";
+
+        // when
+        final ResultActions actions = mvc.perform(get("/products/search")
+                .param("keyword", keyword))
+                .andDo(print());
+
+        // then
+        actions
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
 }
