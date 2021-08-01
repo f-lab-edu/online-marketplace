@@ -28,7 +28,7 @@ public class SignUpRequestDto {
     private String phone;
 
     @Builder
-    public SignUpRequestDto(@JsonProperty("name") String name, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("phone") String phone) {
+    public SignUpRequestDto(String name, String email, String password, String phone) {
         this.name = name;
         this.email = email;
         this.password = password;
