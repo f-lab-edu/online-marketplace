@@ -1,6 +1,6 @@
 package com.coupang.marketplace.coupon.domain;
 
-import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,11 +20,11 @@ public class Coupon {
 
 	private Long productId;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-	private Timestamp expirationTime;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private ZonedDateTime expirationTime;
 
 	@Builder
-	public Coupon(Long id, String name, Long minPrice, Long discountPrice, Long productId, Timestamp expirationTime){
+	public Coupon(Long id, String name, Long minPrice, Long discountPrice, Long productId, ZonedDateTime expirationTime){
 		this.id = id;
 		this.name = name;
 		this.minPrice = minPrice;
