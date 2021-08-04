@@ -1,7 +1,9 @@
 package com.coupang.marketplace.product.service;
 
 
+import com.coupang.marketplace.global.fixture.ProductFixture.*;
 import com.coupang.marketplace.product.controller.dto.GetProductsRequest;
+import com.coupang.marketplace.product.domain.Product;
 import com.coupang.marketplace.product.repository.ProductRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,8 +12,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.coupang.marketplace.product.constant.DeliveryTypeEnum.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.times;
 
@@ -75,14 +82,13 @@ public class ProductServiceTest {
         then(productRepository).should(times(1)).getProductsByIsRocketGlobal(any(Boolean.class), any(Integer.class), any(Integer.class));
     }
 
-
     @DisplayName("배송 유형이 로켓 프레쉬이고 로켓 배송도 가능해야 하면 로켓 프레쉬와 로켓 배송 모두 가능한 상품 전체를 가져온다.")
     @Test
     public void getProductsByIsRocketAndIsRocketFresh() {
         // given
         final GetProductsRequest dto = GetProductsRequest.builder()
                 .deliveryType(ROCKET_FRESH)
-                .isRocket(true)
+                .rocket(true)
                 .start(1)
                 .listSize(10)
                 .build();
@@ -100,7 +106,7 @@ public class ProductServiceTest {
         // given
         final GetProductsRequest dto = GetProductsRequest.builder()
                 .deliveryType(ROCKET_GLOBAL)
-                .isRocket(true)
+                .rocket(true)
                 .start(1)
                 .listSize(10)
                 .build();
@@ -110,5 +116,18 @@ public class ProductServiceTest {
 
         // then
         then(productRepository).should(times(1)).getProductsByIsRocketAndIsRocketGlobal(any(Boolean.class), any(Boolean.class), any(Integer.class), any(Integer.class));
+    }
+
+    @DisplayName("키워드를 포함하는 상품 목록을 가져온다.")
+    @Test
+    public void searchProductsByKeyword() {
+        // given
+        final String keyword = "1";
+        final List<Product> products = Arrays.asList(Product1.PRODUCT);
+        given(productRepository.getProductsByKeyword(keyword))
+                .willReturn(products);
+
+        // then
+        assertThat(productRepository.getProductsByKeyword(keyword)).isEqualTo(products);
     }
 }

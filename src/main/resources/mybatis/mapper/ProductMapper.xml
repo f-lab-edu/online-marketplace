@@ -33,4 +33,9 @@
         WHERE id > #{startId} AND is_rocket_global = #{isRocketGlobal}
         LIMIT #{listSize}
     </select>
+    <select id="getProductsByKeyword" resultType="Product">
+        SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
+        FROM PRODUCT
+        WHERE name LIKE CONCAT(#{keyword}, '%')
+    </select>
 </mapper>

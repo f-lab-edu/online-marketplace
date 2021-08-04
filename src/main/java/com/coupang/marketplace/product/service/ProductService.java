@@ -1,8 +1,8 @@
 package com.coupang.marketplace.product.service;
 
 import com.coupang.marketplace.product.constant.DeliveryTypeEnum;
-import com.coupang.marketplace.product.controller.dto.GetProductsResponse;
 import com.coupang.marketplace.product.controller.dto.GetProductsRequest;
+import com.coupang.marketplace.product.controller.dto.SimpleProduct;
 import com.coupang.marketplace.product.domain.Product;
 import com.coupang.marketplace.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public List<GetProductsResponse> getProducts(GetProductsRequest dto){
+    public List<SimpleProduct> getProducts(GetProductsRequest dto){
         DeliveryTypeEnum deliveryType = dto.getDeliveryType();
         boolean isRocket = dto.isRocket();
         int listSize = dto.getListSize();
@@ -26,7 +26,7 @@ public class ProductService {
 
         List<Product> products = getProductsByDeliveryType(deliveryType, isRocket, listSize, startId);
 
-        return GetProductsResponse.toList(products);
+        return SimpleProduct.toList(products);
     }
 
     private List<Product> getProductsByDeliveryType (DeliveryTypeEnum deliveryType, boolean isRocket, int listSize, int startId) {
@@ -51,8 +51,11 @@ public class ProductService {
                 }
                 break;
         }
-
         return products;
     }
 
+    public List<SimpleProduct> searchProductsByKeyword(String keyword) {
+        List<Product> products = productRepository.getProductsByKeyword(keyword);
+        return SimpleProduct.toList(products);
+    }
 }
