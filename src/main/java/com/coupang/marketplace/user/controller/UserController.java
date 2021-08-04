@@ -1,19 +1,21 @@
 package com.coupang.marketplace.user.controller;
 
+import com.coupang.marketplace.auth.AuthRequired;
 import com.coupang.marketplace.global.common.StatusEnum;
 import com.coupang.marketplace.global.common.SuccessResponse;
+import com.coupang.marketplace.user.controller.dto.*;
 import com.coupang.marketplace.user.service.LoginService;
 import com.coupang.marketplace.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+
+
+@RequestMapping("/users")
 @RequiredArgsConstructor
 @RestController
 public class UserController {
@@ -21,28 +23,35 @@ public class UserController {
     private final UserService userService;
     private final LoginService loginService;
 
-    @PostMapping("/users/sign-up")
-    public ResponseEntity<SuccessResponse> signUp(@Valid @RequestBody SignUpRequestDto requestDto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/sign-up")
+    public SuccessResponse signUp(@Valid @RequestBody final SignUpRequestDto requestDto) {
         userService.join(requestDto);
         SuccessResponse res = SuccessResponse.builder()
                 .status(StatusEnum.CREATED)
                 .message("회원가입 성공")
                 .build();
-        return new ResponseEntity<>(res, HttpStatus.CREATED);
+        return res;
     }
 
-    @PostMapping("/users/login")
-    public ResponseEntity<SuccessResponse> loginUser(@Valid @RequestBody SignInRequestDto requestDto) {
+    @PostMapping("/login")
+    public SuccessResponse loginUser(@Valid @RequestBody final SignInRequestDto requestDto) {
         loginService.login(requestDto);
         SuccessResponse res = SuccessResponse.builder()
                 .status(StatusEnum.OK)
                 .message("로그인 성공")
                 .build();
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        return res;
     }
 
-    @GetMapping("/users/logout")
+    @GetMapping("/logout")
     public void logoutUser(){
         loginService.logout();
+    }
+
+    @AuthRequired
+    @PutMapping("/{id}")
+    public void updateUser(@PathVariable("id") final long id, @Valid @RequestBody final UpdateUserRequestDto dto, HttpSession httpSession) {
+        userService.updateUser(id, dto);
     }
 }

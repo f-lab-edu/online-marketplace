@@ -4,9 +4,16 @@
 
 <mapper namespace="com.coupang.marketplace.user.repository.UserRepository">
     <insert id="insertUser" parameterType="User">
-        INSERT INTO USER (name, email, salt, password, phone) VALUES (#{name}, #{email}, #{salt}, #{password}, #{phone})
+        INSERT INTO USER (name, email, salt, password, phone)
+        VALUES (#{name}, #{email}, #{salt}, #{password}, #{phone})
     </insert>
     <select id="findByEmail" resultType="User">
-        SELECT id, name, email, salt, password, phone FROM USER WHERE email = #{email}
+        SELECT id, name, email, salt, password, phone FROM USER
+        WHERE email = #{email}
     </select>
+    <update id="updateUser" parameterType="User">
+        UPDATE USER
+        SET name = #{name}, phone = #{phone}
+        WHERE id = #{id}
+    </update>
 </mapper>
