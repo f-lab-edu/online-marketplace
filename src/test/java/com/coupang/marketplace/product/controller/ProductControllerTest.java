@@ -46,7 +46,7 @@ public class ProductControllerTest extends ControllerTestTemplate {
         // given
         final GetProductsRequest dto = GetProductsRequest.builder()
                 .deliveryType(ROCKET_FRESH)
-                .isRocket(true)
+                .rocket(true)
                 .start(1)
                 .listSize(2)
                 .build();

@@ -19,7 +19,7 @@ public class GetProductsRequest {
     private DeliveryTypeEnum deliveryType;
 
     @Nullable
-    private boolean isRocket;
+    private boolean rocket;
 
     @NotNull
     @Min(1)
@@ -31,9 +31,9 @@ public class GetProductsRequest {
     private int listSize;
 
     @Builder
-    public GetProductsRequest(DeliveryTypeEnum deliveryType, boolean isRocket, int start, int listSize) {
+    public GetProductsRequest(DeliveryTypeEnum deliveryType, boolean rocket, int start, int listSize) {
         this.deliveryType = deliveryType;
-        this.isRocket = isRocket;
+        this.rocket = rocket;
         this.start = start;
         this.listSize = listSize;
     }

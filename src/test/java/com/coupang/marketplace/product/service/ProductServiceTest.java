@@ -88,7 +88,7 @@ public class ProductServiceTest {
         // given
         final GetProductsRequest dto = GetProductsRequest.builder()
                 .deliveryType(ROCKET_FRESH)
-                .isRocket(true)
+                .rocket(true)
                 .start(1)
                 .listSize(10)
                 .build();
@@ -106,7 +106,7 @@ public class ProductServiceTest {
         // given
         final GetProductsRequest dto = GetProductsRequest.builder()
                 .deliveryType(ROCKET_GLOBAL)
-                .isRocket(true)
+                .rocket(true)
                 .start(1)
                 .listSize(10)
                 .build();
