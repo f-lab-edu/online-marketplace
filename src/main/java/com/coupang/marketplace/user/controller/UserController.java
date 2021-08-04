@@ -51,7 +51,7 @@ public class UserController {
 
     @AuthRequired
     @PutMapping("/{id}")
-    public void updateUser(@PathVariable("id") final long id, @Valid @RequestBody final UpdateUserRequestDto dto, HttpSession httpSession) {
+    public void updateUser(@PathVariable("id") final long id, @Valid @RequestBody final UpdateUserRequestDto dto) {
         userService.updateUser(id, dto);
     }
 }

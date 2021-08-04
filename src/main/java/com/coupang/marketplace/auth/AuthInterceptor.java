@@ -1,5 +1,6 @@
 package com.coupang.marketplace.auth;
 
+import com.coupang.marketplace.auth.exception.UnauthorizedException;
 import com.coupang.marketplace.global.constant.SessionKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,15 +19,19 @@ import java.util.Map;
 public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (needToAuth((HandlerMethod)handler)) {
-            String userIdBySession = getUserIdBySession(request);
-            String userIdByPath = getUserIdByPathVariable(request);
-            if (!userIdBySession.equals(userIdByPath)) {
-                throw new UnAuthorizedException();
-            };
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws UnauthorizedException {
+        try {
+            if (needToAuth((HandlerMethod)handler)) {
+                String userIdBySession = getUserIdBySession(request);
+                String userIdByPath = getUserIdByPathVariable(request);
+                if (!userIdBySession.equals(userIdByPath)) {
+                    throw new UnauthorizedException();
+                };
+            }
+            return true;
+        } catch (Exception e) {
+            throw new UnauthorizedException();
         }
-        return true;
     }
 
     private boolean needToAuth(HandlerMethod handler){
