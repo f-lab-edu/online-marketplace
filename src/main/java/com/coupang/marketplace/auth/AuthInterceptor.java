@@ -30,7 +30,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             }
             return true;
         } catch (Exception e) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedException(e);
         }
     }
 
