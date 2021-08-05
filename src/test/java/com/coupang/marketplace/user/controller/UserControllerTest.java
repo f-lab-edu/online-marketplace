@@ -187,7 +187,7 @@ public class UserControllerTest extends ControllerTest {
                 .andDo(print());
     }
 
-    @DisplayName("인증된 사용자면 회원 정보 수정에 실패한다.")
+    @DisplayName("인증되지 않은 사용자면 회원 정보 수정에 실패한다.")
     @Test
     void updateUserByNotAuthenticatedUser() throws Exception {
         // given
