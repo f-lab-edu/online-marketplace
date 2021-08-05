@@ -19,19 +19,19 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @Transactional
 public class ControllerTestTemplate {
 
-	@Autowired
-	protected MockMvc mvc;
+    @Autowired
+    protected MockMvc mvc;
 
-	@Autowired
-	protected WebApplicationContext ctx;
+    @Autowired
+    protected WebApplicationContext ctx;
 
-	@Autowired
-	protected ObjectMapper objectMapper;
+    @Autowired
+    protected ObjectMapper objectMapper;
 
-	@BeforeEach
-	public void setUp() {
-		this.mvc = MockMvcBuilders.webAppContextSetup(ctx)
-			.addFilter(new CharacterEncodingFilter("UTF-8", true))
-			.build();
-	}
+    @BeforeEach
+    public void setUp() {
+        this.mvc = MockMvcBuilders.webAppContextSetup(ctx)
+                .addFilter(new CharacterEncodingFilter("UTF-8", true))
+                .build();
+    }
 }

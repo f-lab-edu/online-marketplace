@@ -37,4 +37,9 @@ public class SessionLoginService implements LoginService{
         }
         httpSession.setAttribute(SessionKey.LOGIN_USER_ID, user.get().getId());
     }
+
+    @Override
+    public void logout(){
+        httpSession.removeAttribute(SessionKey.LOGIN_USER_ID);
+    }
 }

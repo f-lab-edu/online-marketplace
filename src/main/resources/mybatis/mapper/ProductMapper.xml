@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coupang.marketplace.product.repository.ProductRepository">
+    <select id="getProductsByIsRocket" resultType="Product">
+        SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
+        FROM PRODUCT
+        WHERE id > #{startId}
+        LIMIT #{listSize}
+    </select>
+    <select id="getProductsByIsRocketFresh" resultType="Product">
+        SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
+        FROM PRODUCT
+        WHERE id > #{startId} AND is_rocket_fresh = #{isRocketFresh}
+        LIMIT #{listSize}
+    </select>
+    <select id="getProductsByIsRocketGlobal" resultType="Product">
+        SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
+        FROM PRODUCT
+        WHERE id > #{startId} AND is_rocket_global = #{isRocketGlobal}
+        LIMIT #{listSize}
+    </select>
+    <select id="getProductsByIsRocketAndIsRocketFresh" resultType="Product">
+        SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
+        FROM PRODUCT
+        WHERE id > #{startId} AND is_rocket_fresh = #{isRocketFresh}
+        LIMIT #{listSize}
+    </select>
+    <select id="getProductsByIsRocketAndIsRocketGlobal" resultType="Product">
+        SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
+        FROM PRODUCT
+        WHERE id > #{startId} AND is_rocket_global = #{isRocketGlobal}
+        LIMIT #{listSize}
+    </select>
+    <select id="getProductsByKeyword" resultType="Product">
+        SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
+        FROM PRODUCT
+        WHERE name LIKE CONCAT(#{keyword}, '%')
+    </select>
+</mapper>
