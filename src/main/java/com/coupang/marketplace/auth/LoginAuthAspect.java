@@ -19,8 +19,12 @@ public class LoginAuthAspect {
 
 	@Before("@annotation(com.coupang.marketplace.auth.LoginAuth) && @annotation(loginAuth)")
 	public void loginAuth(LoginAuth loginAuth){
-		HttpSession httpSession = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
-
+		HttpSession httpSession;
+		try {
+			httpSession = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
+		} catch(IllegalStateException e){
+			throw new AuthenticationException();
+		}
 		if(loginAuth.type() == USER)
 			verifyUserSession(httpSession);
 	}
@@ -29,6 +33,6 @@ public class LoginAuthAspect {
 		Long userId = (Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
 
 		if(userId == null)
-			throw new AuthenticationException("로그인 후 이용가능합니다.");
+			throw new AuthenticationException();
 	}
 }
