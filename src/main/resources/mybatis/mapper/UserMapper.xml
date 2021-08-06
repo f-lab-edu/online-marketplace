@@ -13,7 +13,7 @@
     </select>
     <update id="updateUser" parameterType="User">
         UPDATE USER
-        SET name = #{name}, phone = #{phone}
+        SET name = #{name}, phone = #{phone}, salt = #{salt}, password = #{password}
         WHERE id = #{id}
     </update>
 </mapper>
