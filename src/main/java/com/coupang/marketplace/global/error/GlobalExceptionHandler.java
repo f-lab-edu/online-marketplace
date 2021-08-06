@@ -28,4 +28,13 @@ public class GlobalExceptionHandler {
                 .build();
         return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<FailResponse> handleAuthenticationException(AuthenticationException e){
+        FailResponse res = FailResponse.builder()
+            .status(StatusEnum.UNAUTHORIZED)
+            .errorMessage(e.getMessage())
+            .build();
+        return new ResponseEntity<>(res, HttpStatus.UNAUTHORIZED);
+    }
 }
