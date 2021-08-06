@@ -1,5 +1,8 @@
 package com.coupang.marketplace.coupon.domain;
 
+import static com.coupang.marketplace.global.common.Timezone.*;
+
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -30,6 +33,6 @@ public class Coupon {
 		this.minPrice = minPrice;
 		this.discountPrice = discountPrice;
 		this.productId = productId;
-		this.expirationTime = expirationTime;
+		this.expirationTime = expirationTime.withZoneSameInstant(ZoneId.of(LocalTimezone));
 	}
 }
