@@ -8,6 +8,9 @@ spring:
     session:
       host: localhost
       port: 6379
+    cache:
+      host: localhost
+      port: 6380
 
 mybatis:
   type-aliases-package: com.coupang.marketplace.*.domain

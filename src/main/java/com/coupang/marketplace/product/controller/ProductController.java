@@ -6,6 +6,7 @@ import com.coupang.marketplace.product.controller.dto.GetProductsRequest;
 import com.coupang.marketplace.product.controller.dto.SimpleProduct;
 import com.coupang.marketplace.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,6 +21,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @Cacheable(key="#dto.start", value="products")
     @GetMapping
     public SuccessResponse getProducts(@Valid @ModelAttribute GetProductsRequest dto) {
         List<SimpleProduct> products = productService.getProducts(dto);
