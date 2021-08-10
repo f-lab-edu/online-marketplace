@@ -1,6 +1,8 @@
 package com.coupang.marketplace.user.service;
 
 import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
+import com.coupang.marketplace.user.controller.dto.UpdateUserRequestDto;
+import com.coupang.marketplace.user.domain.EncryptedPassword;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.util.crypto.CryptoData;
@@ -23,22 +25,33 @@ public class UserService {
             throw new IllegalArgumentException("이미 등록된 메일입니다.");
         }
 
-        String salt = SaltGenerator.generateSalt();
-        CryptoData cryptoData = CryptoData.WithSaltBuilder()
-                .plainText(dto.getPassword())
-                .salt(salt)
-                .build();
-        String encryptedPassword = encryptor.encrypt(cryptoData);
-        User user = dto.toEntity(salt, encryptedPassword);
-
+        EncryptedPassword pw = encryptPasswordWithSalt(dto.getPassword());
+        User user = dto.toEntity(pw.getSalt(), pw.getPassword());
         userRepository.insertUser(user);
     }
 
-    public boolean checkIsUserExist (String email) {
+    private EncryptedPassword encryptPasswordWithSalt(String plainPassword) {
+        String salt = SaltGenerator.generateSalt();
+        CryptoData cryptoData = CryptoData.WithSaltBuilder()
+                .plainText(plainPassword)
+                .salt(salt)
+                .build();
+        String encryptedPassword = encryptor.encrypt(cryptoData);
+        return EncryptedPassword.builder()
+                .salt(salt)
+                .password(encryptedPassword)
+                .build();
+    }
+
+    private boolean checkIsUserExist(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
 
-
+    public void updateUser(long id, UpdateUserRequestDto dto){
+        EncryptedPassword pw = encryptPasswordWithSalt(dto.getPassword());
+        User user = dto.toEntity(id, pw.getSalt(), pw.getPassword());
+        userRepository.updateUser(user);
+    }
 }
 
 
