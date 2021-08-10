@@ -23,7 +23,7 @@ public class LoginAuthAspect {
 		try {
 			httpSession = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
 		} catch(IllegalStateException e){
-			throw new AuthenticationException();
+			throw new AuthenticationException("로그인 후 이용가능합니다.");
 		}
 		if(loginAuth.type() == USER)
 			verifyUserSession(httpSession);
@@ -33,6 +33,6 @@ public class LoginAuthAspect {
 		Long userId = (Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
 
 		if(userId == null)
-			throw new AuthenticationException();
+			throw new AuthenticationException("로그인 후 이용가능합니다.");
 	}
 }
