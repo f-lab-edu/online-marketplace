@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coupang.marketplace.auth.LoginAuth;
+import com.coupang.marketplace.auth.UserId;
 import com.coupang.marketplace.global.common.StatusEnum;
 import com.coupang.marketplace.global.common.SuccessResponse;
 import com.coupang.marketplace.user.controller.dto.UpdateRequestDto;
@@ -25,7 +26,7 @@ public class InformationController {
 
 	@LoginAuth(type = USER)
 	@PutMapping("/mypage/user-information/{id}")
-	public SuccessResponse updateUser(@PathVariable Long id, @Valid @RequestBody UpdateRequestDto requestDto){
+	public SuccessResponse updateUser(@UserId @PathVariable Long id, @Valid @RequestBody UpdateRequestDto requestDto){
 		userService.updateUser(id, requestDto);
 		SuccessResponse res = SuccessResponse.builder()
 			.status(StatusEnum.OK)
