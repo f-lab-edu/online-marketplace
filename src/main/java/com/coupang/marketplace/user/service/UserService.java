@@ -24,6 +24,7 @@ public class UserService {
     private final UserRepository userRepository;
     @Qualifier("sha256Encryptor")
     private final Encryptor encryptor;
+    private HttpSession httpSession;
 
     public void join(SignUpRequestDto dto){
         if (checkIsUserExist(dto.getEmail())) {
@@ -46,9 +47,8 @@ public class UserService {
     }
 
     public void updateUser(Long id, UpdateRequestDto dto){
-        HttpSession httpSession = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
-        if(!httpSession.getAttribute(SessionKey.LOGIN_USER_ID).equals(id))
-            throw new AuthenticationException("다른 사용자의 정보에 접근하였습니다.");
+
+        checkIsUserSame(id);
 
         String salt = SaltGenerator.generateSalt();
         CryptoData cryptoData = CryptoData.WithSaltBuilder()
@@ -59,5 +59,11 @@ public class UserService {
         User user = dto.toEntity(id, salt, encryptedPassword);
 
         userRepository.updateUserInformation(user);
+    }
+
+    public void checkIsUserSame(Long id){
+        httpSession = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
+        if(!httpSession.getAttribute(SessionKey.LOGIN_USER_ID).equals(id))
+            throw new AuthenticationException("다른 사용자의 정보에 접근하였습니다.");
     }
 }
