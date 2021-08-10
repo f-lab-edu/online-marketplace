@@ -6,6 +6,9 @@ import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 import com.coupang.marketplace.user.controller.dto.UpdateUserRequestDto;
 import com.coupang.marketplace.global.fixture.UserFixture.*;
 import com.coupang.marketplace.global.template.ControllerTestTemplate;
+import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
+import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

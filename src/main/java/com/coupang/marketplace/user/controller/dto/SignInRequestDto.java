@@ -19,7 +19,7 @@ public class SignInRequestDto {
     private String password;
 
     @Builder
-    public SignInRequestDto(@JsonProperty("email") String email, @JsonProperty("password") String password) {
+    public SignInRequestDto(String email, String password) {
         this.email = email;
         this.password = password;
     }
