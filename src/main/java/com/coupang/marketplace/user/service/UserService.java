@@ -1,6 +1,6 @@
 package com.coupang.marketplace.user.service;
 
-import com.coupang.marketplace.user.controller.SignUpRequestDto;
+import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.util.crypto.CryptoData;

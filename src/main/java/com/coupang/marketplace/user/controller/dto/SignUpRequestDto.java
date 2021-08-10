@@ -1,4 +1,4 @@
-package com.coupang.marketplace.user.controller;
+package com.coupang.marketplace.user.controller.dto;
 
 import com.coupang.marketplace.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
