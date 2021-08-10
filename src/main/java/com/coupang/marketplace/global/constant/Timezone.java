@@ -1,5 +1,4 @@
-package com.coupang.marketplace.global.common;
-
+package com.coupang.marketplace.global.constant;
 
 public class Timezone {
 
