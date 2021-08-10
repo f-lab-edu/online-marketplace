@@ -1,4 +1,4 @@
-package com.coupang.marketplace.user.controller;
+package com.coupang.marketplace.user.controller.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;

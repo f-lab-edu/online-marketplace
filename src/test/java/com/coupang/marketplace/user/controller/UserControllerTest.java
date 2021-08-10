@@ -1,6 +1,9 @@
 package com.coupang.marketplace.user.controller;
 
 import com.coupang.marketplace.fixture.UserFixture.*;
+import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
+import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

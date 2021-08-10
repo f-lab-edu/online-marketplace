@@ -4,8 +4,8 @@ import javax.servlet.http.HttpSession;
 
 import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.global.error.AuthenticationException;
-import com.coupang.marketplace.user.controller.SignUpRequestDto;
-import com.coupang.marketplace.user.controller.UpdateRequestDto;
+import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
+import com.coupang.marketplace.user.controller.dto.UpdateRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.util.crypto.CryptoData;
