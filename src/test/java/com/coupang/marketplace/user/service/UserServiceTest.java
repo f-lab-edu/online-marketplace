@@ -1,6 +1,7 @@
 package com.coupang.marketplace.user.service;
 
 import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
+import com.coupang.marketplace.user.controller.dto.UpdateRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.util.crypto.Encryptor;
@@ -71,5 +72,23 @@ public class UserServiceTest {
 
         // then
         assertThrows(IllegalArgumentException.class, () -> userService.join(dto));
+    }
+
+    @DisplayName("회원은 회원정보수정에 성공한다.")
+    @Test
+    void updateUser() {
+        // given
+        final UpdateRequestDto dto = UpdateRequestDto.builder()
+            .name(User1.NAME)
+            .password(User1.PASSWORD)
+            .phone(User1.PHONE)
+            .build();
+        final Long id = User1.ID;
+
+        //when
+        userService.updateUser(id, dto);
+
+        // then
+        then(userRepository).should(times(1)).updateUserInformation(any());
     }
 }
