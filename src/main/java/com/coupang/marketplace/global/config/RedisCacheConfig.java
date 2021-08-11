@@ -27,9 +27,17 @@ public class RedisCacheConfig {
     @Value("${spring.redis.cache.port}")
     private int port;
 
+    @Value("${spring.redis.cache.password}")
+    private String password;
+
+
     @Bean
     public RedisConnectionFactory redisCacheConnectionFactory() {
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration(host, port));
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+        config.setHostName(host);
+        config.setPort(port);
+        config.setPassword(password);
+        return new LettuceConnectionFactory(config);
     }
 
     @Bean
