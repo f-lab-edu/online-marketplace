@@ -16,7 +16,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
-
 @EnableCaching
 @Configuration
 public class RedisCacheConfig {
@@ -29,7 +28,6 @@ public class RedisCacheConfig {
 
     @Value("${spring.redis.cache.password}")
     private String password;
-
 
     @Bean
     public RedisConnectionFactory redisCacheConnectionFactory() {
