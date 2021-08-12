@@ -2,6 +2,7 @@ package com.coupang.marketplace.product.controller;
 
 import com.coupang.marketplace.global.common.StatusEnum;
 import com.coupang.marketplace.global.common.SuccessResponse;
+import com.coupang.marketplace.global.constant.Cache;
 import com.coupang.marketplace.product.controller.dto.GetProductsRequest;
 import com.coupang.marketplace.product.controller.dto.SimpleProduct;
 import com.coupang.marketplace.product.service.ProductService;
@@ -21,7 +22,7 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @Cacheable(key="#dto.start", value="products")
+    @Cacheable(key="#dto.start", value=Cache.PRODUCTS)
     @GetMapping
     public SuccessResponse getProducts(@Valid @ModelAttribute GetProductsRequest dto) {
         List<SimpleProduct> products = productService.getProducts(dto);
