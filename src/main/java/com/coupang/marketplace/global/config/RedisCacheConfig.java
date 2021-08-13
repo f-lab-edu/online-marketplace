@@ -1,6 +1,6 @@
 package com.coupang.marketplace.global.config;
 
-import com.coupang.marketplace.global.constant.Cache;
+import com.coupang.marketplace.global.constant.CacheKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
@@ -60,6 +60,6 @@ public class RedisCacheConfig {
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
         return (builder) -> builder
-                .withCacheConfiguration(Cache.PRODUCTS, defaultRedisCacheConfiguration().entryTtl(Duration.ofMinutes(30)));
+                .withCacheConfiguration(CacheKey.PRODUCTS, defaultRedisCacheConfiguration().entryTtl(Duration.ofMinutes(30)));
     }
 }

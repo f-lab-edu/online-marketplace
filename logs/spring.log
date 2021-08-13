@@ -1,0 +1,120 @@
+[33m2021-08-13 15:14:51,715[m
+            [32mINFO [m
+            -HV000001: Hibernate Validator 6.2.0.Final
+[33m2021-08-13 15:14:51,742[m
+            [32mINFO [m
+            -Starting MarketplaceApplication using Java 11.0.11 on yangjiwon-ui-MacBookPro.local with PID 24513 (/Users/yangjiwon/dev/online-marketplace/build/classes/java/main started by yangjiwon in /Users/yangjiwon/dev/online-marketplace)
+[33m2021-08-13 15:14:51,752[m
+            [32mINFO [m
+            -No active profile set, falling back to default profiles: default
+[33m2021-08-13 15:14:52,550[m
+            [32mINFO [m
+            -Multiple Spring Data modules found, entering strict repository configuration mode!
+[33m2021-08-13 15:14:52,552[m
+            [32mINFO [m
+            -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+[33m2021-08-13 15:14:52,573[m
+            [32mINFO [m
+            -Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+[33m2021-08-13 15:14:53,161[m
+            [32mINFO [m
+            -Tomcat initialized with port(s): 8080 (http)
+[33m2021-08-13 15:14:53,173[m
+            [32mINFO [m
+            -Initializing ProtocolHandler ["http-nio-8080"]
+[33m2021-08-13 15:14:53,174[m
+            [32mINFO [m
+            -Starting service [Tomcat]
+[33m2021-08-13 15:14:53,174[m
+            [32mINFO [m
+            -Starting Servlet engine: [Apache Tomcat/9.0.46]
+[33m2021-08-13 15:14:53,234[m
+            [32mINFO [m
+            -Initializing Spring embedded WebApplicationContext
+[33m2021-08-13 15:14:53,234[m
+            [32mINFO [m
+            -Root WebApplicationContext: initialization completed in 1422 ms
+[33m2021-08-13 15:14:54,195[m
+            [33mWARN [m
+            -Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'enableRedisKeyspaceNotificationsInitializer' defined in class path resource [org/springframework/session/data/redis/config/annotation/web/http/RedisHttpSessionConfiguration.class]: Invocation of init method failed; nested exception is org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to localhost:6379
+[33m2021-08-13 15:14:54,325[m
+            [32mINFO [m
+            -Stopping service [Tomcat]
+[33m2021-08-13 15:14:54,343[m
+            [32mINFO [m
+            -
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[33m2021-08-13 15:14:54,370[m
+            [31mERROR[m
+            -Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'enableRedisKeyspaceNotificationsInitializer' defined in class path resource [org/springframework/session/data/redis/config/annotation/web/http/RedisHttpSessionConfiguration.class]: Invocation of init method failed; nested exception is org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to localhost:6379
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.8.jar:5.3.8]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.8.jar:5.3.8]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.5.1.jar:2.5.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) [spring-boot-2.5.1.jar:2.5.1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434) [spring-boot-2.5.1.jar:2.5.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338) [spring-boot-2.5.1.jar:2.5.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) [spring-boot-2.5.1.jar:2.5.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332) [spring-boot-2.5.1.jar:2.5.1]
+	at com.coupang.marketplace.MarketplaceApplication.main(MarketplaceApplication.java:20) [main/:?]
+Caused by: org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to localhost:6379
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.translateException(LettuceConnectionFactory.java:1621) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1529) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1315) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1298) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:1039) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:371) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration$EnableRedisKeyspaceNotificationsInitializer.afterPropertiesSet(RedisHttpSessionConfiguration.java:331) ~[spring-session-data-redis-2.5.0.jar:2.5.0]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.8.jar:5.3.8]
+	... 16 more
+Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to localhost:6379
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:330) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.RedisClient.connect(RedisClient.java:216) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:115) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at java.util.Optional.orElseGet(Optional.java:369) ~[?:?]
+	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:115) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1527) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1315) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1298) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:1039) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:371) ~[spring-data-redis-2.5.1.jar:2.5.1]
+	at org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration$EnableRedisKeyspaceNotificationsInitializer.afterPropertiesSet(RedisHttpSessionConfiguration.java:331) ~[spring-session-data-redis-2.5.0.jar:2.5.0]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.8.jar:5.3.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.8.jar:5.3.8]
+	... 16 more
+Caused by: io.lettuce.core.RedisCommandExecutionException: NOAUTH HELLO must be called with the client already authenticated, otherwise the HELLO AUTH <user> <pass> option can be used to authenticate the client and select the RESP protocol version at the same time
+	at io.lettuce.core.internal.ExceptionFactory.createExecutionException(ExceptionFactory.java:137) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.internal.ExceptionFactory.createExecutionException(ExceptionFactory.java:110) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.protocol.AsyncCommand.completeResult(AsyncCommand.java:120) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.protocol.AsyncCommand.complete(AsyncCommand.java:111) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.complete(CommandHandler.java:746) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.decode(CommandHandler.java:681) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.lettuce.core.protocol.CommandHandler.channelRead(CommandHandler.java:598) ~[lettuce-core-6.1.2.RELEASE.jar:6.1.2.RELEASE]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493) ~[netty-transport-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-common-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.65.Final.jar:4.1.65.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.65.Final.jar:4.1.65.Final]
+	at java.lang.Thread.run(Thread.java:834) ~[?:?]
