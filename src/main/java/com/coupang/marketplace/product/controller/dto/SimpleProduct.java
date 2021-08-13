@@ -3,12 +3,14 @@ package com.coupang.marketplace.product.controller.dto;
 import com.coupang.marketplace.product.domain.Product;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 @Getter
 public class SimpleProduct {
     @NotNull
