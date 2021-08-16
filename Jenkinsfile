@@ -10,6 +10,7 @@ pipeline {
 
         stage('build') {
             steps {
+                echo 'build ...'
                 sh './gradlew -x test clean build'
             }
         }
