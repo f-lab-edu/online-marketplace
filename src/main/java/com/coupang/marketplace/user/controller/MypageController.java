@@ -4,13 +4,11 @@ import static com.coupang.marketplace.auth.LoginType.*;
 
 import javax.validation.Valid;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coupang.marketplace.auth.LoginAuth;
-import com.coupang.marketplace.auth.UserId;
 import com.coupang.marketplace.global.common.StatusEnum;
 import com.coupang.marketplace.global.common.SuccessResponse;
 import com.coupang.marketplace.user.controller.dto.UpdateRequestDto;

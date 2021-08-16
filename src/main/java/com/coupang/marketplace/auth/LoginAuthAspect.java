@@ -1,7 +1,5 @@
 package com.coupang.marketplace.auth;
 
-import static com.coupang.marketplace.auth.LoginType.*;
-
 import javax.servlet.http.HttpSession;
 
 import org.aspectj.lang.annotation.Aspect;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.global.error.AuthenticationException;
 
 @Aspect
@@ -25,12 +22,11 @@ public class LoginAuthAspect {
 		} catch(IllegalStateException e){
 			throw new AuthenticationException("로그인 후 이용가능합니다.");
 		}
-		if(loginAuth.type() == USER)
-			verifyUserSession(httpSession);
+		verifySession(httpSession, loginAuth.type());
 	}
 
-	private void verifyUserSession(HttpSession httpSession){
-		Long userId = (Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
+	private void verifySession(HttpSession httpSession, LoginType type){
+		Long userId = (Long)httpSession.getAttribute(type.getSessionKey());
 
 		if(userId == null)
 			throw new AuthenticationException("로그인 후 이용가능합니다.");
