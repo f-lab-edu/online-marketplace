@@ -2,6 +2,7 @@ package com.coupang.marketplace.user.service;
 
 import javax.servlet.http.HttpSession;
 
+import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 import com.coupang.marketplace.user.controller.dto.UpdateRequestDto;
 import com.coupang.marketplace.user.domain.User;
@@ -12,6 +13,8 @@ import com.coupang.marketplace.global.util.crypto.SaltGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RequiredArgsConstructor
 @Service
@@ -42,7 +45,10 @@ public class UserService {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    public void updateUser(Long id, UpdateRequestDto dto){
+    public void updateUser(UpdateRequestDto dto){
+
+        httpSession = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
+        Long id = (Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
 
         String salt = SaltGenerator.generateSalt();
         CryptoData cryptoData = CryptoData.WithSaltBuilder()

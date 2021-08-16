@@ -20,14 +20,14 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-public class InformationController {
+public class MypageController {
 
 	private final UserService userService;
 
 	@LoginAuth(type = USER)
-	@PutMapping("/mypage/user-information/{id}")
-	public SuccessResponse updateUser(@UserId @PathVariable Long id, @Valid @RequestBody UpdateRequestDto requestDto){
-		userService.updateUser(id, requestDto);
+	@PutMapping("/mypage/my-info")
+	public SuccessResponse updateUser(@Valid @RequestBody UpdateRequestDto requestDto){
+		userService.updateUser(requestDto);
 		SuccessResponse res = SuccessResponse.builder()
 			.status(StatusEnum.OK)
 			.message("회원 정보 수정 성공")

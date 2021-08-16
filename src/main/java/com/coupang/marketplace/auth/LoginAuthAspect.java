@@ -4,8 +4,6 @@ import static com.coupang.marketplace.auth.LoginType.*;
 
 import javax.servlet.http.HttpSession;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -36,22 +34,5 @@ public class LoginAuthAspect {
 
 		if(userId == null)
 			throw new AuthenticationException("로그인 후 이용가능합니다.");
-	}
-
-	@Around("execution(* *(.., @UserId (*), ..))")
-	public Object loginAuth2(ProceedingJoinPoint joinPoint) throws Throwable{
-		HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
-		Long userId = (Long)session.getAttribute(SessionKey.LOGIN_USER_ID);
-
-		Long paramId = null;
-		Object[] signatureArgs = joinPoint.getArgs();
-		for (Object signatureArg: signatureArgs) {
-			paramId = (Long)signatureArg;
-			break;
-		}
-
-		if(!paramId.equals(userId))
-			throw new AuthenticationException("다른 사용자의 정보에 접근하였습니다.");
-		return joinPoint.proceed(signatureArgs);
 	}
 }
