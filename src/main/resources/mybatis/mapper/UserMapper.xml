@@ -9,7 +9,7 @@
     <select id="findByEmail" resultType="User">
         SELECT id, name, email, salt, password, phone FROM USER WHERE email = #{email}
     </select>
-    <select id="updateUserInformation" resultType="User">
+    <select id="updateUser" resultType="User">
         UPDATE USER
         SET name = #{name}, salt = #{salt}, password = #{password}, phone = #{phone}
         WHERE id = #{id}

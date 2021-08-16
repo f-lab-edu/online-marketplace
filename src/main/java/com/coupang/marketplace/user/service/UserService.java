@@ -58,6 +58,6 @@ public class UserService {
         String encryptedPassword = encryptor.encrypt(cryptoData);
         User user = dto.toEntity(id, salt, encryptedPassword);
 
-        userRepository.updateUserInformation(user);
+        userRepository.updateUser(user);
     }
 }
