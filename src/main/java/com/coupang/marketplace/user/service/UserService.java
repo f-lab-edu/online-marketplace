@@ -13,8 +13,6 @@ import com.coupang.marketplace.global.util.crypto.SaltGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RequiredArgsConstructor
 @Service
@@ -23,7 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
     @Qualifier("sha256Encryptor")
     private final Encryptor encryptor;
-    private HttpSession httpSession;
+    private final HttpSession httpSession;
 
     public void join(SignUpRequestDto dto){
         if (checkIsUserExist(dto.getEmail())) {
@@ -32,9 +30,9 @@ public class UserService {
 
         String salt = SaltGenerator.generateSalt();
         CryptoData cryptoData = CryptoData.WithSaltBuilder()
-                .plainText(dto.getPassword())
-                .salt(salt)
-                .build();
+            .plainText(dto.getPassword())
+            .salt(salt)
+            .build();
         String encryptedPassword = encryptor.encrypt(cryptoData);
         User user = dto.toEntity(salt, encryptedPassword);
 
@@ -47,7 +45,6 @@ public class UserService {
 
     public void updateUser(UpdateRequestDto dto){
 
-        httpSession = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
         Long id = (Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
 
         String salt = SaltGenerator.generateSalt();

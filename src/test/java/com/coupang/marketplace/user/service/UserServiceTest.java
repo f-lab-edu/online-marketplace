@@ -1,5 +1,6 @@
 package com.coupang.marketplace.user.service;
 
+import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 import com.coupang.marketplace.user.controller.dto.UpdateRequestDto;
 import com.coupang.marketplace.user.domain.User;
@@ -21,6 +22,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
+import javax.servlet.http.HttpSession;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -34,16 +36,19 @@ public class UserServiceTest {
     @Mock
     private Encryptor encryptor;
 
+    @Mock
+    private HttpSession httpSession;
+
     @DisplayName("중복되지 않은 이메일이면 회원가입에 성공한다.")
     @Test
     void signUp() {
         // given
         final SignUpRequestDto dto = SignUpRequestDto.builder()
-                .name(User1.NAME)
-                .email(User1.EMAIL)
-                .password(User1.PASSWORD)
-                .phone(User1.PHONE)
-                .build();
+            .name(User1.NAME)
+            .email(User1.EMAIL)
+            .password(User1.PASSWORD)
+            .phone(User1.PHONE)
+            .build();
         final Optional<User> notFoundUser = Optional.ofNullable(null);
 
         given(userRepository.findByEmail(any())).willReturn(notFoundUser);
@@ -83,12 +88,12 @@ public class UserServiceTest {
             .password(User1.PASSWORD)
             .phone(User1.PHONE)
             .build();
-        final Long id = User1.ID;
+        given((Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID)).willReturn(User1.ID);
 
         //when
-        userService.updateUser(id, dto);
+        userService.updateUser(dto);
 
         // then
-        then(userRepository).should(times(1)).updateUserInformation(any());
+        then(userRepository).should(times(1)).updateUser(any());
     }
 }

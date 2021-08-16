@@ -14,7 +14,7 @@ import com.coupang.marketplace.fixture.UserFixture.*;
 import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.user.controller.dto.UpdateRequestDto;
 
-public class InformationControllerTest extends ControllerTest {
+public class MypageControllerTest extends ControllerTest {
 
 	@DisplayName("로그인 검증이 된 사용자는 회원 정보 수정에 성공한다.")
 	@Test
@@ -30,7 +30,7 @@ public class InformationControllerTest extends ControllerTest {
 			.build();
 
 		// when
-		final ResultActions actions = mvc.perform(put("/mypage/user-information/{id}", User1.ID)
+		final ResultActions actions = mvc.perform(put("/mypage/my-info")
 			.session(session)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(dto)))
@@ -53,33 +53,7 @@ public class InformationControllerTest extends ControllerTest {
 			.build();
 
 		// when
-		final ResultActions actions = mvc.perform(put("/mypage/user-information/{id}", User2.ID)
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(objectMapper.writeValueAsString(dto)))
-			.andDo(print());
-
-		// then
-		actions
-			.andExpect(status().isUnauthorized())
-			.andDo(print());
-	}
-
-	@DisplayName("다른 사용자의 정보에 접근한 사용자는 회원 정보 수정에 실패한다.")
-	@Test
-	void updateUserWithOtherAuthenticated() throws Exception {
-		// given
-		MockHttpSession session = new MockHttpSession();
-		session.setAttribute(SessionKey.LOGIN_USER_ID, User1.ID);
-
-		final UpdateRequestDto dto = UpdateRequestDto.builder()
-			.name(User2.NAME)
-			.password(User2.PASSWORD)
-			.phone(User2.PHONE)
-			.build();
-
-		// when
-		final ResultActions actions = mvc.perform(put("/mypage/user-information/{id}", User2.ID)
-			.session(session)
+		final ResultActions actions = mvc.perform(put("/mypage/my-info")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(dto)))
 			.andDo(print());
