@@ -28,6 +28,8 @@ public class CouponService {
 	public void saveCoupon(long id){
 		if(!checkIsAvailableCoupon(id))
 			throw new IllegalArgumentException("사용할 수 없는 쿠폰입니다.");
+		if(checkIsAlreadyHave(id))
+			throw new IllegalArgumentException("이미 받은 쿠폰입니다.");
 		UserCoupon userCoupon = UserCoupon.builder()
 			.userId((long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID))
 			.couponId(id)
@@ -36,6 +38,10 @@ public class CouponService {
 	}
 
 	public boolean checkIsAvailableCoupon(long id){
-		return couponRepository.findAvailableCoupon(id).isPresent();
+		return couponRepository.findAvailableCouponId(id).isPresent();
+	}
+
+	public boolean checkIsAlreadyHave(long id) {
+		return couponRepository.findByCouponId(id).isPresent();
 	}
 }

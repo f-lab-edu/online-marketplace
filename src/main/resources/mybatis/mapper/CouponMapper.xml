@@ -8,10 +8,15 @@
         FROM COUPON
         WHERE expiration_time &gt; NOW()
     </select>
-    <select id="findAvailableCoupon" resultType="Coupon">
+    <select id="findAvailableCouponId" resultType="Coupon">
         SELECT id, name, min_price, discount_price, product_id, expiration_time
         FROM COUPON
         WHERE id = #{id} AND expiration_time &gt; NOW()
+    </select>
+    <select id="findByCouponId" resultType="UserCoupon">
+        SELECT id, user_id, coupon_id, use_status
+        FROM USER_COUPON
+        WHERE coupon_id = #{id}
     </select>
     <insert id="insertUserCoupon" parameterType="UserCoupon">
         INSERT INTO USER_COUPON (id, user_id, coupon_id, use_status)
