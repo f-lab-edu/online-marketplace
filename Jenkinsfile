@@ -27,7 +27,7 @@ pipeline {
 
         stage('unit test') {
             steps {
-                junit '**/build/test-results/test/TEST-com.coupang.marketplace.*.service.*.xml'
+                junit 'build/test-results/test/*ServiceTest.xml'
             }
         }
 
