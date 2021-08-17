@@ -26,7 +26,9 @@ pipeline {
         }
 
         stage('unit test') {
-            junit '**/build/test-results/test/TEST-com.coupang.marketplace.*.service.*.xml'
+            steps {
+                junit '**/build/test-results/test/TEST-com.coupang.marketplace.*.service.*.xml'
+            }
         }
 
         stage('integration test') {
