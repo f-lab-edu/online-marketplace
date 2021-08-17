@@ -25,19 +25,23 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('unit test') {
+            junit '**/build/test-results/test/TEST-com.coupang.marketplace.*.service.*.xml'
+        }
+
+        stage('integration test') {
             steps {
-                echo 'test ...'
+                echo 'integration test ...'
             }
         }
     }
 
     post {
         success {
-            slackSend (channel: SLACK_CHANNEL, color: '#00FF00', message: "✅ SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+            slackSend (channel: SLACK_CHANNEL, color: '#00FF00', message: "✅ SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' ${env.BUILD_URL}")
         }
         failure {
-            slackSend (channel: SLACK_CHANNEL, color: '#FF0000', message: "❗ FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+            slackSend (channel: SLACK_CHANNEL, color: '#FF0000', message: "❗ FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' ${env.BUILD_URL}")
         }
     }
 }
