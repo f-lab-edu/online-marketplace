@@ -5,6 +5,8 @@ import com.coupang.marketplace.auth.exception.UnauthorizedException;
 import com.coupang.marketplace.global.constant.SessionKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.HandlerMapping;
@@ -24,11 +26,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws UnauthorizedException {
         try {
             if (isNeedToAuth((HandlerMethod)handler)) {
-                String userIdBySession = getUserIdBySession(request);
-                String userIdByPath = getUserIdByPathVariable(request);
-                if (!userIdBySession.equals(userIdByPath)) {
-                    throw new UnauthorizedException();
-                };
+                getUserIdBySession(request);
             }
             return true;
         } catch (Exception e) {
@@ -47,12 +45,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         return Optional.ofNullable(session.getAttribute(SessionKey.LOGIN_USER_ID))
                 .map(v -> v.toString())
-                .orElseThrow(NoAuthorizationData::new);
-    }
-
-    private String getUserIdByPathVariable(HttpServletRequest request){
-        Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-        return Optional.ofNullable(pathVariables.get("id"))
                 .orElseThrow(NoAuthorizationData::new);
     }
 }

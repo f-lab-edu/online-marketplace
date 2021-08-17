@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coupang.marketplace.auth.AuthRequired;
 import com.coupang.marketplace.coupon.domain.Coupon;
 import com.coupang.marketplace.coupon.service.CouponService;
 import com.coupang.marketplace.global.common.StatusEnum;
@@ -31,6 +32,7 @@ public class CouponController {
 		return res;
 	}
 
+	@AuthRequired
 	@PostMapping("/available-coupons/{id}")
 	public SuccessResponse saveCoupon(@PathVariable("id") final Long id){
 		couponService.saveCoupon(id);
