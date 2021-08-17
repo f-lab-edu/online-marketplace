@@ -6,8 +6,6 @@ import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 import com.coupang.marketplace.user.controller.dto.UpdateUserRequestDto;
 import com.coupang.marketplace.global.fixture.UserFixture.*;
 import com.coupang.marketplace.global.template.ControllerTestTemplate;
-import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
-import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -85,31 +83,31 @@ public class UserControllerTest extends ControllerTestTemplate {
     void signIn() throws Exception {
         // given
         final SignUpRequestDto joinDto = SignUpRequestDto.builder()
-            .name(User1.NAME)
-            .email(User1.EMAIL)
-            .password(User1.PASSWORD)
-            .phone(User1.PHONE)
-            .build();
+                .name(User1.NAME)
+                .email(User1.EMAIL)
+                .password(User1.PASSWORD)
+                .phone(User1.PHONE)
+                .build();
 
         final SignInRequestDto LoginDto = SignInRequestDto.builder()
-            .email(User1.EMAIL)
-            .password(User1.PASSWORD)
-            .build();
+                .email(User1.EMAIL)
+                .password(User1.PASSWORD)
+                .build();
 
         // when
         mvc.perform(post("/users/sign-up")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(joinDto)));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(joinDto)));
 
         final ResultActions actions = mvc.perform(post("/users/login")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(LoginDto)))
-            .andDo(print());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(LoginDto)))
+                .andDo(print());
 
         // then
         actions
-            .andExpect(status().isOk())
-            .andDo(print());
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 
     @DisplayName("이메일이 존재하지 않은 사용자는 로그인에 실패한다.")
@@ -117,20 +115,20 @@ public class UserControllerTest extends ControllerTestTemplate {
     void signInWithNotFoundEmail() throws Exception {
         // given
         final SignInRequestDto dto = SignInRequestDto.builder()
-            .email(User1.EMAIL)
-            .password(User1.PASSWORD)
-            .build();
+                .email(User1.EMAIL)
+                .password(User1.PASSWORD)
+                .build();
 
         // when
         final ResultActions actions = mvc.perform(post("/users/login")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(dto)))
-            .andDo(print());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andDo(print());
 
         // then
         actions
-            .andExpect(status().isBadRequest())
-            .andDo(print());
+                .andExpect(status().isBadRequest())
+                .andDo(print());
     }
 
     @DisplayName("이메일이 존재하지만 패스워드가 일치하지 않은 사용자는 로그인에 실패한다.")
@@ -138,31 +136,31 @@ public class UserControllerTest extends ControllerTestTemplate {
     void signInWithInvalidPassword() throws Exception {
         // given
         final SignUpRequestDto JoinDto = SignUpRequestDto.builder()
-            .name(User1.NAME)
-            .email(User1.EMAIL)
-            .password(User1.PASSWORD)
-            .phone(User1.PHONE)
-            .build();
+                .name(User1.NAME)
+                .email(User1.EMAIL)
+                .password(User1.PASSWORD)
+                .phone(User1.PHONE)
+                .build();
 
         final SignInRequestDto LoginDto = SignInRequestDto.builder()
-            .email(User1.EMAIL)
-            .password(User2.PASSWORD)
-            .build();
+                .email(User1.EMAIL)
+                .password(User2.PASSWORD)
+                .build();
 
         // when
         mvc.perform(post("/users/sign-up")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(JoinDto)));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(JoinDto)));
 
         final ResultActions actions = mvc.perform(post("/users/login")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(LoginDto)))
-            .andDo(print());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(LoginDto)))
+                .andDo(print());
 
         // then
         actions
-            .andExpect(status().isBadRequest())
-            .andDo(print());
+                .andExpect(status().isBadRequest())
+                .andDo(print());
     }
 
     @DisplayName("인증된 사용자면 회원 정보 수정에 성공한다.")
@@ -213,3 +211,4 @@ public class UserControllerTest extends ControllerTestTemplate {
                 .andDo(print());
     }
 }
+

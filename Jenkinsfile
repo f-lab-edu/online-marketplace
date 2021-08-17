@@ -21,13 +21,13 @@ pipeline {
         stage('build') {
             steps {
                 echo 'build ...'
-                sh './gradlew -x test clean build'
+                sh './gradlew -x test -x integrationTTest clean build'
             }
         }
 
         stage('unit test') {
             steps {
-                junit 'build/test-results/test/*ServiceTest.xml'
+                junit '**/build/test-results/test/*.xml'
             }
         }
 

@@ -1,6 +1,5 @@
 package com.coupang.marketplace.product.controller;
 
-
 import com.coupang.marketplace.global.template.ControllerTestTemplate;
 import com.coupang.marketplace.global.util.MultiValueMapConverter;
 import com.coupang.marketplace.product.controller.dto.GetProductsRequest;
@@ -14,7 +13,6 @@ import static com.coupang.marketplace.product.constant.DeliveryTypeEnum.ROCKET_F
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 public class ProductControllerTest extends ControllerTestTemplate {
 
@@ -31,8 +29,8 @@ public class ProductControllerTest extends ControllerTestTemplate {
 
         // when
         final ResultActions actions = mvc.perform(get("/products")
-            .params(params))
-            .andDo(print());
+                .params(params))
+                .andDo(print());
 
         // then
         actions
@@ -80,3 +78,4 @@ public class ProductControllerTest extends ControllerTestTemplate {
                 .andDo(print());
     }
 }
+
