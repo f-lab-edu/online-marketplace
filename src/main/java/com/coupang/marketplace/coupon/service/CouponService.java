@@ -2,10 +2,14 @@ package com.coupang.marketplace.coupon.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 import com.coupang.marketplace.coupon.domain.Coupon;
+import com.coupang.marketplace.coupon.domain.UserCoupon;
 import com.coupang.marketplace.coupon.repository.CouponRepository;
+import com.coupang.marketplace.global.constant.SessionKey;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +19,23 @@ public class CouponService {
 
 	private final CouponRepository couponRepository;
 
+	private final HttpSession httpSession;
+
 	public List<Coupon> getAvailableCoupons(){
 		return couponRepository.getCouponsBeforeExpirationTime();
+	}
+
+	public void saveCoupon(long id){
+		if(!checkIsAvailableCoupon(id))
+			throw new IllegalArgumentException("사용할 수 없는 쿠폰입니다.");
+		UserCoupon userCoupon = UserCoupon.builder()
+			.userId((long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID))
+			.couponId(id)
+			.build();
+		couponRepository.insertUserCoupon(userCoupon);
+	}
+
+	public boolean checkIsAvailableCoupon(long id){
+		return couponRepository.findAvailableCoupon(id).isPresent();
 	}
 }

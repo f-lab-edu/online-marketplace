@@ -3,6 +3,8 @@ package com.coupang.marketplace.coupon.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coupang.marketplace.coupon.domain.Coupon;
@@ -25,6 +27,16 @@ public class CouponController {
 			.status(StatusEnum.OK)
 			.message("사용가능한 쿠폰 목록 가져오기 성공")
 			.data(coupons)
+			.build();
+		return res;
+	}
+
+	@PostMapping("/available-coupons/{id}")
+	public SuccessResponse saveCoupon(@PathVariable("id") final Long id){
+		couponService.saveCoupon(id);
+		SuccessResponse res = SuccessResponse.builder()
+			.status(StatusEnum.CREATED)
+			.message("쿠폰받기 성공")
 			.build();
 		return res;
 	}
