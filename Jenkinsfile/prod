@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-        SLACK_CHANNEL = "#jenkins"
+        SLACK_CHANNEL = "#jenkins-prod"
     }
 
     stages {
         stage('start') {
             steps {
-                slackSend(channel: SLACK_CHANNEL, color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend(channel: SLACK_CHANNEL, color: '#000000', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             }
         }
 
@@ -21,7 +21,7 @@ pipeline {
         stage('build') {
             steps {
                 echo 'build ...'
-                sh './gradlew -x integrationTTest clean build'
+                sh './gradlew -x integrationTests clean build'
             }
         }
 
@@ -34,6 +34,12 @@ pipeline {
         stage('integration test') {
             steps {
                 echo 'integration test ...'
+            }
+        }
+
+        stage('deploy') {
+            steps {
+                echo 'deploy ...'
             }
         }
     }
