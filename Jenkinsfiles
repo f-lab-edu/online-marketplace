@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SLACK_CHANNEL = "#jenkins-prod"
+        SLACK_CHANNEL = "#jenkins"
     }
 
     stages {
