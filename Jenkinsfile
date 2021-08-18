@@ -22,6 +22,7 @@ pipeline {
             steps {
                 echo 'build ...'
                 sh './gradlew -x integrationTests clean build'
+                archiveArtifacts 'target/*.jar'
             }
         }
 
