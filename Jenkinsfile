@@ -37,22 +37,6 @@ pipeline {
             }
         }
 
-        stage('publish') {
-            steps {
-                def server = Artifactory.server 'Default Artifactory Server'
-                def uploadSpec = """{
-                    "files": [
-                        {
-                            "pattern": "target/online-marketplace.jar",
-                            "target": "artifacts/${BUILD_NUMBER}/",
-                            "props": "Unit-Tested=Yes;Performance-Tested=No"
-                        }
-                    ]
-                }"""
-                server.upload(uploadSpec)
-            }
-        }
-
         stage('deploy') {
             steps {
                 echo 'deploy ...'
