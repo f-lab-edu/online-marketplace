@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="INFO">
+
+    <Properties>
+        <Property name="LOG_NAME">Log4j2</Property>
+        <Property name="LAYOUT_PATTERN">%style{%date{DEFAULT}}{blue} %highlight{%-5level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green} [%C] %style{[%t]}{cyan} - %message%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="ConsoleLog" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LAYOUT_PATTERN}" charset="UTF-8"/>
+        </Console>
+        <RollingFile name="FileLog" fileName="logs/${LOG_NAME}.log" filePattern="logs/${LOG_NAME}_%d{yyyy-MM-dd}_%i.log.gz">>
+            <PatternLayout pattern="${LAYOUT_PATTERN}" charset="UTF-8" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" fileIndex="min" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="ConsoleLog" />
+            <AppenderRef ref="FileLog" />
+        </Root>
+    </Loggers>
+
+</Configuration>
