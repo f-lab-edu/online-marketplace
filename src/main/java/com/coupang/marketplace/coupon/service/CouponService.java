@@ -10,6 +10,7 @@ import com.coupang.marketplace.coupon.domain.Coupon;
 import com.coupang.marketplace.coupon.domain.UserCoupon;
 import com.coupang.marketplace.coupon.repository.CouponRepository;
 import com.coupang.marketplace.global.constant.SessionKey;
+import com.coupang.marketplace.global.util.session.HttpSessionUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +20,7 @@ public class CouponService {
 
 	private final CouponRepository couponRepository;
 
-	private final HttpSession httpSession;
+	private final HttpSessionUtil httpSessionUtil;
 
 	public List<Coupon> getAvailableCoupons(){
 		return couponRepository.getCouponsBeforeExpirationTime();
@@ -31,7 +32,7 @@ public class CouponService {
 		if(checkIsAlreadyHave(id))
 			throw new IllegalArgumentException("이미 받은 쿠폰입니다.");
 		UserCoupon userCoupon = UserCoupon.builder()
-			.userId((long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID))
+			.userId((long)httpSessionUtil.getAttribute())
 			.couponId(id)
 			.build();
 		couponRepository.insertUserCoupon(userCoupon);
