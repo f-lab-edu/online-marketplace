@@ -17,4 +17,12 @@ public class HttpSessionUtil {
 	public Object getAttribute(){
 		return httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
 	}
+
+	public void setAttribute(Object value){
+		httpSession.setAttribute(SessionKey.LOGIN_USER_ID, value);
+	}
+
+	public void removeAttribute(){
+		httpSession.removeAttribute(SessionKey.LOGIN_USER_ID);
+	}
 }

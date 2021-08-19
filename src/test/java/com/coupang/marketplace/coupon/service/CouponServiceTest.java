@@ -7,8 +7,6 @@ import static org.mockito.BDDMockito.*;
 import java.util.Arrays;
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,8 +19,8 @@ import com.coupang.marketplace.coupon.domain.UserCoupon;
 import com.coupang.marketplace.coupon.repository.CouponRepository;
 import com.coupang.marketplace.fixture.CouponFixture.*;
 import com.coupang.marketplace.fixture.UserCouponFixture.*;
-import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.global.fixture.UserFixture;
+import com.coupang.marketplace.global.util.session.HttpSessionUtil;
 
 @ExtendWith(MockitoExtension.class)
 public class CouponServiceTest {
@@ -34,7 +32,7 @@ public class CouponServiceTest {
 	private CouponRepository couponRepository;
 
 	@Mock
-	private HttpSession httpSession;
+	private HttpSessionUtil httpSessionUtil;
 
 	@DisplayName("만료시간이 지나지 않은 쿠폰을 모두 가져온다.")
 	@Test
@@ -57,7 +55,7 @@ public class CouponServiceTest {
 		final Optional<UserCoupon> notFoundUserCoupon = Optional.ofNullable(null);
 		given(couponRepository.findByCouponId(Coupon1.ID)).willReturn(notFoundUserCoupon);
 
-		given((Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID)).willReturn(UserFixture.User1.ID);
+		given((Long)httpSessionUtil.getAttribute()).willReturn(UserFixture.User1.ID);
 
 		//when
 		couponService.saveCoupon(Coupon1.ID);

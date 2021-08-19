@@ -2,14 +2,11 @@ package com.coupang.marketplace.coupon.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 
 import com.coupang.marketplace.coupon.domain.Coupon;
 import com.coupang.marketplace.coupon.domain.UserCoupon;
 import com.coupang.marketplace.coupon.repository.CouponRepository;
-import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.global.util.session.HttpSessionUtil;
 
 import lombok.RequiredArgsConstructor;

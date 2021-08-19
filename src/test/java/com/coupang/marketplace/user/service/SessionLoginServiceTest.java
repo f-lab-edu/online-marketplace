@@ -7,8 +7,6 @@ import static org.mockito.Mockito.times;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.coupang.marketplace.global.util.session.HttpSessionUtil;
 import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.global.fixture.UserFixture.*;
@@ -35,7 +34,7 @@ public class SessionLoginServiceTest {
 	private Encryptor encryptor;
 
 	@Mock
-	private HttpSession httpSession;
+	private HttpSessionUtil httpSessionUtil;
 
 	@DisplayName("이메일이 존재하고 패스워드가 일치하면 로그인에 성공한다.")
 	@Test
@@ -55,7 +54,7 @@ public class SessionLoginServiceTest {
 		sessionLoginService.login(dto);
 
 		// then
-		then(httpSession).should(times(1)).setAttribute(any(),any());
+		then(httpSessionUtil).should(times(1)).setAttribute(any());
 	}
 
 	@DisplayName("존재하지 않은 이메일이면 에러를 내보낸다.")

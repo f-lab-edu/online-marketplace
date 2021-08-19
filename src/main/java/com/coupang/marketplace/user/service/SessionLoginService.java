@@ -1,15 +1,14 @@
 package com.coupang.marketplace.user.service;
 
+import com.coupang.marketplace.global.util.session.HttpSessionUtil;
 import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.user.repository.UserRepository;
-import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.global.util.crypto.CryptoData;
 import com.coupang.marketplace.global.util.crypto.Encryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,7 +16,7 @@ import java.util.Optional;
 public class SessionLoginService implements LoginService{
 
     private final UserRepository userRepository;
-    private final HttpSession httpSession;
+    private final HttpSessionUtil httpSessionUtil;
     private final Encryptor encryptor;
 
     @Override
@@ -35,11 +34,11 @@ public class SessionLoginService implements LoginService{
         if(!encryptedPassword.equals(user.get().getPassword())){
             throw new IllegalArgumentException("패스워드가 틀렸습니다.");
         }
-        httpSession.setAttribute(SessionKey.LOGIN_USER_ID, user.get().getId());
+        httpSessionUtil.setAttribute(user.get().getId());
     }
 
     @Override
     public void logout(){
-        httpSession.removeAttribute(SessionKey.LOGIN_USER_ID);
+        httpSessionUtil.removeAttribute();
     }
 }
