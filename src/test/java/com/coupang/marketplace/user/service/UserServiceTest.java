@@ -88,10 +88,9 @@ public class UserServiceTest {
             .password(User1.PASSWORD)
             .phone(User1.PHONE)
             .build();
-        given((Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID)).willReturn(User1.ID);
 
         //when
-        userService.updateUser(dto);
+        userService.updateUser(User1.ID, dto);
 
         // then
         then(userRepository).should(times(1)).updateUser(any());
