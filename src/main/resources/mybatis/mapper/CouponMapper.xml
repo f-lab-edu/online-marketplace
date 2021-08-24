@@ -13,7 +13,7 @@
         FROM COUPON
         WHERE id = #{id} AND expiration_time &gt; NOW()
     </select>
-    <select id="findByCouponId" resultType="UserCoupon">
+    <select id="findUserCouponById" resultType="UserCoupon">
         SELECT id, user_id, coupon_id, use_status
         FROM USER_COUPON
         WHERE coupon_id = #{id}
