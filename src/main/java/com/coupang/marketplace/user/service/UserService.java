@@ -1,6 +1,6 @@
 package com.coupang.marketplace.user.service;
 
-import com.coupang.marketplace.global.util.session.HttpSessionUtil;
+import com.coupang.marketplace.global.util.login.LoginUtil;
 import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 import com.coupang.marketplace.user.controller.dto.UpdateRequestDto;
 import com.coupang.marketplace.user.domain.User;
@@ -19,7 +19,8 @@ public class UserService {
     private final UserRepository userRepository;
     @Qualifier("sha256Encryptor")
     private final Encryptor encryptor;
-    private final HttpSessionUtil httpSessionUtil;
+    @Qualifier("httpSessionUtil")
+    private final LoginUtil loginUtil;
 
     public void join(SignUpRequestDto dto){
         if (checkIsUserExist(dto.getEmail())) {
@@ -43,7 +44,7 @@ public class UserService {
 
     public void updateUser(UpdateRequestDto dto){
 
-        Long id = (Long)httpSessionUtil.getAttribute();
+        Long id = (Long)loginUtil.getAttribute();
 
         String salt = SaltGenerator.generateSalt();
         CryptoData cryptoData = CryptoData.WithSaltBuilder()
