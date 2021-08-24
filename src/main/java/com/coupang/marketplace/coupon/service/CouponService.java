@@ -36,7 +36,7 @@ public class CouponService {
 	}
 
 	public boolean checkIsAvailableCoupon(long id){
-		return couponRepository.findAvailableCouponId(id).isPresent();
+		return couponRepository.findAvailableCouponById(id).isPresent();
 	}
 
 	public boolean checkIsAlreadyHave(long id) {

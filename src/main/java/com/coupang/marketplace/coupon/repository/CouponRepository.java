@@ -15,7 +15,7 @@ public interface CouponRepository {
 
 	List<Coupon> getCouponsBeforeExpirationTime();
 
-	Optional<Coupon> findAvailableCouponId(long id);
+	Optional<Coupon> findAvailableCouponById(long id);
 
 	Optional<UserCoupon> findByCouponId(long id);
 

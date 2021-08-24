@@ -50,7 +50,7 @@ public class CouponServiceTest {
 	public void saveCouponAfterExpirationTime() {
 		//given
 		final Optional<Coupon> FoundAvailableCoupon = Optional.ofNullable(Coupon1.COUPON);
-		given(couponRepository.findAvailableCouponId(Coupon1.ID)).willReturn(FoundAvailableCoupon);
+		given(couponRepository.findAvailableCouponById(Coupon1.ID)).willReturn(FoundAvailableCoupon);
 
 		final Optional<UserCoupon> notFoundUserCoupon = Optional.ofNullable(null);
 		given(couponRepository.findByCouponId(Coupon1.ID)).willReturn(notFoundUserCoupon);
@@ -68,7 +68,7 @@ public class CouponServiceTest {
 	@Test
 	public void saveCouponBeforeExpirationTime() {
 		//when
-		couponRepository.findAvailableCouponId(Coupon3.ID);
+		couponRepository.findAvailableCouponById(Coupon3.ID);
 
 		//then
 		assertThrows(IllegalArgumentException.class, () -> couponService.saveCoupon(Coupon3.ID));
