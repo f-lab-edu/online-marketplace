@@ -2,6 +2,7 @@ package com.coupang.marketplace.coupon.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import com.coupang.marketplace.coupon.domain.Coupon;
 import com.coupang.marketplace.coupon.service.CouponService;
 import com.coupang.marketplace.global.common.StatusEnum;
 import com.coupang.marketplace.global.common.SuccessResponse;
+import com.coupang.marketplace.user.service.LoginService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 public class CouponController {
 
 	private final CouponService couponService;
+	@Qualifier("userSessionLoginService")
+	private final LoginService loginService;
 
 	@GetMapping("/available-coupons")
 	public SuccessResponse getAvailableCoupons(){
@@ -35,7 +39,8 @@ public class CouponController {
 	@AuthRequired
 	@PostMapping("/available-coupons/{id}")
 	public SuccessResponse saveCoupon(@PathVariable("id") final Long id){
-		couponService.saveCoupon(id);
+		Long userId = (Long)loginService.getLoginUserId();
+		couponService.saveCoupon(userId, id);
 		SuccessResponse res = SuccessResponse.builder()
 			.status(StatusEnum.CREATED)
 			.message("쿠폰받기 성공")

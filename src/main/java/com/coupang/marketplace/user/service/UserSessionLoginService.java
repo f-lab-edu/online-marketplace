@@ -1,6 +1,6 @@
 package com.coupang.marketplace.user.service;
 
-import com.coupang.marketplace.global.util.session.HttpSessionUtil;
+import com.coupang.marketplace.global.constant.SessionKey;
 import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.user.repository.UserRepository;
@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Service
-public class SessionLoginService implements LoginService{
+public class UserSessionLoginService implements LoginService{
 
     private final UserRepository userRepository;
-    private final HttpSessionUtil httpSessionUtil;
+    private final HttpSession httpSession;
     private final Encryptor encryptor;
 
     @Override
@@ -34,11 +36,26 @@ public class SessionLoginService implements LoginService{
         if(!encryptedPassword.equals(user.get().getPassword())){
             throw new IllegalArgumentException("패스워드가 틀렸습니다.");
         }
-        httpSessionUtil.setAttribute(user.get().getId());
+        httpSession.setAttribute(SessionKey.LOGIN_USER_ID, user.get().getId());
     }
 
     @Override
     public void logout(){
-        httpSessionUtil.removeAttribute();
+        httpSession.removeAttribute(SessionKey.LOGIN_USER_ID);
+    }
+
+    @Override
+    public Object getLoginUserId(){
+        return httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
+    }
+
+    @Override
+    public void setLoginUserId(Object value){
+        httpSession.setAttribute(SessionKey.LOGIN_USER_ID, value);
+    }
+
+    @Override
+    public void removeLoginUserId() {
+        httpSession.removeAttribute(SessionKey.LOGIN_USER_ID);
     }
 }

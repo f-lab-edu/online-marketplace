@@ -16,7 +16,7 @@
     <select id="findUserCouponById" resultType="UserCoupon">
         SELECT id, user_id, coupon_id, use_status
         FROM USER_COUPON
-        WHERE coupon_id = #{id}
+        WHERE user_id = #{userId} AND coupon_id = #{id}
     </select>
     <insert id="insertUserCoupon" parameterType="UserCoupon">
         INSERT INTO USER_COUPON (id, user_id, coupon_id, use_status)
