@@ -39,7 +39,7 @@ public class CouponController {
 	@AuthRequired
 	@PostMapping("/available-coupons/{id}")
 	public SuccessResponse saveCoupon(@PathVariable("id") final Long id){
-		Long userId = (Long)loginService.getLoginUserId();
+		Long userId = loginService.getLoginUserId();
 		couponService.saveCoupon(userId, id);
 		SuccessResponse res = SuccessResponse.builder()
 			.status(StatusEnum.CREATED)

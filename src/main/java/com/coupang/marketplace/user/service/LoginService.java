@@ -8,9 +8,5 @@ public interface LoginService {
 
     void logout();
 
-    Object getLoginUserId();
-
-    void setLoginUserId(Object value);
-
-    void removeLoginUserId();
+    Long getLoginUserId();
 }
