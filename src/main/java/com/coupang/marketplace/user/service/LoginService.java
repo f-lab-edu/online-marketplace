@@ -6,7 +6,5 @@ public interface LoginService {
 
     void login(SignInRequestDto dto);
     void logout();
-    Object getLoginUserId();
-    void setLoginUserId(Object value);
-    void removeLoginUserId();
+    Long getLoginUserId();
 }

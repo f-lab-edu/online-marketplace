@@ -44,17 +44,7 @@ public class SessionLoginService implements LoginService{
     }
 
     @Override
-    public Object getLoginUserId(){
-        return httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
-    }
-
-    @Override
-    public void setLoginUserId(Object value){
-        httpSession.setAttribute(SessionKey.LOGIN_USER_ID, value);
-    }
-
-    @Override
-    public void removeLoginUserId(){
-        httpSession.removeAttribute(SessionKey.LOGIN_USER_ID);
+    public Long getLoginUserId(){
+        return (Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
     }
 }

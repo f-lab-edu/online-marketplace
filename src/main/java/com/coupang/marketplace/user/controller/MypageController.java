@@ -29,7 +29,7 @@ public class MypageController {
 	@LoginAuth(type = USER)
 	@PutMapping("/mypage/my-info")
 	public SuccessResponse updateUser(@Valid @RequestBody UpdateRequestDto requestDto){
-		Long id = (Long)loginService.getLoginUserId();
+		Long id = loginService.getLoginUserId();
 		userService.updateUser(id, requestDto);
 		SuccessResponse res = SuccessResponse.builder()
 			.status(StatusEnum.OK)
