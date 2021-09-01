@@ -27,7 +27,7 @@ public class MypageController {
 	private final LoginService loginService;
 
 	@LoginAuth(type = USER)
-	@PutMapping("/mypage/my-info")
+	@PutMapping("/my-info")
 	public SuccessResponse updateUser(@Valid @RequestBody UpdateRequestDto requestDto){
 		Long id = loginService.getLoginUserId();
 		userService.updateUser(id, requestDto);
