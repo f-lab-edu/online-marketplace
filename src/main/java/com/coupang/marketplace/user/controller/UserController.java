@@ -49,8 +49,9 @@ public class UserController {
     }
 
     @AuthRequired
-    @PutMapping("/{id}")
-    public void updateUser(@PathVariable("id") final long id, @Valid @RequestBody final UpdateUserRequestDto dto) {
-        userService.updateUser(id, dto);
+    @PutMapping("/my-info")
+    public void updateUser(@Valid @RequestBody final UpdateUserRequestDto requestDto){
+        long id = loginService.getLoginUserId();
+        userService.updateUser(id, requestDto);
     }
 }

@@ -45,7 +45,11 @@ public class UserSessionLoginService implements LoginService{
     }
 
     @Override
-    public Long getLoginUserId(){
-        return (Long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
+    public long getLoginUserId() {
+        try {
+            return (long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
+        } catch (NullPointerException e) {
+            throw new NullPointerException();
+        }
     }
-}
+    }
