@@ -8,10 +8,10 @@
         FROM COUPON
         WHERE expiration_time &gt; NOW()
     </select>
-    <select id="findAvailableCouponById" resultType="Coupon">
+    <select id="findCouponById" resultType="Coupon">
         SELECT id, name, min_price, discount_price, product_id, expiration_time
         FROM COUPON
-        WHERE id = #{id} AND expiration_time &gt; NOW()
+        WHERE id = #{id}
     </select>
     <select id="findUserCouponById" resultType="UserCoupon">
         SELECT id, user_id, coupon_id, use_status

@@ -1,5 +1,6 @@
 package com.coupang.marketplace.coupon.service;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -33,7 +34,8 @@ public class CouponService {
 	}
 
 	public boolean checkIsAvailableCoupon(long id){
-		return couponRepository.findAvailableCouponById(id).isPresent();
+		ZonedDateTime expirationTime = couponRepository.findCouponById(id).getExpirationTime();
+		return expirationTime.isAfter(ZonedDateTime.now());
 	}
 
 	public boolean checkIsAlreadyHave(long userId, long id) {
