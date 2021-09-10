@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coupang.marketplace.coupon.domain.Coupon;
 import com.coupang.marketplace.coupon.domain.UserCoupon;
@@ -21,6 +22,7 @@ public class CouponService {
 		return couponRepository.getCouponsBeforeExpirationTime();
 	}
 
+	@Transactional(rollbackFor = RuntimeException.class)
 	public void saveCoupon(long userId, long id){
 		if(!checkIsAvailableCoupon(id))
 			throw new IllegalArgumentException("사용할 수 없는 쿠폰입니다.");
@@ -30,7 +32,10 @@ public class CouponService {
 			.userId(userId)
 			.couponId(id)
 			.build();
-		couponRepository.insertUserCoupon(userCoupon);
+		Long insertCouponId = couponRepository.insertUserCoupon(userCoupon);
+		if(insertCouponId != id){
+			throw new RuntimeException("쿠폰 저장 오류");
+		}
 	}
 
 	public boolean checkIsAvailableCoupon(long id){

@@ -19,5 +19,5 @@ public interface CouponRepository {
 
 	Optional<UserCoupon> findUserCouponById(long userId, long id);
 
-	void insertUserCoupon(UserCoupon userCoupon);
+	Long insertUserCoupon(UserCoupon userCoupon);
 }

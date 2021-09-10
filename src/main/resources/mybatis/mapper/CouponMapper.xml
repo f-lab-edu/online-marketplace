@@ -21,5 +21,8 @@
     <insert id="insertUserCoupon" parameterType="UserCoupon">
         INSERT INTO USER_COUPON (id, user_id, coupon_id, use_status)
         VALUES (#{id}, #{userId}, #{couponId}, #{useStatus})
+        <selectKey keyProperty="coupon_id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 </mapper>

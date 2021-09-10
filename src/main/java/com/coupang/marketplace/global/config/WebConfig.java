@@ -9,8 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 @Configuration
 @RequiredArgsConstructor
-public class WebConfig extends WebMvcConfigurationSupport
-{
+public class WebConfig extends WebMvcConfigurationSupport{
+
     @Autowired
     private AuthInterceptor authInterceptor;
 
