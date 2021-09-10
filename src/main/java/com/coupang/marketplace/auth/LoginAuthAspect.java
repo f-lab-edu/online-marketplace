@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.coupang.marketplace.global.error.AuthenticationException;
+import com.coupang.marketplace.global.error.NotAuthorizedException;
 
 @Aspect
 @Component
@@ -20,7 +20,7 @@ public class LoginAuthAspect {
 		try {
 			httpSession = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
 		} catch(IllegalStateException e){
-			throw new AuthenticationException("로그인 후 이용가능합니다.");
+			throw new NotAuthorizedException("로그인 후 이용가능합니다.");
 		}
 		verifySession(httpSession, loginAuth.type());
 	}
@@ -29,6 +29,6 @@ public class LoginAuthAspect {
 		Long userId = (Long)httpSession.getAttribute(type.getSessionKey());
 
 		if(userId == null)
-			throw new AuthenticationException("로그인 후 이용가능합니다.");
+			throw new NotAuthorizedException("로그인 후 이용가능합니다.");
 	}
 }

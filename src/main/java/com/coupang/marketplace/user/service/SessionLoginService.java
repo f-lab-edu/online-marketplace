@@ -1,5 +1,6 @@
 package com.coupang.marketplace.user.service;
 
+import com.coupang.marketplace.global.error.NotAuthorizedException;
 import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.user.repository.UserRepository;
@@ -47,8 +48,8 @@ public class SessionLoginService implements LoginService{
     public long getLoginUserId() {
         try {
             return (long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
-        } catch (NullPointerException e) {
-            throw new NullPointerException();
+        } catch (NotAuthorizedException e) {
+            throw new NotAuthorizedException("인증되지 않은 사용자입니다.");
         }
     }
 }
