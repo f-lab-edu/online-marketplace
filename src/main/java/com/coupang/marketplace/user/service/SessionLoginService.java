@@ -48,8 +48,8 @@ public class SessionLoginService implements LoginService{
     public long getLoginUserId() {
         try {
             return (long)httpSession.getAttribute(SessionKey.LOGIN_USER_ID);
-        } catch (NotAuthorizedException e) {
-            throw new NotAuthorizedException("인증되지 않은 사용자입니다.");
+        } catch (NullPointerException e) {
+            throw new NotAuthorizedException("인증되지 않은 사용자입니다.", e);
         }
     }
 }
