@@ -22,7 +22,7 @@ public class CouponService {
 		return couponRepository.getCouponsBeforeExpirationTime();
 	}
 
-	@Transactional(rollbackFor = RuntimeException.class)
+	@Transactional
 	public void saveCoupon(long userId, long id){
 		if(!checkIsAvailableCoupon(id))
 			throw new IllegalArgumentException("사용할 수 없는 쿠폰입니다.");
