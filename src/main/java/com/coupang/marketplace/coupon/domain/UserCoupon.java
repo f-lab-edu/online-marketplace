@@ -3,8 +3,10 @@ package com.coupang.marketplace.coupon.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class UserCoupon {
 
 	private Long id;
