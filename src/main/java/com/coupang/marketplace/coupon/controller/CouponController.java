@@ -15,15 +15,16 @@ import com.coupang.marketplace.global.common.StatusEnum;
 import com.coupang.marketplace.global.common.SuccessResponse;
 import com.coupang.marketplace.user.service.LoginService;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 @RestController
 public class CouponController {
 
 	private final CouponService couponService;
-	@Qualifier("userSessionLoginService")
 	private final LoginService loginService;
+
+	public CouponController(CouponService couponService, @Qualifier("userSessionLoginService")LoginService loginService){
+		this.couponService = couponService;
+		this.loginService = loginService;
+	}
 
 	@GetMapping("/available-coupons")
 	public SuccessResponse getAvailableCoupons(){
