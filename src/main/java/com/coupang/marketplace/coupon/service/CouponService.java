@@ -33,7 +33,7 @@ public class CouponService {
 			.couponId(id)
 			.build();
 		Long insertCouponId = couponRepository.insertUserCoupon(userCoupon);
-		if(insertCouponId != id){
+		if(insertCouponId != 1){
 			throw new RuntimeException("쿠폰 저장 오류");
 		}
 	}
