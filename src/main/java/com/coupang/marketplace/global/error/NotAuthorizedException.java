@@ -6,7 +6,7 @@ public class NotAuthorizedException extends RuntimeException{
 		super(errorMessage);
 	}
 
-	public NotAuthorizedException(String errorMessage, NullPointerException e){
-		super(errorMessage, e.getCause());
+	public NotAuthorizedException(String errorMessage, Exception e) {
+		super(errorMessage, e);
 	}
 }
