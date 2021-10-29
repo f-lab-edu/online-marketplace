@@ -1,4 +1,4 @@
-package com.coupang.marketplace.fixture;
+package com.coupang.marketplace.global.fixture;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -13,7 +13,7 @@ public class CouponFixture {
 		public static final Long MIN_PRICE = 30000L;
 		public static final Long DISCOUNT_PRICE = 2000L;
 		public static final Long PRODUCT_ID = 11L;
-		public static final ZonedDateTime EXPIRATION_TIME = ZonedDateTime.of(2021, 10, 01, 20, 30, 0, 0, ZoneId.of("UTC"));
+		public static final ZonedDateTime EXPIRATION_TIME = ZonedDateTime.of(2022, 12, 01, 20, 30, 0, 0, ZoneId.of("UTC"));
 
 		public static final Coupon COUPON = Coupon.builder()
 			.id(ID)

@@ -14,13 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.coupang.marketplace.coupon.domain.Coupon;
 import com.coupang.marketplace.coupon.domain.UserCoupon;
 import com.coupang.marketplace.coupon.repository.CouponRepository;
-import com.coupang.marketplace.fixture.CouponFixture.*;
-import com.coupang.marketplace.fixture.UserCouponFixture.*;
-import com.coupang.marketplace.global.fixture.UserFixture;
-import com.coupang.marketplace.global.util.session.HttpSessionUtil;
+import com.coupang.marketplace.global.fixture.CouponFixture.*;
+import com.coupang.marketplace.global.fixture.UserCouponFixture.*;
+import com.coupang.marketplace.global.fixture.UserFixture.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CouponServiceTest {
@@ -30,9 +28,6 @@ public class CouponServiceTest {
 
 	@Mock
 	private CouponRepository couponRepository;
-
-	@Mock
-	private HttpSessionUtil httpSessionUtil;
 
 	@DisplayName("만료시간이 지나지 않은 쿠폰을 모두 가져온다.")
 	@Test
@@ -49,29 +44,25 @@ public class CouponServiceTest {
 	@Test
 	public void saveCouponAfterExpirationTime() {
 		//given
-		final Optional<Coupon> FoundAvailableCoupon = Optional.ofNullable(Coupon1.COUPON);
-		given(couponRepository.findAvailableCouponById(Coupon1.ID)).willReturn(FoundAvailableCoupon);
+		given(couponRepository.findCouponById(Coupon1.ID)).willReturn(Coupon1.COUPON);
 
 		final Optional<UserCoupon> notFoundUserCoupon = Optional.ofNullable(null);
-		given(couponRepository.findByCouponId(Coupon1.ID)).willReturn(notFoundUserCoupon);
+		given(couponRepository.findUserCouponById(User1.ID, Coupon1.ID)).willReturn(notFoundUserCoupon);
 
-		given((Long)httpSessionUtil.getAttribute()).willReturn(UserFixture.User1.ID);
+		given(couponRepository.insertUserCoupon(any())).willReturn(1L);
 
 		//when
-		couponService.saveCoupon(Coupon1.ID);
-
-		//then
-		then(couponRepository).should(times(1)).insertUserCoupon(any());
+		couponService.saveCoupon(User1.ID, Coupon1.ID);
 	}
 
 	@DisplayName("만료시간이 지난 쿠폰은 저장에 실패한다.")
 	@Test
 	public void saveCouponBeforeExpirationTime() {
-		//when
-		couponRepository.findAvailableCouponById(Coupon3.ID);
+		//given
+		given(couponRepository.findCouponById(Coupon3.ID)).willReturn(Coupon3.COUPON);
 
 		//then
-		assertThrows(IllegalArgumentException.class, () -> couponService.saveCoupon(Coupon3.ID));
+		assertThrows(IllegalArgumentException.class, () -> couponService.saveCoupon(User1.ID, Coupon3.ID));
 	}
 
 	@DisplayName("이미 저장된 쿠폰은 중복저장에 실패한다.")
@@ -79,12 +70,11 @@ public class CouponServiceTest {
 	public void saveCouponAlreadyHave() {
 		//given
 		final Optional<UserCoupon> FoundUserCoupon = Optional.ofNullable(UserCoupon1.USERCOUPON);
-		given(couponRepository.findByCouponId(Coupon1.ID)).willReturn(FoundUserCoupon);
+		given(couponRepository.findUserCouponById(User1.ID, Coupon1.ID)).willReturn(FoundUserCoupon);
 
-		//when
-		couponRepository.findByCouponId(Coupon1.ID);
+		given(couponRepository.findCouponById(Coupon1.ID)).willReturn(Coupon1.COUPON);
 
 		//then
-		assertThrows(IllegalArgumentException.class, () -> couponService.saveCoupon(Coupon1.ID));
+		assertThrows(IllegalArgumentException.class, () -> couponService.saveCoupon(User1.ID, Coupon1.ID));
 	}
 }

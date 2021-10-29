@@ -7,6 +7,8 @@ import static org.mockito.Mockito.times;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.coupang.marketplace.global.util.session.HttpSessionUtil;
 import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
 import com.coupang.marketplace.user.domain.User;
 import com.coupang.marketplace.global.fixture.UserFixture.*;
@@ -22,10 +23,10 @@ import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.util.crypto.Encryptor;
 
 @ExtendWith(MockitoExtension.class)
-public class SessionLoginServiceTest {
+public class UserSessionLoginServiceTest {
 
 	@InjectMocks
-	private SessionLoginService sessionLoginService;
+	private UserSessionLoginService userSessionLoginService;
 
 	@Mock
 	private UserRepository userRepository;
@@ -34,7 +35,7 @@ public class SessionLoginServiceTest {
 	private Encryptor encryptor;
 
 	@Mock
-	private HttpSessionUtil httpSessionUtil;
+	private HttpSession httpSession;
 
 	@DisplayName("이메일이 존재하고 패스워드가 일치하면 로그인에 성공한다.")
 	@Test
@@ -51,10 +52,10 @@ public class SessionLoginServiceTest {
 		given(encryptor.encrypt(any())).willReturn(encryptedPassword);
 
 		// when
-		sessionLoginService.login(dto);
+		userSessionLoginService.login(dto);
 
 		// then
-		then(httpSessionUtil).should(times(1)).setAttribute(any());
+		then(httpSession).should(times(1)).setAttribute(any(), any());
 	}
 
 	@DisplayName("존재하지 않은 이메일이면 에러를 내보낸다.")
@@ -70,7 +71,7 @@ public class SessionLoginServiceTest {
 		given(userRepository.findByEmail(any())).willReturn(notFoundUser);
 
 		// then
-		assertThrows(IllegalArgumentException.class, () -> sessionLoginService.login(dto));
+		assertThrows(IllegalArgumentException.class, () -> userSessionLoginService.login(dto));
 	}
 
 	@DisplayName("이메일이 존재하지만 패스워드가 일치하지 않으면 에러를 내보낸다.")
@@ -88,6 +89,6 @@ public class SessionLoginServiceTest {
 		given(encryptor.encrypt(any())).willReturn(encryptedPassword);
 
 		// then
-		assertThrows(IllegalArgumentException.class, () -> sessionLoginService.login(dto));
+		assertThrows(IllegalArgumentException.class, () -> userSessionLoginService.login(dto));
 	}
 }
