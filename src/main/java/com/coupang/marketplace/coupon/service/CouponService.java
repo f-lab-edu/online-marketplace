@@ -11,9 +11,11 @@ import com.coupang.marketplace.coupon.domain.UserCoupon;
 import com.coupang.marketplace.coupon.repository.CouponRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class CouponService {
 
 	private final CouponRepository couponRepository;
@@ -32,8 +34,9 @@ public class CouponService {
 			.userId(userId)
 			.couponId(id)
 			.build();
-		Long insertCouponId = couponRepository.insertUserCoupon(userCoupon);
-		if(insertCouponId != 1){
+		Long insertCouponCount = couponRepository.insertUserCoupon(userCoupon);
+		if(insertCouponCount != 1){
+			log.error("insert coupon Error! userCoupon : {}, insertCouponCount : {}", userCoupon, insertCouponCount);
 			throw new RuntimeException("쿠폰 저장 오류");
 		}
 	}
