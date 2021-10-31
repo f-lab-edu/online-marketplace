@@ -1,13 +1,12 @@
 package com.coupang.marketplace.user.controller;
 
 import com.coupang.marketplace.global.constant.SessionKey;
+import com.coupang.marketplace.global.fixture.UserFixture;
 import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
 import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 import com.coupang.marketplace.user.controller.dto.UpdateUserRequestDto;
 import com.coupang.marketplace.global.fixture.UserFixture.*;
 import com.coupang.marketplace.global.template.ControllerTestTemplate;
-import com.coupang.marketplace.user.controller.dto.SignInRequestDto;
-import com.coupang.marketplace.user.controller.dto.SignUpRequestDto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -91,7 +90,7 @@ public class UserControllerTest extends ControllerTestTemplate {
             .phone(User1.PHONE)
             .build();
 
-        final SignInRequestDto LoginDto = SignInRequestDto.builder()
+        final SignInRequestDto loginDto = SignInRequestDto.builder()
             .email(User1.EMAIL)
             .password(User1.PASSWORD)
             .build();
@@ -103,7 +102,7 @@ public class UserControllerTest extends ControllerTestTemplate {
 
         final ResultActions actions = mvc.perform(post("/users/login")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(LoginDto)))
+            .content(objectMapper.writeValueAsString(loginDto)))
             .andDo(print());
 
         // then
@@ -144,7 +143,7 @@ public class UserControllerTest extends ControllerTestTemplate {
             .phone(User1.PHONE)
             .build();
 
-        final SignInRequestDto LoginDto = SignInRequestDto.builder()
+        final SignInRequestDto loginDto = SignInRequestDto.builder()
             .email(User1.EMAIL)
             .password(User2.PASSWORD)
             .build();
@@ -156,7 +155,7 @@ public class UserControllerTest extends ControllerTestTemplate {
 
         final ResultActions actions = mvc.perform(post("/users/login")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(LoginDto)))
+            .content(objectMapper.writeValueAsString(loginDto)))
             .andDo(print());
 
         // then
@@ -169,26 +168,25 @@ public class UserControllerTest extends ControllerTestTemplate {
     @Test
     void updateUserByAuthenticatedUser() throws Exception {
         // given
-        MockHttpSession session = new MockHttpSession();
-        session.setAttribute(SessionKey.LOGIN_USER_ID, User1.ID);
-
         final UpdateUserRequestDto dto = UpdateUserRequestDto.builder()
-                .name(User2.NAME)
-                .password(User2.PASSWORD)
-                .phone(User2.PHONE)
-                .build();
+            .name(User2.NAME)
+            .password(User2.PASSWORD)
+            .phone(User2.PHONE)
+            .build();
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute(SessionKey.LOGIN_USER_ID, UserFixture.User1.ID);
 
         // when
-        final ResultActions actions = mvc.perform(put("/users/{id}", User1.ID)
-                .session(session)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
-                .andDo(print());
+        final ResultActions actions = mvc.perform(put("/users/my-info")
+            .contentType(MediaType.APPLICATION_JSON)
+            .session(session)
+            .content(objectMapper.writeValueAsString(dto)))
+            .andDo(print());
 
         // then
         actions
-                .andExpect(status().isOk())
-                .andDo(print());
+            .andExpect(status().isOk())
+            .andDo(print());
     }
 
     @DisplayName("인증되지 않은 사용자면 회원 정보 수정에 실패한다.")
@@ -202,7 +200,7 @@ public class UserControllerTest extends ControllerTestTemplate {
                 .build();
 
         // when
-        final ResultActions actions = mvc.perform(put("/users/{id}", User1.ID)
+        final ResultActions actions = mvc.perform(put("/users/my-info")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
                 .andDo(print());
