@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class SessionLoginService implements LoginService{
+public class UserSessionLoginService implements LoginService{
 
     private final UserRepository userRepository;
     private final HttpSession httpSession;

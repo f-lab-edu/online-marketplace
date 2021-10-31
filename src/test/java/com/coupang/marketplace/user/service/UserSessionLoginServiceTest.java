@@ -23,10 +23,10 @@ import com.coupang.marketplace.user.repository.UserRepository;
 import com.coupang.marketplace.global.util.crypto.Encryptor;
 
 @ExtendWith(MockitoExtension.class)
-public class SessionLoginServiceTest {
+public class UserSessionLoginServiceTest {
 
 	@InjectMocks
-	private SessionLoginService sessionLoginService;
+	private UserSessionLoginService userSessionLoginService;
 
 	@Mock
 	private UserRepository userRepository;
@@ -52,7 +52,7 @@ public class SessionLoginServiceTest {
 		given(encryptor.encrypt(any())).willReturn(encryptedPassword);
 
 		// when
-		sessionLoginService.login(dto);
+		userSessionLoginService.login(dto);
 
 		// then
 		then(httpSession).should(times(1)).setAttribute(any(),any());
@@ -71,7 +71,7 @@ public class SessionLoginServiceTest {
 		given(userRepository.findByEmail(any())).willReturn(notFoundUser);
 
 		// then
-		assertThrows(IllegalArgumentException.class, () -> sessionLoginService.login(dto));
+		assertThrows(IllegalArgumentException.class, () -> userSessionLoginService.login(dto));
 	}
 
 	@DisplayName("이메일이 존재하지만 패스워드가 일치하지 않으면 에러를 내보낸다.")
@@ -89,6 +89,6 @@ public class SessionLoginServiceTest {
 		given(encryptor.encrypt(any())).willReturn(encryptedPassword);
 
 		// then
-		assertThrows(IllegalArgumentException.class, () -> sessionLoginService.login(dto));
+		assertThrows(IllegalArgumentException.class, () -> userSessionLoginService.login(dto));
 	}
 }
