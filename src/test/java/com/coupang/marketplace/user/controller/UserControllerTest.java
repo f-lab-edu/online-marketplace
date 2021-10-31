@@ -136,7 +136,7 @@ public class UserControllerTest extends ControllerTestTemplate {
     @Test
     void signInWithInvalidPassword() throws Exception {
         // given
-        final SignUpRequestDto JoinDto = SignUpRequestDto.builder()
+        final SignUpRequestDto joinDto = SignUpRequestDto.builder()
             .name(User1.NAME)
             .email(User1.EMAIL)
             .password(User1.PASSWORD)
@@ -151,7 +151,7 @@ public class UserControllerTest extends ControllerTestTemplate {
         // when
         mvc.perform(post("/users/sign-up")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(JoinDto)));
+            .content(objectMapper.writeValueAsString(joinDto)));
 
         final ResultActions actions = mvc.perform(post("/users/login")
             .contentType(MediaType.APPLICATION_JSON)
