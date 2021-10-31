@@ -3,6 +3,7 @@ package com.coupang.marketplace.review.controller.dto;
 import com.coupang.marketplace.review.domain.Review;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Max;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
+@Setter
 public class CreateReviewRequest {
 
     @NotNull

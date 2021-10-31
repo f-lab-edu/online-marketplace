@@ -1,4 +1,4 @@
-package com.coupang.marketplace.fixture;
+package com.coupang.marketplace.global.fixture;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

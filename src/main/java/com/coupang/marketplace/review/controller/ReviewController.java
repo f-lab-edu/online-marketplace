@@ -4,6 +4,7 @@ import com.coupang.marketplace.global.common.SuccessResponse;
 import com.coupang.marketplace.review.controller.dto.CreateReviewRequest;
 import com.coupang.marketplace.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public SuccessResponse createReview(@Valid @ModelAttribute CreateReviewRequest dto){
         reviewService.createReview(dto);

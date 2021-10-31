@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.coupang.marketplace.coupon.repository.CouponRepository;
-import com.coupang.marketplace.fixture.CouponFixture.*;
+import com.coupang.marketplace.global.fixture.CouponFixture.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CouponServiceTest {
