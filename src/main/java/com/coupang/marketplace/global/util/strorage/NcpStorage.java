@@ -62,8 +62,6 @@ public class NcpStorage implements Storage {
                 .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
                 .build();
 
-        System.out.println(bucketName);
-        System.out.println(fileName);
         s3.putObject(bucketName, fileName, file);
     }
 }
