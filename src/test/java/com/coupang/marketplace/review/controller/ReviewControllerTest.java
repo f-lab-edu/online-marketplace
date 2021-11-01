@@ -3,13 +3,12 @@ package com.coupang.marketplace.review.controller;
 import com.coupang.marketplace.global.fixture.ImageFixture.*;
 import com.coupang.marketplace.global.fixture.ReviewFixture.*;
 import com.coupang.marketplace.global.template.ControllerTestTemplate;
-import com.coupang.marketplace.review.controller.dto.CreateReviewRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.multipart.MultipartFile;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -19,17 +18,17 @@ public class ReviewControllerTest extends ControllerTestTemplate {
     @Test
     public void createReview() throws Exception{
         // given
-        final CreateReviewRequest dto = CreateReviewRequest.builder()
-                .productId(Review1.PRODUCT_ID)
-                .score(Review1.SCORE)
-                .content(Review1.CONTENT)
-                .img(Image1.MULTIPART_FILE)
-                .build();
+        final String productId = String.valueOf(Review1.PRODUCT_ID);
+        final String score = String.valueOf(Review1.SCORE);
+        final String content = Review1.CONTENT;
+        final MultipartFile file = Image1.MULTIPART_FILE;
 
         // when
-        final ResultActions actions = mvc.perform(post("/reviews")
-                        .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
-                        .content(objectMapper.writeValueAsString(dto)))
+        final ResultActions actions = mvc.perform(multipart("/reviews")
+                .file("img", file.getBytes())
+                .param("productId", String.valueOf(Review1.PRODUCT_ID))
+                .param("score", String.valueOf(Review1.SCORE))
+                .param("content", Review1.CONTENT))
                 .andDo(print());
 
         // then

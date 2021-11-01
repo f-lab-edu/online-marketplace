@@ -10,9 +10,4 @@ public class ImageFixture {
         public static final MultipartFile MULTIPART_FILE = FileFactory.createMultipartFile(NAME);
     }
 
-    public static class Image2 {
-        public static final String NAME = "test_img_2.png";
-        public static final MultipartFile MULTIPART_FILE = FileFactory.createMultipartFile(NAME);
-    }
-
 }
