@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RequestMapping("/reviews")
@@ -18,7 +19,7 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public SuccessResponse createReview(@Valid @ModelAttribute CreateReviewRequest dto){
+    public SuccessResponse createReview(@Valid CreateReviewRequest dto){
         reviewService.createReview(dto);
         return SuccessResponse.builder()
                 .message("리뷰 등록 성공")
