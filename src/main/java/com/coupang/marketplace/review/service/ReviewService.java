@@ -21,9 +21,7 @@ public class ReviewService {
     private final Storage storage;
 
     @Transactional
-    public void createReview(CreateReviewRequest dto){
-        long userId = 1; // 하드코딩
-
+    public void createReview(long userId, CreateReviewRequest dto){
         Review review = dto.toEntity(userId);
         reviewRepository.insertReview(review);
 
