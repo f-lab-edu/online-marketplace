@@ -20,7 +20,8 @@ public class ReviewController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public SuccessResponse createReview(@Valid CreateReviewRequest dto){
-        reviewService.createReview(dto);
+        long userId = 1; // 하드코딩
+        reviewService.createReview(userId, dto);
         return SuccessResponse.builder()
                 .message("리뷰 등록 성공")
                 .build();
