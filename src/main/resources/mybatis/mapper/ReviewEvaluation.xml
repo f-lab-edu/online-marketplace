@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coupang.marketplace.review.repository.ReviewEvaluationRepository">
+    <insert id="insertReviewEvaluation" parameterType="ReviewEvaluation">
+        INSERT INTO REVIEW_EVALUATION (review_id, user_id, is_help)
+        VALUES (#{reviewId}, #{userId}, #{isHelp});
+    </insert>
+    <select id="getReviewEvaluationByUserIdAndReviewId" resultType="ReviewEvaluation">
+        SELECT id, review_id, user_id, is_help
+        FROM REVIEW_EVALUATION
+        WHERE user_id = #{userId} AND review_id = #{reviewId}
+    </select>
+    <delete id="deleteReviewEvaluation">
+        DELETE FROM REVIEW_EVALUATION
+        WHERE id = #{id};
+    </delete>
+</mapper>
