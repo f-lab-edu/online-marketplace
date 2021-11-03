@@ -2,6 +2,7 @@ package com.coupang.marketplace.review.controller.dto;
 
 import com.coupang.marketplace.review.domain.Evaluation;
 import com.coupang.marketplace.review.domain.ReviewEvaluation;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ public class EvaluateReviewRequest {
     @NotNull
     private Evaluation evaluation;
 
+    @Builder
     public EvaluateReviewRequest(long reviewId, Evaluation evaluation) {
         this.reviewId = reviewId;
         this.evaluation = evaluation;
