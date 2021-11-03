@@ -4,25 +4,37 @@
 
 <mapper namespace="com.coupang.marketplace.coupon.repository.CouponRepository">
     <select id="getCouponsBeforeExpirationTime" resultType="Coupon">
-        SELECT id, name, min_price, discount_price, product_id, expiration_time
+        SELECT id, name, min_price, discount_price, product_id, expiration_time, max_count
         FROM COUPON
-        WHERE expiration_time &gt; NOW()
+        WHERE expiration_time
     </select>
     <select id="findCouponById" resultType="Coupon">
-        SELECT id, name, min_price, discount_price, product_id, expiration_time
+        SELECT id, name, min_price, discount_price, product_id, expiration_time, max_count
         FROM COUPON
         WHERE id = #{id}
     </select>
     <select id="findUserCouponById" resultType="UserCoupon">
-        SELECT id, user_id, coupon_id, use_status
+        SELECT id, user_id, coupon_id, use_status, issued_count
         FROM USER_COUPON
-        WHERE user_id = #{userId} AND coupon_id = #{id}
+        WHERE coupon_id = #{couponId} AND user_id = #{userId}
+    </select>
+    <select id="getMaxCouponCount" resultType="java.lang.Integer">
+        SELECT max_count
+        FROM COUPON
+        WHERE id = #{id}
+    </select>
+    <select id="getIssuedCouponCount" resultType="int">
+        SELECT issued_count
+        FROM USER_COUPON
+        WHERE coupon_id = #{couponId} AND user_id = #{userId}
     </select>
     <insert id="insertUserCoupon" parameterType="UserCoupon">
-        INSERT INTO USER_COUPON (id, user_id, coupon_id, use_status)
-        VALUES (#{id}, #{userId}, #{couponId}, #{useStatus})
-        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+        INSERT INTO USER_COUPON (id, user_id, coupon_id, use_status, issued_count)
+        VALUES (#{id}, #{userId}, #{couponId}, #{useStatus}, #{issuedCouponCount})
     </insert>
+    <update id="updateIssuedCouponCount">
+        UPDATE USER_COUPON
+        SET issued_count = #{issuedCount}
+        WHERE coupon_id = #{couponId} AND user_id = #{userId}
+    </update>
 </mapper>

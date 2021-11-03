@@ -15,11 +15,14 @@ public class UserCoupon {
 
 	private boolean useStatus;
 
+	private int issuedCouponCount;
+
 	@Builder
-	public UserCoupon(Long id, Long userId, Long couponId, boolean useStatus){
+	public UserCoupon(Long id, Long userId, Long couponId, boolean useStatus, int issuedCouponCount){
 		this.id = id;
 		this.userId = userId;
 		this.couponId = couponId;
 		this.useStatus = useStatus;
+		this.issuedCouponCount = issuedCouponCount;
 	}
 }

@@ -17,7 +17,13 @@ public interface CouponRepository {
 
 	Coupon findCouponById(long id);
 
-	Optional<UserCoupon> findUserCouponById(long userId, long id);
+	Optional<UserCoupon> findUserCouponById(long couponId, long userId);
 
-	long insertUserCoupon(UserCoupon userCoupon);
+	Integer getMaxCouponCount(long id);
+
+	int getIssuedCouponCount(long couponId, long userId);
+
+	void insertUserCoupon(UserCoupon userCoupon);
+
+	void updateIssuedCouponCount(long couponId, long userId, int issuedCount);
 }

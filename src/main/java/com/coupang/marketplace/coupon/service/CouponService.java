@@ -25,20 +25,27 @@ public class CouponService {
 	}
 
 	@Transactional
-	public void saveCoupon(long userId, long id){
+	public void saveCoupon(long id, long userId){
 		if(!checkIsAvailableCoupon(id))
 			throw new IllegalArgumentException("사용할 수 없는 쿠폰입니다.");
-		if(checkIsAlreadyHave(userId, id))
-			throw new IllegalArgumentException("이미 받은 쿠폰입니다.");
-		UserCoupon userCoupon = UserCoupon.builder()
-			.userId(userId)
-			.couponId(id)
-			.build();
-		Long insertCouponCount = couponRepository.insertUserCoupon(userCoupon);
-		if(insertCouponCount != 1){
-			log.error("insert coupon Error! userCoupon : {}, insertCouponCount : {}", userCoupon, insertCouponCount);
-			throw new RuntimeException("쿠폰 저장 오류");
+		Integer maxCouponCount = couponRepository.getMaxCouponCount(id);
+		int issuedCouponCount = 0;
+		if(checkIsAlreadyHave(id, userId))
+			issuedCouponCount = couponRepository.getIssuedCouponCount(id, userId);
+
+		if(maxCouponCount.equals(Integer.valueOf(issuedCouponCount)))
+			throw new IllegalArgumentException("더 이상 발급이 불가능합니다.");
+
+		if(!checkIsAlreadyHave(id, userId)){
+			UserCoupon userCoupon = UserCoupon.builder()
+				.userId(userId)
+				.couponId(id)
+				.issuedCouponCount(issuedCouponCount+1)
+				.build();
+			couponRepository.insertUserCoupon(userCoupon);
 		}
+		else
+			couponRepository.updateIssuedCouponCount(id, userId, issuedCouponCount+1);
 	}
 
 	public boolean checkIsAvailableCoupon(long id){
@@ -46,7 +53,7 @@ public class CouponService {
 		return expirationTime.isAfter(ZonedDateTime.now());
 	}
 
-	public boolean checkIsAlreadyHave(long userId, long id) {
-		return couponRepository.findUserCouponById(userId, id).isPresent();
+	public boolean checkIsAlreadyHave(long id, long userId) {
+		return couponRepository.findUserCouponById(id, userId).isPresent();
 	}
 }

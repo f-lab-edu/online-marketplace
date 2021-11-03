@@ -41,7 +41,7 @@ public class CouponController {
 	@PostMapping("/available-coupons/{id}")
 	public SuccessResponse saveCoupon(@PathVariable("id") final Long id){
 		Long userId = loginService.getLoginUserId();
-		couponService.saveCoupon(userId, id);
+		couponService.saveCoupon(id, userId);
 		SuccessResponse res = SuccessResponse.builder()
 			.status(StatusEnum.CREATED)
 			.message("쿠폰받기 성공")
