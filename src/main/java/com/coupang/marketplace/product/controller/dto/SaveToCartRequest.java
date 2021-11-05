@@ -1,7 +1,5 @@
 package com.coupang.marketplace.product.controller.dto;
 
-import java.math.BigInteger;
-
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -10,7 +8,7 @@ import lombok.Getter;
 public class SaveToCartRequest {
 
 	@NotNull
-	private BigInteger productId;
+	private long productId;
 
 	@NotNull
 	private int productNum;

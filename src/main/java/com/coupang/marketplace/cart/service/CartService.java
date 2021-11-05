@@ -1,6 +1,5 @@
 package com.coupang.marketplace.cart.service;
 
-import java.math.BigInteger;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class CartService {
 	private final ProductService productService;
 
 	@Transactional
-	public void saveProduct(BigInteger userId, SaveToCartRequest dto){
+	public void saveProduct(long userId, SaveToCartRequest dto){
 		if(!productService.checkIsProductExist(dto.getProductId()))
 			throw new IllegalArgumentException("존재하지 않는 상품입니다.");
 		if(dto.getProductNum() == 0)
@@ -43,7 +42,7 @@ public class CartService {
 		return cartRepository.findByProductId(cart.getUserId(), cart.getProductId()).isPresent();
 	}
 
-	public int getSavedProductNum(BigInteger userId, BigInteger productId){
+	public int getSavedProductNum(long userId, long productId){
 		Optional<Cart> product = cartRepository.findByProductId(userId, productId);
 		return product.get().getProductNum();
 	}

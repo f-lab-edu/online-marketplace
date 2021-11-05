@@ -24,5 +24,5 @@ public interface ProductRepository {
 
     List<Product> getProductsByKeyword(String keyword);
 
-    Optional<Product> findByProductId(BigInteger id);
+    Optional<Product> findByProductId(long id);
 }

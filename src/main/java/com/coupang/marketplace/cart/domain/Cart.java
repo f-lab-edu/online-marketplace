@@ -1,20 +1,18 @@
 package com.coupang.marketplace.cart.domain;
 
-import java.math.BigInteger;
-
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 public class Cart {
 
-	private BigInteger id;
-	private BigInteger productId;
+	private long id;
+	private long productId;
 	private int productNum;
-	private BigInteger userId;
+	private long userId;
 
 	@Builder
-	public Cart(BigInteger id, BigInteger productId, int productNum, BigInteger userId){
+	public Cart(long id, long productId, int productNum, long userId){
 		this.id = id;
 		this.productId = productId;
 		this.productNum = productNum;

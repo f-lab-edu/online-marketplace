@@ -8,7 +8,6 @@ import com.coupang.marketplace.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +59,7 @@ public class ProductService {
         return SimpleProduct.toList(products);
     }
 
-    public boolean checkIsProductExist(BigInteger id){
+    public boolean checkIsProductExist(long id){
         return productRepository.findByProductId(id).isPresent();
     }
 }
