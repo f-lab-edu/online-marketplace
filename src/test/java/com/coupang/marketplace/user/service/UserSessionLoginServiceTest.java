@@ -55,7 +55,7 @@ public class UserSessionLoginServiceTest {
 		userSessionLoginService.login(dto);
 
 		// then
-		then(httpSession).should(times(1)).setAttribute(any(),any());
+		then(httpSession).should(times(1)).setAttribute(any(), any());
 	}
 
 	@DisplayName("존재하지 않은 이메일이면 에러를 내보낸다.")
