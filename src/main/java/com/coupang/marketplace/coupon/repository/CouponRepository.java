@@ -19,7 +19,7 @@ public interface CouponRepository {
 
 	Optional<UserCoupon> findUserCouponById(long couponId, long userId);
 
-	Integer getMaxCouponCount(long id);
+	int getMaxCouponCount(long id);
 
 	int getIssuedCouponCount(long couponId, long userId);
 

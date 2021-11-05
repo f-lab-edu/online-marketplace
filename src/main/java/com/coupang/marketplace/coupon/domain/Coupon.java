@@ -21,13 +21,13 @@ public class Coupon {
 
 	private Long productId;
 
-	private Integer maxCouponCount;
+	private int maxCouponCount;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private ZonedDateTime expirationTime;
 
 	@Builder
-	public Coupon(Long id, String name, Long minPrice, Long discountPrice, Long productId, ZonedDateTime expirationTime, Integer maxCouponCount){
+	public Coupon(Long id, String name, Long minPrice, Long discountPrice, Long productId, ZonedDateTime expirationTime, int maxCouponCount){
 		this.id = id;
 		this.name = name;
 		this.minPrice = minPrice;

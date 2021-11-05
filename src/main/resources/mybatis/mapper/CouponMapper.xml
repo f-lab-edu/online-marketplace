@@ -18,7 +18,7 @@
         FROM USER_COUPON
         WHERE coupon_id = #{couponId} AND user_id = #{userId}
     </select>
-    <select id="getMaxCouponCount" resultType="java.lang.Integer">
+    <select id="getMaxCouponCount" resultType="int">
         SELECT max_count
         FROM COUPON
         WHERE id = #{id}

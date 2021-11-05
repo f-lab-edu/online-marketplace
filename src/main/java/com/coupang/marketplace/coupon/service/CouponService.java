@@ -28,12 +28,12 @@ public class CouponService {
 	public void saveCoupon(long id, long userId){
 		if(!checkIsAvailableCoupon(id))
 			throw new IllegalArgumentException("사용할 수 없는 쿠폰입니다.");
-		Integer maxCouponCount = couponRepository.getMaxCouponCount(id);
+		int maxCouponCount = couponRepository.getMaxCouponCount(id);
 		int issuedCouponCount = 0;
 		if(checkIsAlreadyHave(id, userId))
 			issuedCouponCount = couponRepository.getIssuedCouponCount(id, userId);
 
-		if(maxCouponCount.equals(Integer.valueOf(issuedCouponCount)))
+		if(maxCouponCount == issuedCouponCount)
 			throw new IllegalArgumentException("더 이상 발급이 불가능합니다.");
 
 		if(!checkIsAlreadyHave(id, userId)){
