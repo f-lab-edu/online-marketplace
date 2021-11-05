@@ -8,7 +8,7 @@ import java.math.BigInteger;
 @Getter
 public class Product {
 
-    private BigInteger id;
+    private long id;
     private BigInteger categoryId;
     private String name;
     private BigInteger price;
@@ -22,7 +22,7 @@ public class Product {
     private Boolean rocketGlobal;
 
     @Builder
-    public Product(BigInteger id, BigInteger categoryId, String name, BigInteger price, String mainImg, String detailImg, BigInteger stock, Float score, BigInteger deliveryFee, Boolean rocket, Boolean rocketFresh, Boolean rocketGlobal) {
+    public Product(long id, BigInteger categoryId, String name, BigInteger price, String mainImg, String detailImg, BigInteger stock, Float score, BigInteger deliveryFee, Boolean rocket, Boolean rocketFresh, Boolean rocketGlobal) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;

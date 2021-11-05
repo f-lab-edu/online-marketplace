@@ -7,7 +7,7 @@ import java.math.BigInteger;
 public class ProductFixture {
 
     public static class Product1 {
-        public static final BigInteger ID = new BigInteger("1");
+        public static final long ID = 1L;
         public static final BigInteger CATEGORY_ID  = new BigInteger("1");
         public static final String NAME =  "상품1";
         public static final BigInteger PRICE = new BigInteger("10000");
@@ -37,7 +37,7 @@ public class ProductFixture {
     }
 
     public static class Product2 {
-        public static final BigInteger ID = new BigInteger("2");
+        public static final long ID = 2L;
         public static final BigInteger CATEGORY_ID  = new BigInteger("2");
         public static final String NAME =  "상품2";
         public static final BigInteger PRICE = new BigInteger("20000");
@@ -67,7 +67,7 @@ public class ProductFixture {
     }
 
     public static class Product3 {
-        public static final BigInteger ID = new BigInteger("3");
+        public static final long ID = 3L;
         public static final BigInteger CATEGORY_ID  = new BigInteger("3");
         public static final String NAME =  "상품3";
         public static final BigInteger PRICE = new BigInteger("30000");

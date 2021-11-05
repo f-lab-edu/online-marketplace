@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Getter
 public class SimpleProduct {
     @NotNull
-    private BigInteger id;
+    private long id;
 
     @NotNull
     private String name;
@@ -29,7 +29,7 @@ public class SimpleProduct {
     private float score;
 
     @Builder
-    public SimpleProduct(BigInteger id, String name, BigInteger price, String mainImg, float score) {
+    public SimpleProduct(long id, String name, BigInteger price, String mainImg, float score) {
         this.id = id;
         this.name = name;
         this.price = price;
