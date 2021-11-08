@@ -34,6 +34,15 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(RuntimeException.class)
+    public FailResponse handleRuntimeException(RuntimeException e){
+        return FailResponse.builder()
+            .status(StatusEnum.BAD_REQUEST)
+            .errorMessage(e.getMessage())
+            .build();
+    }
+
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UnauthorizedException.class)
     public FailResponse handleUnathorizedException(UnauthorizedException e){

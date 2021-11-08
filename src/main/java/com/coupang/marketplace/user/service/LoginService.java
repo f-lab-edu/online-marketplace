@@ -7,4 +7,6 @@ public interface LoginService {
     void login(SignInRequestDto dto);
 
     void logout();
+
+    long getLoginUserId();
 }
