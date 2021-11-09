@@ -1,12 +1,10 @@
 package com.coupang.marketplace.product.controller;
 
-import com.coupang.marketplace.auth.AuthRequired;
 import com.coupang.marketplace.cart.service.CartService;
 import com.coupang.marketplace.global.common.StatusEnum;
 import com.coupang.marketplace.global.common.SuccessResponse;
 import com.coupang.marketplace.global.constant.CacheKey;
 import com.coupang.marketplace.product.controller.dto.GetProductsRequest;
-import com.coupang.marketplace.product.controller.dto.SaveToCartRequest;
 import com.coupang.marketplace.product.controller.dto.SimpleProduct;
 import com.coupang.marketplace.product.service.ProductService;
 import com.coupang.marketplace.user.service.LoginService;
@@ -30,7 +28,7 @@ public class ProductController {
     private final CartService cartService;
     private final LoginService loginService;
 
-    public ProductController(ProductService productService, CartService cartService,  @Qualifier("userSessionLoginService")LoginService loginService){
+    public ProductController(ProductService productService, CartService cartService,  @Qualifier("userSessionLoginService") LoginService loginService){
         this.productService = productService;
         this.cartService = cartService;
         this.loginService = loginService;
@@ -55,16 +53,5 @@ public class ProductController {
                 .message("상품 검색 성공")
                 .data(products)
                 .build();
-    }
-
-    @AuthRequired
-    @PostMapping("/cart")
-    public SuccessResponse saveProductsToCart(@Valid @RequestBody final SaveToCartRequest dto){
-        long userId = loginService.getLoginUserId();
-        cartService.saveProduct(userId, dto);
-        return SuccessResponse.builder()
-            .status(StatusEnum.OK)
-            .message("장바구니에 상품 담기 성공")
-            .build();
     }
 }
