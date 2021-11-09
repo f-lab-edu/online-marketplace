@@ -28,7 +28,7 @@ public class ProductController {
     private final CartService cartService;
     private final LoginService loginService;
 
-    public ProductController(ProductService productService, CartService cartService,  @Qualifier("userSessionLoginService") LoginService loginService){
+    public ProductController(ProductService productService, CartService cartService, @Qualifier("userSessionLoginService") LoginService loginService){
         this.productService = productService;
         this.cartService = cartService;
         this.loginService = loginService;

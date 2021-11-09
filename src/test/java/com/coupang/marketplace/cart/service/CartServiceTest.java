@@ -1,5 +1,6 @@
 package com.coupang.marketplace.cart.service;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.times;
@@ -71,5 +72,33 @@ public class CartServiceTest {
 
 		// then
 		then(cartRepository).should(times(1)).updateProductNum(Product1.ID, 2);
+	}
+
+	@DisplayName("존재하지 않은 상품을 선택시 장바구니 담기에 실패한다.")
+	@Test
+	void saveProductDoesNotExist() {
+		// given
+		final SaveToCartRequest dto = SaveToCartRequest.builder()
+			.productId(Product2.ID)
+			.productNum(1)
+			.build();
+		given(productService.checkIsProductExist(Product2.ID)).willReturn(false);
+
+		// then
+		assertThrows(IllegalArgumentException.class, () -> cartService.saveProduct(User1.ID, dto));
+	}
+
+	@DisplayName("0개의 상품을 선택시 장바구니 담기에 실패한다.")
+	@Test
+	void saveProductZero() {
+		// given
+		final SaveToCartRequest dto = SaveToCartRequest.builder()
+			.productId(Cart1.PRODUCT_ID)
+			.productNum(0)
+			.build();
+		given(productService.checkIsProductExist(Product1.ID)).willReturn(true);
+
+		// then
+		assertThrows(IllegalArgumentException.class, () -> cartService.saveProduct(User1.ID, dto));
 	}
 }
