@@ -4,11 +4,14 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coupang.marketplace.address.repository.AddressRepository;
 import com.coupang.marketplace.cart.domain.Cart;
 import com.coupang.marketplace.cart.repository.CartRepository;
+import com.coupang.marketplace.global.constant.CacheKey;
 import com.coupang.marketplace.order.controller.dto.OrderInfo;
 import com.coupang.marketplace.order.controller.dto.OrderProductInfo;
 import com.coupang.marketplace.product.repository.ProductRepository;
@@ -26,6 +29,8 @@ public class OrderService {
 	private final AddressRepository addressRepository;
 	private final ProductRepository productRepository;
 
+	@Transactional(readOnly = true)
+	@Cacheable(key = "#userId", value = CacheKey.ORDER_INFO)
 	public OrderInfo getOrderInfo(long userId){
 		List<Cart> cartProducts = cartRepository.findByUserId(userId);
 		User userInfo = userRepository.findById(userId);

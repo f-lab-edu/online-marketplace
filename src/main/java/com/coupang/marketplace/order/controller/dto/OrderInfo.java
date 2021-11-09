@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -42,7 +43,7 @@ public class OrderInfo {
 	private long deliveryFee;
 
 	@Builder
-	public OrderInfo(long userId, String consumerName, String consumerPhone, String receiverName, String receiverAddress, String receiverPhone, String receiverRequest, List<OrderProductInfo> orderProducts, long productPrice, long deliveryFee){
+	public OrderInfo(@JsonProperty("userId") long userId, @JsonProperty("consumerName") String consumerName, @JsonProperty("consumerPhone") String consumerPhone, @JsonProperty("receiverName") String receiverName, @JsonProperty("receiverAddress") String receiverAddress, @JsonProperty("receiverPhone") String receiverPhone, @JsonProperty("receiverRequest") String receiverRequest, @JsonProperty("orderProducts") List<OrderProductInfo> orderProducts, @JsonProperty("productPrice") long productPrice, @JsonProperty("deliveryFee") long deliveryFee){
 		this.userId = userId;
 		this.consumerName = consumerName;
 		this.consumerPhone = consumerPhone;

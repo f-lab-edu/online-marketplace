@@ -7,15 +7,15 @@ import lombok.Getter;
 public class Address {
 
 	private long id;
-	private boolean isMain;
+	private boolean main;
 	private String name;
 	private String content;
 	private long userId;
 
 	@Builder
-	public Address(long id, boolean isMain, String name, String content, long userId){
+	public Address(long id, boolean main, String name, String content, long userId){
 		this.id = id;
-		this.isMain = isMain;
+		this.main = main;
 		this.name = name;
 		this.content = content;
 		this.userId = userId;

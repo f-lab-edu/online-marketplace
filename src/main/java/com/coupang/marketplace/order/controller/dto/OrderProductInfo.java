@@ -4,6 +4,8 @@ import java.math.BigInteger;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -23,7 +25,7 @@ public class OrderProductInfo {
 	private BigInteger deliveryFee;
 
 	@Builder
-	public OrderProductInfo(long productId, String productName, int productNum, BigInteger deliveryFee){
+	public OrderProductInfo(@JsonProperty("productId") long productId, @JsonProperty("productName") String productName, @JsonProperty("productNum") int productNum, @JsonProperty("deliveryFee") BigInteger deliveryFee){
 		this.productId = productId;
 		this.productName = productName;
 		this.productNum = productNum;
