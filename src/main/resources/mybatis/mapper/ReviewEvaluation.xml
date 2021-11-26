@@ -12,8 +12,9 @@
         FROM REVIEW_EVALUATION
         WHERE user_id = #{userId} AND review_id = #{reviewId}
     </select>
-    <delete id="deleteReviewEvaluation">
-        DELETE FROM REVIEW_EVALUATION
+    <delete id="updateReviewEvaluation">
+        UPDATE REVIEW_EVALUATION
+        SET is_help = #{isHelp}
         WHERE user_id = #{userId} AND review_id = #{reviewId}
     </delete>
 </mapper>

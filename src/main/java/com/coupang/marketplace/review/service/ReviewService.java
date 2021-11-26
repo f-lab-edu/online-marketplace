@@ -38,13 +38,12 @@ public class ReviewService {
 
     @Transactional
     public void evaluateReview(long userId, EvaluateReviewRequest dto){
-        long reviewId = dto.getReviewId();
-        if (checkIsExistReviewEvaluation(userId, reviewId)) {
-            reviewEvaluationRepository.deleteReviewEvaluation(userId, reviewId);
-        }
-
         ReviewEvaluation reviewEvaluation = dto.toEntity(userId);
-        reviewEvaluationRepository.insertReviewEvaluation(reviewEvaluation);
+        if (checkIsExistReviewEvaluation(userId, dto.getReviewId())) {
+            reviewEvaluationRepository.updateReviewEvaluation(userId, reviewEvaluation.getReviewId(), reviewEvaluation.isHelp());
+        } else {
+            reviewEvaluationRepository.insertReviewEvaluation(reviewEvaluation);
+        }
     }
 
     private boolean checkIsExistReviewEvaluation(long userId, long reveiwId){

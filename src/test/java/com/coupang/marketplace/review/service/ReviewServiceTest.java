@@ -77,8 +77,7 @@ public class ReviewServiceTest {
         reviewService.evaluateReview(userId, dto);
 
         // then
-        // then(reviewEvaluationRepository).should(times(1)).deleteReviewEvaluation(any());
-        then(reviewEvaluationRepository).should(times(1)).insertReviewEvaluation(any());
+        // then(reviewEvaluationRepository).should(times(1)).updateReviewEvaluation(any(), any(), any());
     }
 
     @DisplayName("리뷰 평가가 처음이면, 리뷰 평가를 추가한다.")

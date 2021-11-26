@@ -14,5 +14,5 @@ public interface ReviewEvaluationRepository {
 
     Optional<ReviewEvaluation> getReviewEvaluationByUserIdAndReviewId(long userId, long reviewId);
 
-    void deleteReviewEvaluation(long userId, long reviewId);
+    void updateReviewEvaluation(long userId, long reviewId, boolean isHelp);
 }
