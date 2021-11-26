@@ -1,6 +1,7 @@
 package com.coupang.marketplace.review.controller;
 
 import com.coupang.marketplace.global.fixture.ImageFixture.*;
+import com.coupang.marketplace.global.fixture.ReviewEvaluationFixture.*;
 import com.coupang.marketplace.global.fixture.ReviewFixture.*;
 import com.coupang.marketplace.global.template.ControllerTestTemplate;
 import com.coupang.marketplace.review.controller.dto.EvaluateReviewRequest;
@@ -46,7 +47,7 @@ public class ReviewControllerTest extends ControllerTestTemplate {
     public void evaluateReview() throws Exception{
         // given
         final EvaluateReviewRequest dto = EvaluateReviewRequest.builder()
-                .reviewId(Review1.ID)
+                .reviewId(ReviewEvaluation1.ID)
                 .evaluation(Evaluation.HELP)
                 .build();
 
