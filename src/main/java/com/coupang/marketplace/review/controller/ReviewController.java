@@ -35,10 +35,11 @@ public class ReviewController {
                 .build();
     }
 
+    @AuthRequired
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/evaluate")
     public SuccessResponse evaluateReview(@Valid @RequestBody EvaluateReviewRequest dto){
-        long userId = 1; // 하드코딩
+        Long userId = loginService.getLoginUserId();
         reviewService.evaluateReview(userId, dto);
         return SuccessResponse.builder()
                 .status(StatusEnum.CREATED)

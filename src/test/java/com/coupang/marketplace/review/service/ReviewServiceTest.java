@@ -90,7 +90,7 @@ public class ReviewServiceTest {
                 .evaluation(Evaluation.HELP)
                 .build();
         final Optional<ReviewEvaluation> notExistReviewEvaluation = Optional.ofNullable(null);
-        // given(reviewEvaluationRepository.getReviewEvaluationByUserIdAndReviewId(any(), any())).willReturn(null);
+        // given(reviewEvaluationRepository.getReviewEvaluationByUserIdAndReviewId(any(), any())).willReturn(notExistReviewEvaluation);
 
         // when
         reviewService.evaluateReview(userId, dto);

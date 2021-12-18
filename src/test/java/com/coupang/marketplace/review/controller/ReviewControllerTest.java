@@ -59,9 +59,13 @@ public class ReviewControllerTest extends ControllerTestTemplate {
                 .evaluation(Evaluation.HELP)
                 .build();
 
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute(SessionKey.LOGIN_USER_ID, UserFixture.User1.ID);
+
         // when
         final ResultActions actions = mvc.perform(post("/reviews/evaluate")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .session(session)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andDo(print());
 
