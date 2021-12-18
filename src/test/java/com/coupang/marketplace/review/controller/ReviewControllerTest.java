@@ -9,6 +9,10 @@ import com.coupang.marketplace.review.domain.Evaluation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import com.coupang.marketplace.global.constant.SessionKey;
+import com.coupang.marketplace.global.fixture.UserFixture;
+
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,12 +32,16 @@ public class ReviewControllerTest extends ControllerTestTemplate {
         final String content = Review1.CONTENT;
         final MultipartFile file = Image1.MULTIPART_FILE;
 
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute(SessionKey.LOGIN_USER_ID, UserFixture.User1.ID);
+
         // when
         final ResultActions actions = mvc.perform(multipart("/reviews")
                 .file("img", file.getBytes())
                 .param("productId", String.valueOf(Review1.PRODUCT_ID))
                 .param("score", String.valueOf(Review1.SCORE))
-                .param("content", Review1.CONTENT))
+                .param("content", Review1.CONTENT)
+                .session(session))
                 .andDo(print());
 
         // then

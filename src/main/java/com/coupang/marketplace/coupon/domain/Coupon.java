@@ -21,16 +21,19 @@ public class Coupon {
 
 	private Long productId;
 
+	private int maxCouponCount;
+
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private ZonedDateTime expirationTime;
 
 	@Builder
-	public Coupon(Long id, String name, Long minPrice, Long discountPrice, Long productId, ZonedDateTime expirationTime){
+	public Coupon(Long id, String name, Long minPrice, Long discountPrice, Long productId, ZonedDateTime expirationTime, int maxCouponCount){
 		this.id = id;
 		this.name = name;
 		this.minPrice = minPrice;
 		this.discountPrice = discountPrice;
 		this.productId = productId;
 		this.expirationTime = expirationTime.withZoneSameInstant(ZoneId.systemDefault());
+		this.maxCouponCount = maxCouponCount;
 	}
 }

@@ -31,18 +31,6 @@ public class NcpStorage implements Storage {
     @Value("${ncp.object-storage.bucket-name}")
     private String bucketName;
 
-    private File convertToFile(MultipartFile multipartFile) {
-        try {
-            File tempFile = File.createTempFile("temp", null, null);
-            try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-                fos.write(multipartFile.getBytes());
-                return tempFile;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("multipart 파일 컨버팅을 실패했습니다.", e);
-        }
-    }
-
     @Override
     public void saveMultipartFile(MultipartFile multipartFile, String fileName){
         try {
@@ -63,5 +51,17 @@ public class NcpStorage implements Storage {
                 .build();
 
         s3.putObject(bucketName, fileName, file);
+    }
+
+    private File convertToFile(MultipartFile multipartFile) {
+        try {
+            File tempFile = File.createTempFile("temp", null, null);
+            try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+                fos.write(multipartFile.getBytes());
+                return tempFile;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("multipart 파일 컨버팅을 실패했습니다.", e);
+        }
     }
 }
