@@ -1,17 +1,17 @@
 spring:
   datasource:
-    url:
+    url: jdbc:mysql://localhost:3306/coupang?serverTimezone=UTC&useLegacyDatetimeCode=false
     username:
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     session:
-      host: localhost
-      port: 6379
+      host:
+      port:
       password:
     cache:
-      host: localhost
-      port: 6380
+      host:
+      port:
       password:
 
 mybatis:
