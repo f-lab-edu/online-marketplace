@@ -19,4 +19,6 @@ public interface CartRepository {
 	void updateProductNum(long productId, int productNum);
 
 	Optional<Cart> findByProductId(long userId, long productId);
+
+	void deleteCartProducts(Cart cart);
 }
