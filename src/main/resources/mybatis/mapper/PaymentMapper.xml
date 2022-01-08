@@ -3,11 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.coupang.marketplace.payment.repository.PaymentRepository">
-    <insert id="insertPaymentInfo" parameterType="Payment">
+    <insert id="insertPaymentInfo" parameterType="Payment" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO PAYMENT (type, discount_price, total_price, status)
         VALUES (#{type}, #{discountPrice}, #{totalPrice}, #{status})
-        <selectKey keyProperty="id" resultType="long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
     </insert>
 </mapper>

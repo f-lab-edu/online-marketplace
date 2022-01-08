@@ -8,7 +8,7 @@ import lombok.Getter;
 public class PaymentDto {
 
 	@NotNull
-	private int type;
+	private PaymentType type;
 
 	private long discountPrice;
 
@@ -16,7 +16,7 @@ public class PaymentDto {
 	private long totalPrice;
 
 	@Builder
-	public PaymentDto(int type, long discountPrice, long totalPrice){
+	public PaymentDto(PaymentType type, long discountPrice, long totalPrice){
 		this.type = type;
 		this.discountPrice = discountPrice;
 		this.totalPrice = totalPrice;

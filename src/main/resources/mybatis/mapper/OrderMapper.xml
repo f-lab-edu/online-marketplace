@@ -3,16 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.coupang.marketplace.order.repository.OrderRepository">
-    <insert id="insertOrderInfo" parameterType="Order">
+    <insert id="insertOrderInfo" parameterType="Order" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO ORDERS (user_id, consumer_name, consumer_phone, receiver_name, receiver_address, receiver_phone, receiver_request, status, payment_id)
         VALUES (#{userId}, #{consumerName}, #{consumerPhone}, #{receiverName}, #{receiverAddress}, #{receiverPhone}, #{receiverRequest}, #{status}, #{paymentId})
-        <selectKey keyProperty="id" resultType="long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
     </insert>
 
     <insert id="insertOrderProducts" parameterType="OrderProduct">
         INSERT INTO ORDER_PRODUCT (order_id, product_id, product_num)
         VALUES (#{orderId}, #{productId}, #{productNum})
     </insert>
+
+    <select id = "findOrdersByUserId" resultType="Order">
+        SELECT consumer_name, consumer_phone, receiver_name, receiver_address, receiver_phone, receiver_request, created_at
+        FROM ORDERS
+        WHERE user_id = #{userId} AND status = false
+    </select>
 </mapper>

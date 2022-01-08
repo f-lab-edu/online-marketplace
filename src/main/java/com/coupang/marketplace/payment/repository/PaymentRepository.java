@@ -9,5 +9,5 @@ import com.coupang.marketplace.payment.domain.Payment;
 @Repository
 public interface PaymentRepository {
 
-	long insertPaymentInfo(Payment payment);
+	void insertPaymentInfo(Payment payment);
 }
