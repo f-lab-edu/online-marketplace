@@ -4,7 +4,7 @@
 
 <mapper namespace="com.coupang.marketplace.order.repository.OrderRepository">
     <insert id="insertOrderInfo" parameterType="Order" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO ORDERS (user_id, consumer_name, consumer_phone, receiver_name, receiver_address, receiver_phone, receiver_request, status, payment_id)
+        INSERT INTO ORDER (user_id, consumer_name, consumer_phone, receiver_name, receiver_address, receiver_phone, receiver_request, status, payment_id)
         VALUES (#{userId}, #{consumerName}, #{consumerPhone}, #{receiverName}, #{receiverAddress}, #{receiverPhone}, #{receiverRequest}, #{status}, #{paymentId})
     </insert>
 
@@ -15,7 +15,7 @@
 
     <select id = "findOrdersByUserId" resultType="Order">
         SELECT consumer_name, consumer_phone, receiver_name, receiver_address, receiver_phone, receiver_request, created_at
-        FROM ORDERS
+        FROM ORDER
         WHERE user_id = #{userId} AND status = false
     </select>
 </mapper>
