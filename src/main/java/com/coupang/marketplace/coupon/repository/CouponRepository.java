@@ -15,15 +15,17 @@ public interface CouponRepository {
 
 	List<Coupon> getAllCoupons();
 
-	Coupon findCouponById(long id);
+	Optional<Coupon> findCouponById(long id);
 
 	Optional<UserCoupon> findUserCouponById(long couponId, long userId);
 
 	int getMaxCouponCount(long id);
 
-	int getIssuedCouponCount(long couponId, long userId);
+	int getIssuedCount(long couponId, long userId);
 
 	void insertUserCoupon(UserCoupon userCoupon);
 
-	void updateIssuedCouponCount(long couponId, long userId, int issuedCount);
+	void updateIssuedCount(long couponId, long userId, int issuedCount);
+
+	void updateUseCount(long userId, long couponId, int useCount);
 }

@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.*;
 import java.util.Arrays;
 import java.util.Optional;
 
+import com.coupang.marketplace.coupon.domain.Coupon;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,7 +45,8 @@ public class CouponServiceTest {
 	@Test
 	public void saveCouponBeforeExpirationTime() {
 		//given
-		given(couponRepository.findCouponById(Coupon1.ID)).willReturn(Coupon1.COUPON);
+		final Optional<Coupon> FoundCoupon = Optional.ofNullable(Coupon1.COUPON);
+		given(couponRepository.findCouponById(Coupon1.ID)).willReturn(FoundCoupon);
 		given(couponRepository.getMaxCouponCount(Coupon1.ID)).willReturn(Coupon1.MAX_COUPON_COUNT);
 
 		final Optional<UserCoupon> notFoundUserCoupon = Optional.ofNullable(null);
@@ -61,7 +63,8 @@ public class CouponServiceTest {
 	@Test
 	public void saveCouponAfterExpirationTime() {
 		//given
-		given(couponRepository.findCouponById(Coupon3.ID)).willReturn(Coupon3.COUPON);
+		final Optional<Coupon> FoundCoupon = Optional.ofNullable(Coupon3.COUPON);
+		given(couponRepository.findCouponById(Coupon3.ID)).willReturn(FoundCoupon);
 
 		//then
 		assertThrows(IllegalArgumentException.class, () -> couponService.saveCoupon(Coupon3.ID, User1.ID));
@@ -74,15 +77,16 @@ public class CouponServiceTest {
 		final Optional<UserCoupon> FoundUserCoupon = Optional.ofNullable(UserCoupon1.USERCOUPON);
 		given(couponRepository.findUserCouponById(Coupon2.ID, User1.ID)).willReturn(FoundUserCoupon);
 
-		given(couponRepository.findCouponById(Coupon2.ID)).willReturn(Coupon2.COUPON);
+		final Optional<Coupon> FoundCoupon = Optional.ofNullable(Coupon2.COUPON);
+		given(couponRepository.findCouponById(Coupon2.ID)).willReturn(FoundCoupon);
 		given(couponRepository.getMaxCouponCount(Coupon2.ID)).willReturn(Coupon2.MAX_COUPON_COUNT);
-		given(couponRepository.getIssuedCouponCount(Coupon2.ID, User1.ID)).willReturn(UserCoupon1.ISSUED_COUPON_COUNT);
+		given(couponRepository.getIssuedCount(Coupon2.ID, User1.ID)).willReturn(UserCoupon1.ISSUED_COUNT);
 
 		//when
 		couponService.saveCoupon(Coupon2.ID, User1.ID);
 
 		//then
-		then(couponRepository).should(times(1)).updateIssuedCouponCount(Coupon2.ID, User1.ID, UserCoupon1.ISSUED_COUPON_COUNT+1);
+		then(couponRepository).should(times(1)).updateIssuedCount(Coupon2.ID, User1.ID, UserCoupon1.ISSUED_COUNT+1);
 	}
 
 	@DisplayName("발급받을 수 있는 최대 쿠폰의 수만큼 발행하였을 경우 쿠폰 저장에 실패한다.")
@@ -92,9 +96,10 @@ public class CouponServiceTest {
 		final Optional<UserCoupon> FoundUserCoupon = Optional.ofNullable(UserCoupon2.USERCOUPON);
 		given(couponRepository.findUserCouponById(Coupon2.ID, User2.ID)).willReturn(FoundUserCoupon);
 
-		given(couponRepository.findCouponById(Coupon2.ID)).willReturn(Coupon2.COUPON);
+		final Optional<Coupon> FoundCoupon = Optional.ofNullable(Coupon2.COUPON);
+		given(couponRepository.findCouponById(Coupon2.ID)).willReturn(FoundCoupon);
 		given(couponRepository.getMaxCouponCount(Coupon2.ID)).willReturn(Coupon2.MAX_COUPON_COUNT);
-		given(couponRepository.getIssuedCouponCount(Coupon2.ID, User2.ID)).willReturn(UserCoupon2.ISSUED_COUPON_COUNT);
+		given(couponRepository.getIssuedCount(Coupon2.ID, User2.ID)).willReturn(UserCoupon2.ISSUED_COUNT);
 
 		//then
 		assertThrows(IllegalArgumentException.class, () -> couponService.saveCoupon(Coupon2.ID, User2.ID));

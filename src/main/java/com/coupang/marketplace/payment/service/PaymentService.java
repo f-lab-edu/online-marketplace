@@ -14,10 +14,9 @@ public class PaymentService {
 
 	private final PaymentRepository paymentRepository;
 
-	public boolean pay(PaymentDto paymentDto){
+	public void pay(PaymentDto paymentDto){
 		if(!mockPayment(paymentDto))
 			throw new IllegalArgumentException("결제에 실패하였습니다.");
-		return true;
 	}
 
 	public long savePaymentInfo(Payment payment){

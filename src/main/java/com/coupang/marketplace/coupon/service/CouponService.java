@@ -2,8 +2,10 @@ package com.coupang.marketplace.coupon.service;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.coupang.marketplace.cart.domain.Cart;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +41,7 @@ public class CouponService {
 		int maxCouponCount = couponRepository.getMaxCouponCount(id);
 		int issuedCouponCount = 0;
 		if(checkIsAlreadyHave(id, userId))
-			issuedCouponCount = couponRepository.getIssuedCouponCount(id, userId);
+			issuedCouponCount = couponRepository.getIssuedCount(id, userId);
 
 		if(maxCouponCount == issuedCouponCount)
 			throw new IllegalArgumentException("더 이상 발급이 불가능합니다.");
@@ -48,20 +50,49 @@ public class CouponService {
 			UserCoupon userCoupon = UserCoupon.builder()
 				.userId(userId)
 				.couponId(id)
-				.issuedCouponCount(issuedCouponCount+1)
+				.issuedCount(issuedCouponCount+1)
 				.build();
 			couponRepository.insertUserCoupon(userCoupon);
 		}
 		else
-			couponRepository.updateIssuedCouponCount(id, userId, issuedCouponCount+1);
+			couponRepository.updateIssuedCount(id, userId, issuedCouponCount+1);
 	}
 
 	public boolean checkIsAvailableCoupon(long id){
-		ZonedDateTime expirationTime = couponRepository.findCouponById(id).getExpirationTime();
+		ZonedDateTime expirationTime = couponRepository.findCouponById(id).get().getExpirationTime();
 		return expirationTime.isAfter(ZonedDateTime.now());
 	}
 
-	public boolean checkIsAlreadyHave(long id, long userId) {
-		return couponRepository.findUserCouponById(id, userId).isPresent();
+	public boolean checkIsAlreadyHave(long couponId, long userId) {
+		return couponRepository.findUserCouponById(couponId, userId).isPresent();
+	}
+
+	public long getDiscountPriceByCoupon(long userId, Optional<Long> couponId, List<Cart> cartProducts, long totalProductPrice){
+		if(couponId.isEmpty())
+			return 0;
+		if(!checkIsAlreadyHave(couponId.get(), userId))
+			throw new IllegalArgumentException("발급받지 않은 쿠폰입니다.");
+		if(!checkIsAvailableCoupon(couponId.get()))
+			throw new IllegalArgumentException("기간이 지난 쿠폰입니다.");
+
+		Optional<Coupon> coupon = couponRepository.findCouponById(couponId.get());
+		List<Long> productsId = cartProducts.stream()
+				.map(cartProduct -> cartProduct.getProductId())
+				.collect(Collectors.toList());
+		if(!productsId.contains(coupon.get().getProductId()))
+			throw new IllegalArgumentException("상품에 적용되는 쿠폰이 아닙니다.");
+		if(coupon.get().getMinPrice() > totalProductPrice)
+			throw new IllegalArgumentException("최소주문금액을 만족하지 못합니다.");
+
+		Optional<UserCoupon> userCoupon = couponRepository.findUserCouponById(couponId.get(), userId);
+		if(userCoupon.get().getIssuedCount() - userCoupon.get().getUseCount() <= 0)
+			throw new IllegalArgumentException("이미 사용 완료한 쿠폰입니다.");
+
+		return coupon.get().getDiscountPrice();
+	}
+
+	public void IncreaseUseCount(long userId, long couponId){
+		Optional<UserCoupon> userCoupon = couponRepository.findUserCouponById(couponId, userId);
+		couponRepository.updateUseCount(userId, couponId, userCoupon.get().getUseCount()+1);
 	}
 }
