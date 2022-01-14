@@ -2,6 +2,7 @@ package com.coupang.marketplace.coupon.service;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import com.coupang.marketplace.coupon.repository.CouponRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+
 @RequiredArgsConstructor
 @Service
 @Slf4j
@@ -21,7 +23,13 @@ public class CouponService {
 	private final CouponRepository couponRepository;
 
 	public List<Coupon> getAvailableCoupons(){
-		return couponRepository.getCouponsBeforeExpirationTime();
+		List<Coupon> coupons = couponRepository.getAllCoupons();
+
+		List<Coupon> availableCoupons = coupons.stream()
+				.filter(coupon -> coupon.getExpirationTime().isAfter(ZonedDateTime.now()))
+				.collect(Collectors.toList());
+
+		return availableCoupons;
 	}
 
 	@Transactional

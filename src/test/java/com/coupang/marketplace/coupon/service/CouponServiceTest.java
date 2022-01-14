@@ -33,11 +33,11 @@ public class CouponServiceTest {
 	@Test
 	public void getCouponsBeforeExpirationTime() {
 		//given
-		given(couponRepository.getCouponsBeforeExpirationTime())
-			.willReturn(Arrays.asList(Coupon1.COUPON));
+		given(couponRepository.getAllCoupons())
+			.willReturn(Arrays.asList(Coupon1.COUPON, Coupon2.COUPON, Coupon3.COUPON));
 
 		//then
-		assertThat(couponService.getAvailableCoupons().size()).isEqualTo(1);
+		assertThat(couponService.getAvailableCoupons().size()).isEqualTo(2);
 	}
 
 	@DisplayName("만료시간이 지나지 않은 쿠폰이면 저장에 성공한다.")

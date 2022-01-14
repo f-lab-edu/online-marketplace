@@ -13,7 +13,7 @@ import com.coupang.marketplace.coupon.domain.UserCoupon;
 @Repository
 public interface CouponRepository {
 
-	List<Coupon> getCouponsBeforeExpirationTime();
+	List<Coupon> getAllCoupons();
 
 	Coupon findCouponById(long id);
 
