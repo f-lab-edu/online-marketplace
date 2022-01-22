@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coupang.marketplace.review.repository.ReviewRepository">
+    <insert id="insertReview" parameterType="Review" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO REVIEW (user_id, product_id, content, score)
+        VALUES (#{userId}, #{productId}, #{content}, #{score});
+    </insert>
+</mapper>
