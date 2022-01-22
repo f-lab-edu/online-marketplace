@@ -22,9 +22,4 @@
         FROM CART
         WHERE product_id = #{productId} AND user_id = #{userId}
     </select>
-    <delete id="deleteCartProducts">
-        DELETE
-        FROM CART
-        WHERE product_id = #{productId} AND user_id = #{userId}
-    </delete>
 </mapper>

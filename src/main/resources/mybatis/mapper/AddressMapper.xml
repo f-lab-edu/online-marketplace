@@ -6,6 +6,6 @@
     <select id="findMainContentByUserId" resultType="java.lang.String">
         SELECT content
         FROM ADDRESS
-        WHERE user_id = #{userId} AND is_main = 1
+        WHERE user_id = #{userId} AND main = 1
     </select>
 </mapper>
