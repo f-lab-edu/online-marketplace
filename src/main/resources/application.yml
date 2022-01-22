@@ -1,8 +1,10 @@
+server:
+  port: 8080
+
 spring:
-  application:
-    name: marketplace
-  profiles:
-    active: dev
+  config:
+    import: "configserver:http://localhost:8888"
   cloud:
     config:
-      uri: http://localhost:8888
+      name: marketplace
+      profile: dev
