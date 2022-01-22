@@ -48,6 +48,7 @@ public class OrderServiceTest {
     @Mock
     private ProductRepository productRepository;
 
+    // TODO(시은): order 테스트코드 재작성
     @DisplayName("장바구니에 담긴 상품을 주문한다.")
     @Test
     public void order() {
