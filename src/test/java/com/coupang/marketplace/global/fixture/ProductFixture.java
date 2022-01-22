@@ -95,4 +95,34 @@ public class ProductFixture {
                 .rocketGlobal(ROCKET_GLOBAL)
                 .build();
     }
+
+    public static class Product4 {
+        public static final long ID = 4L;
+        public static final BigInteger CATEGORY_ID  = new BigInteger("4");
+        public static final String NAME =  "상품4";
+        public static final long PRICE = 0L;
+        public static final String MAIN_IMG = "/img/main/4.png";
+        public static final String DETAIL_IMG = "/img/detail/4.png";
+        public static final BigInteger STOCK = new BigInteger("0");
+        public static final float SCORE = 0f;
+        public static final BigInteger DELIVERY_FEE = new BigInteger("0");
+        public static final boolean ROCKET = false;
+        public static final boolean ROCKET_FRESH = false;
+        public static final boolean ROCKET_GLOBAL = false;
+
+        public static final Product PRODUCT = Product.builder()
+                .id(ID)
+                .categoryId(CATEGORY_ID)
+                .name(NAME)
+                .price(PRICE)
+                .mainImg(MAIN_IMG)
+                .detailImg(DETAIL_IMG)
+                .stock(STOCK)
+                .score(SCORE)
+                .deliveryFee(DELIVERY_FEE)
+                .rocket(ROCKET)
+                .rocketFresh(ROCKET_FRESH)
+                .rocketGlobal(ROCKET_GLOBAL)
+                .build();
+    }
 }

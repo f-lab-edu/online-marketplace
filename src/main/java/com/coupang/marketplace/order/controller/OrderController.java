@@ -28,6 +28,7 @@ public class OrderController {
 		this.loginService = loginService;
 	}
 
+// TODO(시은): [GET]/orders 코드 재작성
 //	@Transactional(readOnly = true)
 //	@AuthRequired
 //	@GetMapping("/orders")
@@ -52,6 +53,7 @@ public class OrderController {
 				.status(StatusEnum.CREATED)
 				.message("주문하기 성공")
 				.build();
+
 		return res;
 	}
 }

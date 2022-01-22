@@ -63,7 +63,11 @@ public class OrderService {
 			.totalPrice(totalPrice - discountPrice)
 			.build();
 
-		paymentService.pay(paymentDto);
+		try {
+			paymentService.pay(paymentDto);
+		}catch(Exception e) {
+			throw new IllegalArgumentException("결제에 실패하였습니다.", e);
+		}
 
 		Payment payment = Payment.builder()
 				.type(paymentDto.getType().ordinal())
