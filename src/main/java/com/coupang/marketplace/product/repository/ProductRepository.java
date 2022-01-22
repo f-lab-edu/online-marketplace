@@ -4,8 +4,9 @@ import com.coupang.marketplace.product.domain.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.List;
-
+import java.util.Optional;
 
 @Mapper
 @Repository
@@ -22,4 +23,6 @@ public interface ProductRepository {
     List<Product> getProductsByIsRocketAndIsRocketGlobal(boolean isRocket, boolean isRocketGlobal, int startId, int listSize);
 
     List<Product> getProductsByKeyword(String keyword);
+
+    Optional<Product> findByProductId(long id);
 }

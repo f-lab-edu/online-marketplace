@@ -21,7 +21,7 @@ public class CouponController {
 	private final CouponService couponService;
 	private final LoginService loginService;
 
-	public CouponController(CouponService couponService, @Qualifier("userSessionLoginService")LoginService loginService){
+	public CouponController(CouponService couponService, @Qualifier("userSessionLoginService") LoginService loginService){
 		this.couponService = couponService;
 		this.loginService = loginService;
 	}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coupang.marketplace.cart.repository.CartRepository">
+    <select id="findByUserId" resultType="Cart">
+        SELECT id, product_id, product_num, user_id
+        FROM CART
+        WHERE user_id = #{userId}
+    </select>
+    <insert id="insertProduct" parameterType="Cart">
+        INSERT INTO CART (id, product_id, product_num, user_id)
+        VALUES (#{id}, #{productId}, #{productNum}, #{userId})
+    </insert>
+    <insert id="updateProductNum">
+        UPDATE CART
+        SET product_num = #{productNum}
+        WHERE product_id = #{productId}
+    </insert>
+    <select id="findByProductId" resultType="Cart">
+        SELECT id, product_id, product_num, user_id
+        FROM CART
+        WHERE product_id = #{productId} AND user_id = #{userId}
+    </select>
+</mapper>

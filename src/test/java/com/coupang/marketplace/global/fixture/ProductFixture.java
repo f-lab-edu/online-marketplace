@@ -7,10 +7,10 @@ import java.math.BigInteger;
 public class ProductFixture {
 
     public static class Product1 {
-        public static final BigInteger ID = new BigInteger("1");
+        public static final long ID = 1L;
         public static final BigInteger CATEGORY_ID  = new BigInteger("1");
         public static final String NAME =  "상품1";
-        public static final BigInteger PRICE = new BigInteger("10000");
+        public static final long PRICE = 10000L;
         public static final String MAIN_IMG = "/img/main/1.png";
         public static final String DETAIL_IMG = "/img/detail/1.png";
         public static final BigInteger STOCK = new BigInteger("1000");
@@ -37,10 +37,10 @@ public class ProductFixture {
     }
 
     public static class Product2 {
-        public static final BigInteger ID = new BigInteger("2");
+        public static final long ID = 2L;
         public static final BigInteger CATEGORY_ID  = new BigInteger("2");
         public static final String NAME =  "상품2";
-        public static final BigInteger PRICE = new BigInteger("20000");
+        public static final long PRICE = 20000L;
         public static final String MAIN_IMG = "/img/main/2.png";
         public static final String DETAIL_IMG = "/img/detail/2.png";
         public static final BigInteger STOCK = new BigInteger("2000");
@@ -67,10 +67,10 @@ public class ProductFixture {
     }
 
     public static class Product3 {
-        public static final BigInteger ID = new BigInteger("3");
+        public static final long ID = 3L;
         public static final BigInteger CATEGORY_ID  = new BigInteger("3");
         public static final String NAME =  "상품3";
-        public static final BigInteger PRICE = new BigInteger("30000");
+        public static final long PRICE = 30000L;
         public static final String MAIN_IMG = "/img/main/3.png";
         public static final String DETAIL_IMG = "/img/detail/3.png";
         public static final BigInteger STOCK = new BigInteger("3000");

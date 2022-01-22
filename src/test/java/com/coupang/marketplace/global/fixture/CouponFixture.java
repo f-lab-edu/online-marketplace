@@ -17,14 +17,14 @@ public class CouponFixture {
 		public static final Integer MAX_COUPON_COUNT = 5;
 
 		public static final Coupon COUPON = Coupon.builder()
-				.id(ID)
-				.name(NAME)
-				.minPrice(MIN_PRICE)
-				.discountPrice(DISCOUNT_PRICE)
-				.productId(PRODUCT_ID)
-				.expirationTime(EXPIRATION_TIME)
-				.maxCouponCount(MAX_COUPON_COUNT)
-				.build();
+			.id(ID)
+			.name(NAME)
+			.minPrice(MIN_PRICE)
+			.discountPrice(DISCOUNT_PRICE)
+			.productId(PRODUCT_ID)
+			.expirationTime(EXPIRATION_TIME)
+			.maxCouponCount(MAX_COUPON_COUNT)
+			.build();
 	}
 
 	public static class Coupon2 {
@@ -37,14 +37,14 @@ public class CouponFixture {
 		public static final Integer MAX_COUPON_COUNT = 5;
 
 		public static final Coupon COUPON = Coupon.builder()
-				.id(ID)
-				.name(NAME)
-				.minPrice(MIN_PRICE)
-				.discountPrice(DISCOUNT_PRICE)
-				.productId(PRODUCT_ID)
-				.expirationTime(EXPIRATION_TIME)
-				.maxCouponCount(MAX_COUPON_COUNT)
-				.build();
+			.id(ID)
+			.name(NAME)
+			.minPrice(MIN_PRICE)
+			.discountPrice(DISCOUNT_PRICE)
+			.productId(PRODUCT_ID)
+			.expirationTime(EXPIRATION_TIME)
+			.maxCouponCount(MAX_COUPON_COUNT)
+			.build();
 	}
 
 	public static class Coupon3 {
@@ -57,13 +57,13 @@ public class CouponFixture {
 		public static final Integer MAX_COUPON_COUNT = 5;
 
 		public static final Coupon COUPON = Coupon.builder()
-				.id(ID)
-				.name(NAME)
-				.minPrice(MIN_PRICE)
-				.discountPrice(DISCOUNT_PRICE)
-				.productId(PRODUCT_ID)
-				.expirationTime(EXPIRATION_TIME)
-				.maxCouponCount(MAX_COUPON_COUNT)
-				.build();
+			.id(ID)
+			.name(NAME)
+			.minPrice(MIN_PRICE)
+			.discountPrice(DISCOUNT_PRICE)
+			.productId(PRODUCT_ID)
+			.expirationTime(EXPIRATION_TIME)
+			.maxCouponCount(MAX_COUPON_COUNT)
+			.build();
 	}
 }
