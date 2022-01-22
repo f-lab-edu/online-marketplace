@@ -1,15 +1,13 @@
 package com.coupang.marketplace.order.service;
 
 import com.coupang.marketplace.address.repository.AddressRepository;
-import com.coupang.marketplace.cart.domain.Cart;
 import com.coupang.marketplace.cart.repository.CartRepository;
 import com.coupang.marketplace.global.fixture.AddressFixture.*;
 import com.coupang.marketplace.global.fixture.CartFixture.*;
 import com.coupang.marketplace.global.fixture.PaymentFixture.*;
+import com.coupang.marketplace.global.fixture.ProductFixture.*;
 import com.coupang.marketplace.global.fixture.UserFixture.*;
 import com.coupang.marketplace.order.controller.dto.OrderRequestDto;
-import com.coupang.marketplace.order.repository.OrderRepository;
-import com.coupang.marketplace.payment.repository.PaymentRepository;
 import com.coupang.marketplace.payment.service.PaymentService;
 import com.coupang.marketplace.product.domain.Product;
 import com.coupang.marketplace.product.repository.ProductRepository;
@@ -35,6 +33,9 @@ public class OrderServiceTest {
     @InjectMocks
     private OrderService orderService;
 
+    @InjectMocks
+    private PaymentService paymentService;
+
     @Mock
     private CartRepository cartRepository;
 
@@ -51,9 +52,19 @@ public class OrderServiceTest {
     @Test
     public void order() {
 //        //given
+//        final Optional<Product> FoundProduct = Optional.of(Product1.PRODUCT);
+//        final OrderRequestDto dto = OrderRequestDto.builder()
+//                .type(Payment1.TYPE)
+//                .receiverName(User1.NAME)
+//                .receiverPhone(User1.PHONE)
+//                .receiverRequest("")
+//                .build();
 //        given(cartRepository.findByUserId(User1.ID)).willReturn(Arrays.asList(Cart1.CART));
 //        given(userRepository.findById(User1.ID)).willReturn(User1.USER);
 //        given(addressRepository.findMainContentByUserId(User1.ID)).willReturn(Address1.CONTENT);
+//        given(productRepository.findByProductId(Product1.ID)).willReturn(FoundProduct);
+//        //when
+//        orderService.order(User1.ID, dto);
 //        //then
 //        then(cartRepository).should(times(1)).deleteCartProducts(Cart1.CART);
     }
@@ -61,18 +72,15 @@ public class OrderServiceTest {
     @DisplayName("주문을 요청한 상품이 없는 경우 주문에 실패한다.")
     @Test
     public void NoProductToOrder() {
-//        //given
-//        final Optional<Cart> notFoundCartProduct = Optional.ofNullable(null);
-//        final Optional<Product> notFoundProduct = Optional.ofNullable(null);
-//        final OrderRequestDto dto = OrderRequestDto.builder()
-//                        .type(Payment1.TYPE)
-//                        .receiverName(User1.NAME)
-//                        .receiverPhone(User1.PHONE)
-//                        .receiverRequest("")
-//                        .build();
-//        given(cartRepository.findByUserId(User1.ID)).willReturn(Arrays.asList());
-//        given(productRepository.findByProductId(notFoundCartProduct.get().getProductId())).willReturn(notFoundProduct);
-//        //then
-//        assertThrows(IllegalArgumentException.class, () -> orderService.order(User1.ID, dto));
+        //given
+        final OrderRequestDto dto = OrderRequestDto.builder()
+                .type(Payment1.TYPE)
+                .receiverName(User1.NAME)
+                .receiverPhone(User1.PHONE)
+                .receiverRequest("")
+                .build();
+        given(cartRepository.findByUserId(User1.ID)).willReturn(Arrays.asList());
+        //then
+        assertThrows(IllegalArgumentException.class, () -> orderService.order(User1.ID, dto));
     }
 }
