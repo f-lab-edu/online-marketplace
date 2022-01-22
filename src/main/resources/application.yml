@@ -1,27 +1,8 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/coupang?serverTimezone=UTC&useLegacyDatetimeCode=false
-    username:
-    password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  redis:
-    session:
-      host:
-      port:
-      password:
-    cache:
-      host:
-      port:
-      password:
-
-mybatis:
-  type-aliases-package: com.coupang.marketplace.*.domain
-  mapper-locations: mybatis/mapper/**/*.xml
-
-ncp:
-  object-storage:
-    end-point:
-    region-name:
-    access-key:
-    secret-key:
-    bucket-name:
+  application:
+    name: marketplace
+  profiles:
+    active: dev
+  cloud:
+    config:
+      uri: http://localhost:8888

@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'mysql:mysql-connector-java'
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
     implementation 'com.amazonaws:aws-java-sdk-s3'
     compileOnly 'org.projectlombok:lombok'
