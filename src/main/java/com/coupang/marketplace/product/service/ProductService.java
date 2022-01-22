@@ -58,8 +58,4 @@ public class ProductService {
         List<Product> products = productRepository.getProductsByKeyword(keyword);
         return SimpleProduct.toList(products);
     }
-
-    public boolean checkIsProductExist(long id){
-        return productRepository.findByProductId(id).isPresent();
-    }
 }

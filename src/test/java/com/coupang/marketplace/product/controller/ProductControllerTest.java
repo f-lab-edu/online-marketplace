@@ -1,24 +1,17 @@
 package com.coupang.marketplace.product.controller;
 
 
-import com.coupang.marketplace.global.constant.SessionKey;
-import com.coupang.marketplace.global.fixture.CartFixture.*;
-import com.coupang.marketplace.global.fixture.UserFixture;
 import com.coupang.marketplace.global.template.ControllerTestTemplate;
 import com.coupang.marketplace.global.util.MultiValueMapConverter;
 import com.coupang.marketplace.product.controller.dto.GetProductsRequest;
-import com.coupang.marketplace.product.controller.dto.SaveToCartRequest;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.MultiValueMap;
 
 import static com.coupang.marketplace.product.constant.DeliveryTypeEnum.ROCKET;
 import static com.coupang.marketplace.product.constant.DeliveryTypeEnum.ROCKET_FRESH;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -85,30 +78,5 @@ public class ProductControllerTest extends ControllerTestTemplate {
         actions
                 .andExpect(status().isOk())
                 .andDo(print());
-    }
-
-    @DisplayName("상품과 수량을 선택하면 장바구니에 담긴다.")
-    @Test
-    public void saveProductsToCart() throws Exception {
-        // given
-        MockHttpSession session = new MockHttpSession();
-        session.setAttribute(SessionKey.LOGIN_USER_ID, UserFixture.User1.ID);
-
-        final SaveToCartRequest dto = SaveToCartRequest.builder()
-            .productId(Cart1.PRODUCT_ID)
-            .productNum(Cart1.PRODUCT_NUM)
-            .build();
-
-        // when
-        final ResultActions actions = mvc.perform(post("/products/cart")
-            .session(session)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(dto)))
-            .andDo(print());
-
-        // then
-        actions
-            .andExpect(status().isOk())
-            .andDo(print());
     }
 }

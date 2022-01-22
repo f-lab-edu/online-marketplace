@@ -38,9 +38,4 @@
         FROM PRODUCT
         WHERE name LIKE CONCAT(#{keyword}, '%')
     </select>
-    <select id="findByProductId" resultType="Product">
-        SELECT id, category_id, name, price, main_img, detail_img, stock, score, delivery_fee, is_rocket, is_rocket_fresh, is_rocket_global
-        FROM PRODUCT
-        WHERE id = #{id}
-    </select>
 </mapper>

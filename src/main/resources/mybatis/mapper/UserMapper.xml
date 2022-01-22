@@ -8,14 +8,8 @@
         VALUES (#{name}, #{email}, #{salt}, #{password}, #{phone})
     </insert>
     <select id="findByEmail" resultType="User">
-        SELECT id, name, email, salt, password, phone
-        FROM USER
+        SELECT id, name, email, salt, password, phone FROM USER
         WHERE email = #{email}
-    </select>
-    <select id="findById" resultType="User">
-        SELECT id, name, email, salt, password, phone
-        FROM USER
-        WHERE id = #{id}
     </select>
     <update id="updateUser" parameterType="User">
         UPDATE USER

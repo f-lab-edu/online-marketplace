@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,13 +14,13 @@ import java.util.stream.Collectors;
 @Getter
 public class SimpleProduct {
     @NotNull
-    private long id;
+    private BigInteger id;
 
     @NotNull
     private String name;
 
     @NotNull
-    private long price;
+    private BigInteger price;
 
     @NotNull
     private String mainImg;
@@ -28,7 +29,7 @@ public class SimpleProduct {
     private float score;
 
     @Builder
-    public SimpleProduct(long id, String name, long price, String mainImg, float score) {
+    public SimpleProduct(BigInteger id, String name, BigInteger price, String mainImg, float score) {
         this.id = id;
         this.name = name;
         this.price = price;
