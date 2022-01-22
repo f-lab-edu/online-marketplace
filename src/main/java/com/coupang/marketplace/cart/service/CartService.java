@@ -25,6 +25,7 @@ public class CartService {
 			throw new IllegalArgumentException("존재하지 않는 상품입니다.");
 		if(dto.getProductNum() == 0)
 			throw new IllegalArgumentException("0개의 상품은 장바구니에 담을 수 없습니다.");
+
 		Cart cart = Cart.builder()
 			.productId(dto.getProductId())
 			.productNum(dto.getProductNum())
