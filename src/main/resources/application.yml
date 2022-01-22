@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  profiles:
+    active: local
   config:
     import: "configserver:http://localhost:8888"
   cloud:
