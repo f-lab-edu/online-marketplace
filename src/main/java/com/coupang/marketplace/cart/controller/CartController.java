@@ -26,7 +26,7 @@ public class CartController {
 	}
 
 	@AuthRequired
-	@PostMapping("/carts")
+	@PostMapping("/cart")
 	public SuccessResponse saveProductsToCart(@Valid @RequestBody final SaveToCartRequest dto){
 		long userId = loginService.getLoginUserId();
 		cartService.saveProduct(userId, dto);

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coupang.marketplace.payment.repository.PaymentRepository">
+    <insert id="insertPaymentInfo" parameterType="Payment" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO PAYMENT (type, discount_price, total_price, status)
+        VALUES (#{type}, #{discountPrice}, #{totalPrice}, #{status})
+    </insert>
+</mapper>
