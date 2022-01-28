@@ -76,7 +76,7 @@ public class OrderService {
 				.discountPrice(discountPrice)
 				.build();
 		long paymentId = paymentService.savePaymentInfo(payment);
-		couponService.IncreaseUseCount(userId, couponId.get());
+		couponService.increaseUseCount(userId, couponId.get());
 
 		long orderId = saveOrderInfo(userId, paymentId, orderRequestDto);
 

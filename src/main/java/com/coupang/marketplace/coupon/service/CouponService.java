@@ -91,7 +91,7 @@ public class CouponService {
 		return coupon.get().getDiscountPrice();
 	}
 
-	public void IncreaseUseCount(long userId, long couponId){
+	public void increaseUseCount(long userId, long couponId){
 		Optional<UserCoupon> userCoupon = couponRepository.findUserCouponById(couponId, userId);
 		couponRepository.updateUseCount(userId, couponId, userCoupon.get().getUseCount()+1);
 	}
