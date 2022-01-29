@@ -7,6 +7,9 @@ import com.coupang.marketplace.payment.controller.dto.PaymentType;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Optional;
+
+
 @Getter
 public class OrderRequestDto {
 
@@ -23,11 +26,14 @@ public class OrderRequestDto {
 	@NotNull
 	private String receiverRequest;
 
+	private Optional<Long> couponId;
+
 	@Builder
-	public OrderRequestDto(PaymentType type, String receiverName, String receiverPhone, String receiverRequest){
+	public OrderRequestDto(PaymentType type, String receiverName, String receiverPhone, String receiverRequest, Optional<Long> couponId){
 		this.type = type;
 		this.receiverName = receiverName;
 		this.receiverPhone = receiverPhone;
 		this.receiverRequest = receiverRequest;
+		this.couponId = couponId;
 	}
 }

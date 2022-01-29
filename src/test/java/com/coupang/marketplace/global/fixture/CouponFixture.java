@@ -33,7 +33,7 @@ public class CouponFixture {
 		public static final Long MIN_PRICE = 20000L;
 		public static final Long DISCOUNT_PRICE = 1000L;
 		public static final Long PRODUCT_ID = 11L;
-		public static final ZonedDateTime EXPIRATION_TIME = ZonedDateTime.of(2021, 12, 05, 14, 00, 0, 0, ZoneId.of("UTC"));
+		public static final ZonedDateTime EXPIRATION_TIME = ZonedDateTime.of(2023, 12, 05, 14, 00, 0, 0, ZoneId.of("UTC"));
 		public static final Integer MAX_COUPON_COUNT = 5;
 
 		public static final Coupon COUPON = Coupon.builder()

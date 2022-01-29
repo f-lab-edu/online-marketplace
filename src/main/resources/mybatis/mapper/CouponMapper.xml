@@ -3,10 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.coupang.marketplace.coupon.repository.CouponRepository">
-    <select id="getCouponsBeforeExpirationTime" resultType="Coupon">
+    <select id="getAllCoupons" resultType="Coupon">
         SELECT id, name, min_price, discount_price, product_id, expiration_time, max_count
         FROM COUPON
-        WHERE expiration_time
     </select>
     <select id="findCouponById" resultType="Coupon">
         SELECT id, name, min_price, discount_price, product_id, expiration_time, max_count
@@ -14,7 +13,7 @@
         WHERE id = #{id}
     </select>
     <select id="findUserCouponById" resultType="UserCoupon">
-        SELECT id, user_id, coupon_id, use_status, issued_count
+        SELECT id, user_id, coupon_id, use_count, issued_count
         FROM USER_COUPON
         WHERE coupon_id = #{couponId} AND user_id = #{userId}
     </select>
@@ -23,18 +22,23 @@
         FROM COUPON
         WHERE id = #{id}
     </select>
-    <select id="getIssuedCouponCount" resultType="int">
+    <select id="getIssuedCount" resultType="int">
         SELECT issued_count
         FROM USER_COUPON
         WHERE coupon_id = #{couponId} AND user_id = #{userId}
     </select>
     <insert id="insertUserCoupon" parameterType="UserCoupon">
-        INSERT INTO USER_COUPON (id, user_id, coupon_id, use_status, issued_count)
-        VALUES (#{id}, #{userId}, #{couponId}, #{useStatus}, #{issuedCouponCount})
+        INSERT INTO USER_COUPON (id, user_id, coupon_id, use_count, issued_count)
+        VALUES (#{id}, #{userId}, #{couponId}, #{useCount}, #{issuedCount})
     </insert>
-    <update id="updateIssuedCouponCount">
+    <update id="updateIssuedCount">
         UPDATE USER_COUPON
         SET issued_count = #{issuedCount}
+        WHERE coupon_id = #{couponId} AND user_id = #{userId}
+    </update>
+    <update id="updateUseCount">
+        UPDATE USER_COUPON
+        SET use_count = #{useCount}
         WHERE coupon_id = #{couponId} AND user_id = #{userId}
     </update>
 </mapper>
