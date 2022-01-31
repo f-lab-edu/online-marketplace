@@ -3,12 +3,10 @@ server:
 
 spring:
   profiles:
-    active: prod
-
+    active: local
   config:
     import: "configserver:http://localhost:8888"
-
   cloud:
     config:
       name: marketplace
-      profile: prod
+      profile: dev
