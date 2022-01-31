@@ -1,8 +1,4 @@
-FROM java:11
-
-LABEL maintainer="jiwonyang.tech@gmail.com"
-
-VOLUME /tmp
+FROM adoptopenjdk/openjdk11
 
 EXPOSE 8080
 
