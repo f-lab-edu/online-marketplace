@@ -4,10 +4,8 @@ server:
 spring:
   profiles:
     active: prod
-
   config:
     import: "configserver:http://localhost:8888"
-
   cloud:
     config:
       name: marketplace
