@@ -1,11 +1,11 @@
 CREATE TABLE `USER` (
-                        `id` bigint NOT NULL AUTO_INCREMENT,
-                        `name` varchar(10) NOT NULL,
-                        `email` varchar(100) NOT NULL,
-                        `salt` varchar(100) NOT NULL,
-                        `password` varchar(100) NOT NULL,
-                        `phone` varchar(11) NOT NULL,
-                        `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                        `id` BIGINT NOT NULL AUTO_INCREMENT,
+                        `name` VARCHAR(10) NOT NULL,
+                        `email` VARCHAR(100) NOT NULL,
+                        `salt` VARCHAR(100) NOT NULL,
+                        `password` VARCHAR(100) NOT NULL,
+                        `phone` VARCHAR(11) NOT NULL,
+                        `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         PRIMARY KEY (`id`),
                         KEY `email` (`email`)
 );
@@ -21,7 +21,7 @@ CREATE TABLE `ADDRESS` (
 );
 
 CREATE TABLE `CATEGORY` (
-                            `id` bigint NOT NULL,
+                            `id` bigint NOT NULL AUTO_INCREMENT,
                             `name` varchar(10) NOT NULL,
                             PRIMARY KEY (`id`)
 );
@@ -44,11 +44,10 @@ CREATE TABLE `PRODUCT` (
 );
 
 CREATE TABLE `CART` (
-                        `id` bigint NOT NULL,
-                        `product_id` bigint NOT NULL,
-                        `product_num` int NOT NULL,
-                        `user_id` bigint NOT NULL,
-                        `is_regular_delivery` tinyint(1) NOT NULL,
+                        `id` BIGINT NOT NULL AUTO_INCREMENT,
+                        `product_id` BIGINT NOT NULL,
+                        `product_num` INT NOT NULL,
+                        `user_id` BIGINT NOT NULL,
                         PRIMARY KEY (`id`),
                         KEY `cart_user_id_idx` (`product_id`,`user_id`),
                         KEY `cart_user_id` (`user_id`),
@@ -57,40 +56,45 @@ CREATE TABLE `CART` (
 );
 
 CREATE TABLE `COUPON` (
-                          `id` bigint NOT NULL AUTO_INCREMENT,
-                          `name` varchar(10) NOT NULL,
-                          `min_price` bigint NOT NULL,
-                          `discount_price` bigint NOT NULL,
-                          `product_id` bigint NOT NULL,
-                          `expiration_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                          `id` BIGINT NOT NULL AUTO_INCREMENT,
+                          `name` VARCHAR(10) NOT NULL,
+                          `min_price` BIGINT NOT NULL,
+                          `discount_price` BIGINT NOT NULL,
+                          `product_id` BIGINT NOT NULL,
+                          `expiration_time` TIMESTAMP NOT NULL, 
+                          `max_count` BIGINT NOT NULL,
                           PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `USER_COUPON` (
-                               `id` bigint NOT NULL AUTO_INCREMENT,
-                               `user_id` bigint NOT NULL,
-                               `coupon_id` bigint NOT NULL,
-                               `use_status` tinyint(1) NOT NULL DEFAULT '0',
+                               `id` BIGINT NOT NULL AUTO_INCREMENT,
+                               `user_id` BIGINT NOT NULL,
+                               `coupon_id` BIGINT NOT NULL,
+                               `issued_count` INT DEFAULT '0',
+                               `use_count` INT DEFAULT '0',
                                PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `ORDER` (
-                         `id` bigint NOT NULL,
-                         `user_id` bigint NOT NULL,
-                         `receiver_name` varchar(10) NOT NULL,
-                         `recevier_address` varchar(100) NOT NULL,
-                         `receiver_phone` varchar(10) NOT NULL,
-                         `receiver_request` varchar(20) NOT NULL,
-                         `status` tinyint(1) NOT NULL DEFAULT '0',
-                         `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         `id` BIGINT NOT NULL AUTO_INCREMENT,
+                         `user_id` BIGINT NOT NULL,
+                         `consumer_name` VARCHAR(10) NOT NULL,
+                         `consumer_phone` VARCHAR(20) NOT NULL,
+                         `receiver_name` VARCHAR(10) NOT NULL,
+                         `receiver_address` VARCHAR(100) NOT NULL,
+                         `receiver_phone` VARCHAR(20) NOT NULL,
+                         `receiver_request` VARCHAR(20) NOT NULL,
+                         `status` TINYINT(1) NOT NULL DEFAULT 0,
+                         `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         `payment_id` VARCHAR(10) NOT NULL,
                          PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `ORDER_PRODUCT` (
-                                 `id` bigint NOT NULL,
-                                 `order_id` bigint NOT NULL,
-                                 `product_id` bigint NOT NULL,
-                                 `product_num` int NOT NULL,
+                                 `id` BIGINT NOT NULL AUTO_INCREMENT,
+                                 `order_id` BIGINT NOT NULL,
+                                 `product_id` BIGINT NOT NULL,
+                                 `product_num` INT NOT NULL,
                                  PRIMARY KEY (`id`),
                                  KEY `order_product_order_id_idx` (`order_id`),
                                  KEY `order_procut_product_id_idx` (`product_id`),
@@ -99,14 +103,15 @@ CREATE TABLE `ORDER_PRODUCT` (
 );
 
 CREATE TABLE `REVIEW` (
-                          `id` bigint NOT NULL AUTO_INCREMENT,
-                          `user_id` bigint NOT NULL,
-                          `product_id` bigint NOT NULL,
-                          `content` text NOT NULL,
-                          `help_num` int NOT NULL DEFAULT '0',
-                          `no_help_num` int NOT NULL DEFAULT '0',
-                          `score` int NOT NULL,
-                          `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                          `id` BIGINT NOT NULL AUTO_INCREMENT,
+                          `user_id` BIGINT NOT NULL,
+                          `product_id` BIGINT NOT NULL,
+                          `img` VARCHAR(45) NOT NULL,
+                          `content` TEXT(500) NOT NULL,
+                          `help_num` INT NOT NULL,
+                          `no_help_num` VARCHAR(45) NOT NULL,
+                          `score` VARCHAR(45) NOT NULL,
+                          `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                           PRIMARY KEY (`id`),
                           KEY `review_user_id_idx` (`user_id`),
                           KEY `review_product_id_idx` (`product_id`),
@@ -124,13 +129,12 @@ CREATE TABLE `REVIEW_EVALUATION` (
 
 
 CREATE TABLE `PAYMENT` (
-                           `id` bigint NOT NULL AUTO_INCREMENT,
-                           `type` int NOT NULL,
-                           `order_id` bigint NOT NULL,
-                           `discount_price` bigint NOT NULL DEFAULT '0',
-                           `total_price` bigint NOT NULL,
-                           `status` int NOT NULL DEFAULT '0',
-                           `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                           `id` BIGINT NOT NULL AUTO_INCREMENT,
+                           `type` INT NOT NULL,
+                           `discount_price` BIGINT NOT NULL DEFAULT 0,
+                           `total_price` BIGINT NOT NULL,
+                           `status` TINYINT(1) NOT NULL DEFAULT 0,
+                           `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                            PRIMARY KEY (`id`),
                            KEY `payment_order_id_idx` (`order_id`),
                            CONSTRAINT `payment_order_id` FOREIGN KEY (`order_id`) REFERENCES `ORDER` (`id`)
