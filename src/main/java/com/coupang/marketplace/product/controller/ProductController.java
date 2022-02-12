@@ -34,7 +34,7 @@ public class ProductController {
         this.loginService = loginService;
     }
 
-    @Cacheable(key="#dto.start", value= CacheKey.PRODUCTS)
+//    @Cacheable(key="#dto.start", value= CacheKey.PRODUCTS)
     @GetMapping
     public SuccessResponse getProducts(@Valid @ModelAttribute GetProductsRequest dto) {
         List<SimpleProduct> products = productService.getProducts(dto);
