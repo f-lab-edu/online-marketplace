@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public SuccessResponse loginUser(@Valid @RequestBody final SignInRequestDto requestDto) {
+    public SuccessResponse loginUser(@Valid final SignInRequestDto requestDto) {
         loginService.login(requestDto);
         SuccessResponse res = SuccessResponse.builder()
                 .status(StatusEnum.OK)

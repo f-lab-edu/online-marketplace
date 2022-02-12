@@ -1,17 +1,17 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/coupang?serverTimezone=UTC&useLegacyDatetimeCode=false
-    username:
-    password:
+    url: jdbc:mysql://27.96.134.111:3306/coupang?serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+    password: coupang1234!
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     session:
-      host:
-      port:
+      host: 118.67.132.101
+      port: 6379
       password:
     cache:
-      host:
-      port:
+      host: 118.67.132.101
+      port: 6380
       password:
 
 mybatis:
@@ -20,8 +20,8 @@ mybatis:
 
 ncp:
   object-storage:
-    end-point:
-    region-name:
-    access-key:
-    secret-key:
-    bucket-name:
+    end-point: https://kr.object.ncloudstorage.com
+    region-name: kr-standard
+    access-key: 3af1ocT3MbklqvdAL0Ij
+    secret-key: yYZP9p3FgI4RE2VG2akDSd4AxOOMUkOFc1TEKGc7
+    bucket-name: review-images
