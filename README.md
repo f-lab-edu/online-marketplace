@@ -14,7 +14,7 @@
 
 ## 🛒 화면 설계
 - 카카오 오븐
-- 이미지
+  <img width="980" alt="image" src="https://user-images.githubusercontent.com/31584255/154731333-63061b81-721d-4a3f-9eb7-716f4e8edba9.png">
 
 
 </br>
@@ -30,7 +30,8 @@
 
 ### 아키텍처
 - 이미지1 (프로젝트 구조)
-- 이미지2 (ERD)
+- ERD
+<img width="669" alt="스크린샷 2021-06-15 오후 6 54 21" src="https://user-images.githubusercontent.com/79824919/122033021-1eb3e400-ce0b-11eb-86b3-460a669e7171.png">
   
   
 </br>
@@ -60,7 +61,7 @@
 - Prototype
 - Architecture
 - Usecase
-- Trouble Shooting
-- Performance
+- Technical Issue
+- Performance Test
 - Rule & Convention </br></br>
 ▶️ [Wiki 보러가기](https://github.com/f-lab-edu/online-marketplace/wiki)
